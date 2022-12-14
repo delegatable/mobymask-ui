@@ -10,6 +10,7 @@ export default function LazyConnect(props) {
   const [accounts, setAccounts] = useState([]);
   const [userChainId, setUserChainId] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   if (!provider && MetaMaskOnboarding.isMetaMaskInstalled()) {
     setInjectedProvider(window.ethereum);
@@ -65,6 +66,15 @@ export default function LazyConnect(props) {
   const needsToConnectAccount = needsAccountConnected && (!accounts || accounts.length === 0);
   const requiresAction = needsToSwitchChain || needsToConnectAccount;
 
+  if (error) {
+    return (
+      <div className="lazyConnect">
+        <h3>Something went wrong 😿:</h3>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
     return (
       <div className="lazyConnect">
@@ -98,6 +108,7 @@ export default function LazyConnect(props) {
       <div className="lazyConnect">
         {createChecklist({
           setLoading,
+          setError,
           provider,
           needsToConnectAccount,
           hasWallet: MetaMaskOnboarding.isMetaMaskInstalled(),
@@ -142,6 +153,7 @@ function createChecklist(checklistOpts) {
     needsToConnectAccount,
     needsAccountConnected,
     actionName,
+    setError,
     hasWallet,
     accounts,
   } = checklistOpts;
@@ -163,7 +175,7 @@ function createChecklist(checklistOpts) {
           accounts,
           hasWallet,
         })}
-        {switchNetworkItem({ chainId, userChainId, chainName, setAccounts, provider, setLoading, hasWallet })}
+        {switchNetworkItem({ chainId, setError, userChainId, chainName, setAccounts, provider, setLoading, hasWallet })}
       </ol>
     </div>
   );
@@ -200,7 +212,7 @@ function switchAccountsItem(opts) {
 }
 
 function switchNetworkItem(opts) {
-  const { chainId, userChainId, chainName, provider, setLoading, hasWallet } = opts;
+  const { chainId, userChainId, chainName, provider, setLoading, hasWallet, setError } = opts;
   const needsToSwitchChain = !!chainId && Number(userChainId) !== chainId;
 
   if (!needsToSwitchChain) {

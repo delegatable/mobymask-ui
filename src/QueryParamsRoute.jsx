@@ -2,19 +2,20 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes, useLocation } from "react-router-dom";
 import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
-const { chainId } = require("./config.json");
 
 // Routes
 import InstallExtension from "./InstallExtension";
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
 
+const { chainId } = require("./config.json");
+
 export default function QueryParamsRouter(props) {
   const { provider } = props;
   let query = useQuery();
 
   return (
-    <Switch>
+    <Routes>
       <Route exact path="/">
         <div className="box">
           <LazyConnect
@@ -32,7 +33,7 @@ export default function QueryParamsRouter(props) {
       <Route path="/members/">
         <Members />
       </Route>
-    </Switch>
+    </Routes>
   );
 }
 

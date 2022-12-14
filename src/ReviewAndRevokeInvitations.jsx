@@ -1,16 +1,18 @@
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
-const { generateUtil, createSignedDelegationHash } = require("eth-delegatable-utils");
-const { chainId, address, name } = require("./config.json");
 import createRegistry from "./createRegistry";
 import linkForInvitation from "./linkForInvitation";
+import copyInvitationLink from "./copyInvitationLink";
+
+const { generateUtil, createSignedDelegationHash } = require("eth-delegatable-utils");
+const { chainId, address, name } = require("./config.json");
 const CONTRACT_NAME = name;
 const util = generateUtil({
   chainId,
   verifyingContract: address,
   name: CONTRACT_NAME,
 });
-import copyInvitationLink from "./copyInvitationLink";
+
 
 export default function (props) {
   const { provider, invitations, invitation, setInvitations } = props;

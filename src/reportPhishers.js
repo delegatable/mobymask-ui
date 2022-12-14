@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
+import contractInfo from "./contractInfo";
 const types = require("./types");
 const { createMembership } = require("eth-delegatable-utils");
 const { abi } = require("./artifacts");
 const { chainId, address, name } = require("./config.json");
-import contractInfo from "./contractInfo";
 const CONTRACT_NAME = name;
 
 export default async function reportPhishers(phishers, provider, invitation) {

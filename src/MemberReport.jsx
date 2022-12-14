@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import reportMembers from "./reportMembers";
 import LazyConnect from "./LazyConnect";
+import TextInput from "./TextInput";
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
-import TextInput from "./TextInput";
 
 export default function (props) {
   const { invitation } = props;

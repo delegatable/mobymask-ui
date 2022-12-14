@@ -2,19 +2,17 @@ import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
 import { BrowserRouter as Router, Route, Link, Routes, useNavigate, useLocation } from "react-router-dom";
-
-const { validateInvitation } = require("eth-delegatable-utils");
 import contractInfo from "./contractInfo";
-const { chainId } = contractInfo;
-
 import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";
 import { PhisherCheckButton } from "./PhisherCheck";
 import { MemberCheckButton } from "./MemberCheck";
-import createInvitation from "./createInvitation";
-const { createMembership } = require("eth-delegatable-utils");
 import LazyConnect from "./LazyConnect";
 import copyInvitationLink from "./copyInvitationLink";
+
+const { validateInvitation } = require("eth-delegatable-utils");
+const { chainId } = contractInfo;
+const { createMembership } = require("eth-delegatable-utils");
 
 export default function Members(props) {
   const query = useQuery();
