@@ -16,7 +16,7 @@ export default function QueryParamsRouter(props) {
 
   return (
     <Routes>
-      <Route exact path="/">
+      <Route exact path="/" element={<div>
         <div className="box">
           <LazyConnect
             actionName="check if a user is a phisher or member"
@@ -27,12 +27,9 @@ export default function QueryParamsRouter(props) {
             <MemberCheckButton />
           </LazyConnect>
         </div>
-
         <InstallExtension />
-      </Route>
-      <Route path="/members/">
-        <Members />
-      </Route>
+      </div>} />
+      <Route path="/members/" element={<Members />} />
     </Routes>
   );
 }
