@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
-import { BrowserRouter as Router, Route, Link, Routes, useHistory, useLocation } from "react-router-dom";
+import { BrowserRouter as useHistory, useLocation } from "react-router-dom";
 
 const { validateInvitation } = require("eth-delegatable-utils");
 import contractInfo from "./contractInfo";
@@ -11,7 +11,6 @@ import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";
 import { PhisherCheckButton } from "./PhisherCheck";
 import { MemberCheckButton } from "./MemberCheck";
-import createInvitation from "./createInvitation";
 const { createMembership } = require("eth-delegatable-utils");
 import LazyConnect from "./LazyConnect";
 import copyInvitationLink from "./copyInvitationLink";

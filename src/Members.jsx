@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
-import { BrowserRouter as Router, Route, Link, Routes, useNavigate, useLocation } from "react-router-dom";
+import { BrowserRouter as useNavigate, useLocation } from "react-router-dom";
 import contractInfo from "./contractInfo";
 import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";

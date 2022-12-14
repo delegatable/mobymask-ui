@@ -1,10 +1,8 @@
 import logo from "./logo.svg";
-import QueryParamsRoute from "./QueryParamsRoute";
-import "antd/dist/antd.min.css";
 import { HashRouter as Router } from "react-router-dom";
 import "./App.css";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +14,6 @@ function App(props) {
       </header>
 
       <Router>
-        <QueryParamsRoute />
       </Router>
 
       <div className="footer">

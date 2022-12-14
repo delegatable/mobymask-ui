@@ -1,19 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link, Switch, useLocation } from "react-router-dom";
+import { BrowserRouter as Route, Switch, useLocation } from "react-router-dom";
 import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
-const { chainId } = require("./config.json");
+import ErrorBoundary from './ErrorBoundary';
 
 // Routes
 import InstallExtension from "./InstallExtension";
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
+const { chainId } = require("./config.json");
 
 export default function QueryParamsRouter(props) {
   const { provider } = props;
   let query = useQuery();
 
   return (
+    <ErrorBoundary>
     <Switch>
       <Route exact path="/">
         <div className="box">
@@ -33,6 +35,7 @@ export default function QueryParamsRouter(props) {
         <Members />
       </Route>
     </Switch>
+    </ErrorBoundary>
   );
 }
 
