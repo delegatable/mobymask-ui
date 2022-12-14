@@ -325,11 +325,11 @@ module.exports = function (webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
-        // Needed to polyfill the browserify Buffer module:
+        // Needed to polyfill the browserify Buffer global:
         // https://viglucci.io/how-to-polyfill-buffer-with-webpack-5
-        new webpack.ProvidePlugin({
-            Buffer: ['buffer', 'Buffer'],
-        }),
+        // new webpack.ProvidePlugin({
+        //     Buffer: ['buffer/', 'Buffer'],
+        // }),
 
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
