@@ -301,6 +301,7 @@ module.exports = function (webpackEnv) {
         modules.additionalModulePaths || []
       ),
       fallback: {
+        "buffer": require.resolve('buffer/'),
         "crypto": require.resolve('crypto-browserify'), //if you want to use this module also don't forget npm i crypto-browserify
       },
       // These are the reasonable defaults supported by the Node ecosystem.
@@ -324,6 +325,12 @@ module.exports = function (webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
+        // Needed to polyfill the browserify Buffer module:
+        // https://viglucci.io/how-to-polyfill-buffer-with-webpack-5
+        new webpack.ProvidePlugin({
+            Buffer: ['buffer', 'Buffer'],
+        }),
+
         // Prevents users from importing files from outside of src/ (or node_modules/).
         // This often causes confusion because we only process files within src/ with babel.
         // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
