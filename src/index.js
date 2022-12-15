@@ -1,17 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const subgraphUri = "http://localhost:8000/subgraphs/name/scaffold-eth/your-contract";
+const watcherUri = "https://mobymask.vdb.to/graphql"
+
+const subgraphEndpoint = new HttpLink({
+  uri: subgraphUri,
+});
+const watcherEndpoint = new HttpLink({
+  uri: watcherUri,
+});
+
+const client = new ApolloClient({
+  link: ApolloLink.split(
+    operation => operation.getContext().clientName === "watcher",
+    watcherEndpoint,
+    subgraphEndpoint,
+  ),
+  cache: new InMemoryCache(),
+});
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <App subgraphUri={subgraphUri} />
+  </ApolloProvider>,
+  document.getElementById("root"),
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
