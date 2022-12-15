@@ -4,7 +4,8 @@ import useLazyQuery from "./hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "./queries/latestBlock";
 import IS_MEMBER_GRAPHQL from "./queries/isMember";
 import TextInput from "./TextInput";
-import address from "./config.json";
+import config from "./config.json";
+const { address } = config;
 
 export default function MemberCheck(props) {
   const [output, setOutput] = useState("");

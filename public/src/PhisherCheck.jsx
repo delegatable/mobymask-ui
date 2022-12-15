@@ -4,7 +4,8 @@ import useLazyQuery from "./hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "./queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "./queries/isPhisher";
 import TextInput from "./TextInput";
-import address from "./config.json";
+import config from "./config.json";
+const { address } = config;
 
 export default function PhisherCheck(props) {
   const [output, setOutput] = useState("");
