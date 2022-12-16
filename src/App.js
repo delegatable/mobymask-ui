@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./installBuffer";
-import QueryParamsRoute from "./QueryParamsRoute";
+import QueryParamsRoute from "./RoutableArea";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 

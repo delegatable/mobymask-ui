@@ -11,7 +11,7 @@ import { MemberCheckButton } from "./MemberCheck";
 const config = require("./config.json");
 const { chainId } = config;
 
-export default function QueryParamsRouter(props) {
+export default function RoutableArea(props) {
   return (
     <Routes>
       <Route exact path="/" element={<div>
