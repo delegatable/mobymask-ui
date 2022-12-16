@@ -33,14 +33,12 @@ export function MemberCheckButton() {
   // Get latest block
   const LATEST_BLOCK_GQL = gql(LATEST_BLOCK_GRAPHQL);
   const latestBlock = useLazyQuery(LATEST_BLOCK_GQL, {
-    context: { clientName: "watcher" },
     fetchPolicy: "no-cache",
   });
 
   // Check if isMember
   const IS_MEMBER_GQL = gql(IS_MEMBER_GRAPHQL);
   const isMember = useLazyQuery(IS_MEMBER_GQL, {
-    context: { clientName: "watcher" },
     variables: {
       contractAddress: address,
     },
