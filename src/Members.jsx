@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
-import { useNavigate, useLocation } from "react-router-dom";
+import { BrowserRouter as useHistory, useLocation } from "react-router-dom";
+
+const { validateInvitation } = require("eth-delegatable-utils");
 import contractInfo from "./contractInfo";
+const { chainId } = contractInfo;
+
 import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";
 import { PhisherCheckButton } from "./PhisherCheck";
 import { MemberCheckButton } from "./MemberCheck";
+const { createMembership } = require("eth-delegatable-utils");
 import LazyConnect from "./LazyConnect";
 import copyInvitationLink from "./copyInvitationLink";
-
-const { validateInvitation } = require("eth-delegatable-utils");
-const { chainId } = contractInfo;
-const { createMembership } = require("eth-delegatable-utils");
-const localStorage = window.localStorage;
 
 export default function Members(props) {
   const query = useQuery();
@@ -24,7 +24,7 @@ export default function Members(props) {
 
   const [invitation, setInvitation] = useState(null); // Own invitation
   const [invitations, setInvitations] = useState([]); // Outbound invitations
-  const navigate = useNavigate();
+  const history = useHistory();
 
   // Load user's own invitation from disk or query string:
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function Members(props) {
         if (!invitation) {
           try {
             let parsedInvitation;
-            let rawLoaded = localStorage.getItem('invitation');
+            let rawLoaded = document.cookie;
             if (rawLoaded) {
               parsedInvitation = JSON.parse(rawLoaded);
             }
@@ -45,10 +45,10 @@ export default function Members(props) {
                 contractInfo,
                 invitation: parsedInvitation,
               });
-              localStorage.setItem('invitation', query.get("invitation"));
+              document.cookie = query.get("invitation");
             }
 
-            navigate("/members");
+            history.push("/members");
             validateInvitation({
               contractInfo,
               invitation: parsedInvitation,
@@ -58,6 +58,7 @@ export default function Members(props) {
             }
             setLoadingFromDisk(false);
           } catch (err) {
+            console.error(err);
             setErrorMessage(err.message);
           }
         }
@@ -101,6 +102,7 @@ export default function Members(props) {
   }
 
   const inviteView = generateInviteView(invitation, invitation => {
+    console.log("adding invitation", invitation);
     if (invitation) {
       const newInvites = [...invitations, invitation];
       localStorage.setItem("outstandingInvitations", JSON.stringify(newInvites));
