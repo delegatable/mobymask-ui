@@ -8,12 +8,10 @@ import InstallExtension from "./InstallExtension";
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
 
-const { chainId } = require("./config.json");
+const config = require("./config.json");
+const { chainId } = config;
 
 export default function QueryParamsRouter(props) {
-  const { provider } = props;
-  let query = useQuery();
-
   return (
     <Routes>
       <Route exact path="/" element={<div>
@@ -29,13 +27,7 @@ export default function QueryParamsRouter(props) {
         </div>
         <InstallExtension />
       </div>} />
-      <Route path="/members/" element={<Members />} />
+      <Route path="/members" element={<Members />} />
     </Routes>
   );
-}
-
-function useQuery() {
-  const { search } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search), [search]);
 }
