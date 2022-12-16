@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./installBuffer";
 import QueryParamsRoute from "./RoutableArea";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -15,9 +15,9 @@ function App() {
         <p>An alliance of good-hearted phish, aiming to eliminate phishers.</p>
       </header>
 
-      <BrowserRouter>
+      <HashRouter>
         <QueryParamsRoute />
-      </BrowserRouter>
+      </HashRouter>
 
       <div className="footer">
         <p>Reporters are added on an invite-only basis.</p>

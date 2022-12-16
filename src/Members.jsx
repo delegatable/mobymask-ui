@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
-import { BrowserRouter as useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import contractInfo from "./contractInfo";
 import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";
@@ -13,6 +13,7 @@ import copyInvitationLink from "./copyInvitationLink";
 const { validateInvitation } = require("eth-delegatable-utils");
 const { chainId } = contractInfo;
 const { createMembership } = require("eth-delegatable-utils");
+const localStorage = window.localStorage;
 
 export default function Members(props) {
   const query = useQuery();
@@ -23,7 +24,7 @@ export default function Members(props) {
 
   const [invitation, setInvitation] = useState(null); // Own invitation
   const [invitations, setInvitations] = useState([]); // Outbound invitations
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   // Load user's own invitation from disk or query string:
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function Members(props) {
         if (!invitation) {
           try {
             let parsedInvitation;
-            let rawLoaded = document.cookie;
+            let rawLoaded = localStorage.getItem('invitation');
             if (rawLoaded) {
               parsedInvitation = JSON.parse(rawLoaded);
             }
@@ -44,10 +45,10 @@ export default function Members(props) {
                 contractInfo,
                 invitation: parsedInvitation,
               });
-              document.cookie = query.get("invitation");
+              localStorage.setItem('invitation', query.get("invitation"));
             }
 
-            history.push("/members");
+            navigate("/members");
             validateInvitation({
               contractInfo,
               invitation: parsedInvitation,
@@ -57,7 +58,6 @@ export default function Members(props) {
             }
             setLoadingFromDisk(false);
           } catch (err) {
-            console.error(err);
             setErrorMessage(err.message);
           }
         }
@@ -101,7 +101,6 @@ export default function Members(props) {
   }
 
   const inviteView = generateInviteView(invitation, invitation => {
-    console.log("adding invitation", invitation);
     if (invitation) {
       const newInvites = [...invitations, invitation];
       localStorage.setItem("outstandingInvitations", JSON.stringify(newInvites));

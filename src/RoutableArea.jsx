@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
 
