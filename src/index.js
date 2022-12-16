@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
+import { createRoot } from 'react-dom/client';
 
 const subgraphUri = "http://localhost:8000/subgraphs/name/scaffold-eth/your-contract";
 const watcherUri = "https://mobymask.vdb.to/graphql"
@@ -23,9 +24,8 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App subgraphUri={subgraphUri} />
-  </ApolloProvider>,
-  document.getElementById("root"),
-);
+const container = document.getElementById('root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<ApolloProvider client={client}>
+  <App subgraphUri={subgraphUri} />
+</ApolloProvider>);
