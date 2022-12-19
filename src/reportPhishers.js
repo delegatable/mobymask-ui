@@ -31,6 +31,7 @@ export default async function reportPhishers(phishers, provider, invitation) {
       return invocation;
     }),
   );
+  console.dir({ invocations });
 
   const queue = Math.floor(Math.random() * 100000000);
   const signedInvocations = membership.signInvocations({
@@ -41,6 +42,8 @@ export default async function reportPhishers(phishers, provider, invitation) {
     },
   });
 
+  console.dir({ signedInvocations });
+  console.log('reporting phishers', signedInvocations);
   return await registry.invoke([signedInvocations]);
 }
 

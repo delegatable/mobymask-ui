@@ -15,7 +15,8 @@ const { chainId } = contractInfo;
 const { createMembership } = require("eth-delegatable-utils");
 const localStorage = window.localStorage;
 
-export default function Members(props) {
+export default function Members() {
+  console.log('loading members view');
   const query = useQuery();
 
   const [loaded, setLoaded] = useState(false); // For loading invitations
@@ -28,16 +29,27 @@ export default function Members(props) {
 
   // Load user's own invitation from disk or query string:
   useEffect(() => {
+    console.log('using effect to check invitations')
     async function checkInvitations() {
+      console.log('checking invitations');
       if (!loadingFromDisk) {
+        console.log('loading from disk');
         setLoadingFromDisk(true);
 
         if (!invitation) {
+          console.log('nothing yet');
           try {
             let parsedInvitation;
             let rawLoaded = localStorage.getItem('invitation');
+            console.log('loading from disk', rawLoaded);
             if (rawLoaded) {
               parsedInvitation = JSON.parse(rawLoaded);
+              console.log('validating');
+              validateInvitation({
+                contractInfo,
+                invitation: parsedInvitation,
+              });
+              console.log('validated.');
             }
             if (!parsedInvitation || parsedInvitation === "null") {
               parsedInvitation = JSON.parse(query.get("invitation"));
@@ -75,7 +87,7 @@ export default function Members(props) {
     try {
       const rawStorage = localStorage.getItem("outstandingInvitations");
       let loadedInvitations = JSON.parse(rawStorage) || [];
-      setInvitations(loadedInvitations);
+      setInvitations(loadedInvitations, [loaded]);
       setLoaded(true);
     } catch (err) {
       console.error(err);
