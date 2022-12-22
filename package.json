@@ -42,7 +42,6 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "mini-css-extract-plugin": "^2.4.5",
-    "postcss": "^8.4.4",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-loader": "^6.2.1",
     "postcss-normalize": "^10.0.1",
@@ -62,7 +61,6 @@
     "source-map-loader": "^3.0.0",
     "stream": "^0.0.2",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
     "web-vitals": "^2.1.4",
     "webpack": "^5.64.4",
@@ -152,7 +150,10 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.13",
     "buffer": "^6.0.3",
-    "react-error-overlay": "^6.0.9"
+    "postcss": "^8.4.20",
+    "react-error-overlay": "^6.0.9",
+    "tailwindcss": "^3.2.4"
   }
 }
