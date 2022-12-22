@@ -18,8 +18,7 @@ export default async function reportPhishers(phishers, provider, invitation) {
 
   const invocations = await Promise.all(
     phishers.map(async phisher => {
-      const _phisher = phisher.indexOf("@") === "0" ? phisher.slice(1) : phisher;
-      const desiredTx = await registry.populateTransaction.claimIfPhisher(`TWT:${_phisher.toLowerCase()}`, true);
+      const desiredTx = await registry.populateTransaction.claimIfPhisher(phisher, true);
       const invocation = {
         transaction: {
           to: address,

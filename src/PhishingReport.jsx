@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import reportPhishers from "./reportPhishers";
 import LazyConnect from "./LazyConnect";
-import TextInput from "./TextInput";
+import ReportInput from './ReportInput';
+import { reportTypes } from './constants';
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
 
 export default function (props) {
   const { invitation } = props;
-  const [phisher, setPhisher] = useState();
   const [phishers, setPhishers] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
@@ -29,30 +29,12 @@ export default function (props) {
   return (
     <div className="box">
       <h3>Report a phishing attempt</h3>
-      <TextInput
-        placeholder="@phisher_person"
-        buttonLabel="Report"
-        onComplete={phisher => {
-          const _phisher = phisher.indexOf("@") === 0 ? phisher.slice(1) : phisher;
-          if (phishers.includes(_phisher)) return;
+
+      <ReportInput onSubmit={(_phisher) => {
           const newPhishers = [...phishers, _phisher];
-          console.log("new phishers is ", newPhishers);
           localStorage.setItem("pendingPhishers", JSON.stringify(newPhishers));
           setPhishers(newPhishers);
-        }}
-      />
-
-      <button
-        onClick={() => {
-          if (phisher) {
-            phishers.push(phisher);
-            localStorage.setItem("pendingPhishers", JSON.stringify(phishers));
-            setPhisher("");
-          }
-        }}
-      >
-        Report twitter phisher
-      </button>
+      }} />
 
       <div className="phishers">
         {phishers && phishers.length > 0 ? (
@@ -60,9 +42,14 @@ export default function (props) {
             <p>Pending phishing reports:</p>
             <ol>
               {phishers.map((phisher, index) => {
+                const segments = phisher.split(':');
+                const value = segments.pop();
+                const type = segments.join(':');
+                const typeLabel = reportTypes.filter((reportType) => reportType.value === type)[0].label;
+                const phisherLabel = `${typeLabel}: ${value}`;
                 return (
                   <li key={index}>
-                    {phisher}{" "}
+                    {phisherLabel}{" "}
                     <button
                       onClick={() => {
                         const newPhishers = phishers.filter(p => p !== phisher);
@@ -90,7 +77,6 @@ export default function (props) {
 function SubmitBatchButton(props) {
   const { provider, phishers, invitation, setPhishers } = props;
   const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
-  console.log("trying to submit batch with", ethersProvider);
   return (
     <div>
       <button
