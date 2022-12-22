@@ -39,6 +39,7 @@ export default async function reportMembers(members, provider, invitation) {
     },
   });
 
+  console.log('reporting members', signedInvocations);
   return await registry.invoke([signedInvocations]);
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
 
@@ -8,12 +8,10 @@ import InstallExtension from "./InstallExtension";
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
 
-const { chainId } = require("./config.json");
+const config = require("./config.json");
+const { chainId } = config;
 
-export default function QueryParamsRouter(props) {
-  const { provider } = props;
-  let query = useQuery();
-
+export default function RoutableArea(props) {
   return (
     <Routes>
       <Route exact path="/" element={<div>
@@ -29,13 +27,7 @@ export default function QueryParamsRouter(props) {
         </div>
         <InstallExtension />
       </div>} />
-      <Route path="/members/" element={<Members />} />
+      <Route path="/members" element={<Members />} />
     </Routes>
   );
-}
-
-function useQuery() {
-  const { search } = useLocation();
-
-  return React.useMemo(() => new URLSearchParams(search), [search]);
 }
