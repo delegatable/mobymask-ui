@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import reportPhishers from "./reportPhishers";
 import LazyConnect from "./LazyConnect";
 import ReportInput from './ReportInput';
-import { reportTypes } from './constants';
+import createPhisherLabel from "./createPhisherLabel";
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
@@ -42,11 +42,7 @@ export default function (props) {
             <p>Pending phishing reports:</p>
             <ol>
               {phishers.map((phisher, index) => {
-                const segments = phisher.split(':');
-                const value = segments.pop();
-                const type = segments.join(':');
-                const typeLabel = reportTypes.filter((reportType) => reportType.value === type)[0].label;
-                const phisherLabel = `${typeLabel}: ${value}`;
+                const phisherLabel = createPhisherLabel(phisher);
                 return (
                   <li key={index}>
                     {phisherLabel}{" "}
