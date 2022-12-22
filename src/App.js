@@ -9,10 +9,12 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <h1>
+        <div className="logo-bar">
           <img src={logo} className="App-logo" alt="logo" />
-          MobyMask
-        </h1>
+          <h1>
+            MobyMask
+          </h1>
+        </div>
 
         {/* Based on https://codepen.io/goodkatz/pen/LYPGxQz?editors=1100 */}
         <div class="waves">
