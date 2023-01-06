@@ -6,7 +6,7 @@ const { abi } = require("./artifacts");
 const { chainId, address, name } = require("./config.json");
 const CONTRACT_NAME = name;
 
-export default async function reportMembers(members, provider, invitation) {
+export default async function reportMembers(members, provider, peer, invitation) {
   const membership = createMembership({
     contractInfo,
     invitation,
@@ -40,6 +40,9 @@ export default async function reportMembers(members, provider, invitation) {
   });
 
   console.log('reporting members', signedInvocations);
+  
+  // Broadcast invocations among peers
+  peer.broadcastMessage([signedInvocations]);
   return await registry.invoke([signedInvocations]);
 }
 

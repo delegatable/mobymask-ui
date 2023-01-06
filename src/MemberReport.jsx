@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import reportMembers from "./reportMembers";
 import LazyConnect from "./LazyConnect";
 import TextInput from "./TextInput";
+import { PeerContext } from "./context/PeerContext";
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
@@ -76,12 +77,14 @@ export default function (props) {
 function SubmitBatchButton(props) {
   const { provider, members, invitation, setMembers } = props;
   const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
+  const peer = useContext(PeerContext);
+
   return (
     <div>
       <button
         onClick={async () => {
           try {
-            const block = await reportMembers(members, ethersProvider, invitation);
+            const block = await reportMembers(members, ethersProvider, peer, invitation);
             localStorage.clear();
             setMembers([]);
           } catch (err) {

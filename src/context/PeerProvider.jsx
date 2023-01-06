@@ -14,14 +14,6 @@ const PeerProvider = ({ signalServer, relayNode, children }) => {
 
       // Debug
       console.log(`Peer ID: ${peer.peerId.toString()}`);
-      // Subscribe to messages from remote peers
-      peer.subscribeMessage((peerId, message) => {
-        console.log(`${peerId.toString()} > ${message}`)
-      })
-      // Expose broadcast method in browser to send messages
-      window.broadcast = (message) => {
-        peer.broadcastMessage(message)
-      }
 
       setPeer(peer);
     };

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import reportPhishers from "./reportPhishers";
 import LazyConnect from "./LazyConnect";
 import ReportInput from './ReportInput';
 import createPhisherLabel from "./createPhisherLabel";
+import { PeerContext } from "./context/PeerContext";
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
@@ -73,12 +74,14 @@ export default function (props) {
 function SubmitBatchButton(props) {
   const { provider, phishers, invitation, setPhishers } = props;
   const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
+  const peer = useContext(PeerContext);
+
   return (
     <div>
       <button
         onClick={async () => {
           try {
-            const block = await reportPhishers(phishers, ethersProvider, invitation);
+            const block = await reportPhishers(phishers, ethersProvider, peer, invitation);
             localStorage.clear();
             setPhishers([]);
           } catch (err) {

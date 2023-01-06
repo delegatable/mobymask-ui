@@ -1,10 +1,26 @@
+import { useContext, useEffect } from "react";
+import { HashRouter } from "react-router-dom";
 import logo from "./logo.svg";
 import "./installBuffer";
 import QueryParamsRoute from "./RoutableArea";
-import { HashRouter } from "react-router-dom";
 import "./App.css";
+import { PeerContext } from "./context/PeerContext";
 
 function App() {
+  const peer = useContext(PeerContext);
+
+  useEffect(() => {
+    if (peer) {
+      const unsubscribe = peer.subscribeMessage((peerId, message) => {
+        console.log("Message from peer:", peerId.toString())
+        console.log("Signed invocations")
+        console.log(message)
+      });
+
+      return unsubscribe
+    }
+  }, [peer])
+
   return (
     <div className="App">
       <header className="App-header">
