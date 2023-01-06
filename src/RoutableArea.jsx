@@ -14,19 +14,24 @@ const { chainId } = config;
 export default function RoutableArea(props) {
   return (
     <Routes>
-      <Route exact path="/" element={<div>
-        <div className="box">
-          <LazyConnect
-            actionName="check if a user is a phisher or member"
-            chainId={chainId}
-            opts={{ needsAccountConnected: false }}
-          >
-            <PhisherCheckButton />
-            <MemberCheckButton />
-          </LazyConnect>
-        </div>
-        <InstallExtension />
-      </div>} />
+      <Route
+        exact
+        path="/"
+        element={
+          <div>
+            <div className="box">
+              <LazyConnect
+                actionName="check if a user is a phisher or member"
+                chainId={chainId}
+                opts={{ needsAccountConnected: true }}>
+                <PhisherCheckButton />
+                <MemberCheckButton />
+              </LazyConnect>
+            </div>
+            <InstallExtension />
+          </div>
+        }
+      />
       <Route path="/members" element={<Members />} />
     </Routes>
   );

@@ -8,9 +8,11 @@ function InstallExtension() {
         Install the Web Extension (coming soon!)
       </button>
 
-      <p>Users of <a href="https://metamask.io/flask">MetaMask Flask</a>:</p>
+      <p>
+        Users of <a href="https://metamask.io/flask">MetaMask Flask</a>:
+      </p>
       <a href="https://montoya.github.io/get-mobymask-snap/">
-        <button className="installButton" enabled>
+        <button className="installButton" enabled="true">
           Install the MetaMask Snap
         </button>
       </a>

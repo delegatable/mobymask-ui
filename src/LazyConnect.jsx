@@ -63,7 +63,8 @@ export default function LazyConnect(props) {
   }, []);
 
   const needsToSwitchChain = Number(userChainId) !== chainId;
-  const needsToConnectAccount = needsAccountConnected && (!accounts || accounts.length === 0);
+  const needsToConnectAccount =
+    needsAccountConnected && (!accounts || accounts.length === 0);
   const requiresAction = needsToSwitchChain || needsToConnectAccount;
 
   if (error) {
@@ -95,14 +96,12 @@ export default function LazyConnect(props) {
           onClick={() => {
             const onboarding = new MetaMaskOnboarding();
             onboarding.startOnboarding();
-          }}
-        >
+          }}>
           Get MetaMask
         </button>
       </div>
     );
   }
-
   if (requiresAction) {
     return (
       <div className="lazyConnect">
@@ -130,7 +129,7 @@ export default function LazyConnect(props) {
 
   const { children } = props;
 
-  const childrenWithProps = React.Children.map(children, child => {
+  const childrenWithProps = React.Children.map(children, (child) => {
     // Checking isValidElement is the safe way and avoids a typescript
     // error too.
     if (React.isValidElement(child)) {

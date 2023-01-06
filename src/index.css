@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
   margin: 0;
 }
@@ -6,8 +9,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.logo-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}

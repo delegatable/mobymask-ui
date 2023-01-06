@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReportInput from './ReportInput';
+import ReportInput from "./views/ReportInput";
 import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "./hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "./queries/latestBlock";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import reportPhishers from "./reportPhishers";
 import LazyConnect from "./LazyConnect";
-import ReportInput from './ReportInput';
+import ReportInput from "./views/ReportInput";
 import createPhisherLabel from "./createPhisherLabel";
 const { ethers } = require("ethers");
 const config = require("./config.json");
