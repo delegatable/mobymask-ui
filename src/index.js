@@ -2,9 +2,12 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import PeerProvider from "./context/PeerProvider";
 import "./index.css";
 
 const watcherUri = "https://mobymask.vdb.to/graphql"
+const signalServerURL = "/ip4/127.0.0.1/tcp/13579/ws/p2p-webrtc-star/"
+const relayNodeURL = "/ip4/127.0.0.1/tcp/13579/wss/p2p-webrtc-star/p2p/12D3KooWL6co42CAbwyDhRSKa1F49CNZQtG9VLbgiy5CJBDKjsvX"
 
 const client = new ApolloClient({
   uri: watcherUri,
@@ -13,7 +16,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <PeerProvider signalServer={signalServerURL} relayNode={relayNodeURL}>
+      <App />
+    </PeerProvider>
   </ApolloProvider>,
   document.getElementById("root"),
 );
