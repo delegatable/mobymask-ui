@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import InstallExtension from "./InstallExtension";
 import ReviewAndRevokeInvitations from "./ReviewAndRevokeInvitations";
 import { useNavigate, useLocation } from "react-router-dom";
-import contractInfo from "./contractInfo";
+import contractInfo from "../contractInfo";
 import PhishingReport from "./PhishingReport";
 import MemberReport from "./MemberReport";
 import { PhisherCheckButton } from "./PhisherCheck";
 import { MemberCheckButton } from "./MemberCheck";
 import LazyConnect from "./LazyConnect";
-import copyInvitationLink from "./copyInvitationLink";
+import copyInvitationLink from "../copyInvitationLink";
 
 const { validateInvitation } = require("eth-delegatable-utils");
 const { chainId } = contractInfo;
@@ -35,7 +35,7 @@ export default function Members() {
         if (!invitation) {
           try {
             let parsedInvitation;
-            let rawLoaded = localStorage.getItem('invitation');
+            let rawLoaded = localStorage.getItem("invitation");
             if (rawLoaded) {
               parsedInvitation = JSON.parse(rawLoaded);
               validateInvitation({
@@ -49,7 +49,7 @@ export default function Members() {
                 contractInfo,
                 invitation: parsedInvitation,
               });
-              localStorage.setItem('invitation', query.get("invitation"));
+              localStorage.setItem("invitation", query.get("invitation"));
             }
 
             navigate("/members");
@@ -104,10 +104,13 @@ export default function Members() {
     }
   }
 
-  const inviteView = generateInviteView(invitation, invitation => {
+  const inviteView = generateInviteView(invitation, (invitation) => {
     if (invitation) {
       const newInvites = [...invitations, invitation];
-      localStorage.setItem("outstandingInvitations", JSON.stringify(newInvites));
+      localStorage.setItem(
+        "outstandingInvitations",
+        JSON.stringify(newInvites)
+      );
       setInvitations(newInvites);
     }
   });
@@ -120,8 +123,7 @@ export default function Members() {
             <LazyConnect
               actionName="check if a user is a phisher"
               chainId={chainId}
-              opts={{ needsAccountConnected: false }}
-            >
+              opts={{ needsAccountConnected: false }}>
               <PhisherCheckButton />
             </LazyConnect>
           </div>
@@ -136,8 +138,7 @@ export default function Members() {
             <LazyConnect
               actionName="check if a user is endorsed"
               chainId={chainId}
-              opts={{ needsAccountConnected: false }}
-            >
+              opts={{ needsAccountConnected: false }}>
               <MemberCheckButton />
             </LazyConnect>
           </div>
@@ -150,7 +151,9 @@ export default function Members() {
         <div className="inviteBox">
           {inviteView}
 
-          <LazyConnect actionName="revoke outstanding invitations" chainId={chainId}>
+          <LazyConnect
+            actionName="revoke outstanding invitations"
+            chainId={chainId}>
             <ReviewAndRevokeInvitations
               invitations={invitations}
               invitation={invitation}
@@ -177,20 +180,22 @@ function generateInviteView(invitation, addInvitation) {
     return (
       <div className="box">
         <p>
-          You are a tier {invitation.signedDelegations.length} invitee. This means you can invite up to {4 - tier}{" "}
-          additional tiers of members.
+          You are a tier {invitation.signedDelegations.length} invitee. This
+          means you can invite up to {4 - tier} additional tiers of members.
         </p>
         <p>
-          Invite people who you think will respect the system, and only report definite impostors and frauds, and only
-          endorse people who are neither.
+          Invite people who you think will respect the system, and only report
+          definite impostors and frauds, and only endorse people who are
+          neither.
         </p>
         <p>
-          If you invite an abusive person and don't revoke their activity quickly, you may have your membership revoked.
+          If you invite an abusive person and don't revoke their activity
+          quickly, you may have your membership revoked.
         </p>
         <button
           onClick={() => {
             const petName = prompt(
-              "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?",
+              "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
             );
             const newInvitation = membership.createInvitation();
             copyInvitationLink(newInvitation, petName)
@@ -208,8 +213,7 @@ function generateInviteView(invitation, addInvitation) {
                   invitation: newInvitation,
                 });
               });
-          }}
-        >
+          }}>
           Create new invite link
         </button>
       </div>
@@ -217,8 +221,9 @@ function generateInviteView(invitation, addInvitation) {
   } else if (tier === 4) {
     <div>
       <p>
-        You are a tier 4 member. That means you can't currently invite new members through this interface, but if this
-        site becomes popular, we can add support for this later.
+        You are a tier 4 member. That means you can't currently invite new
+        members through this interface, but if this site becomes popular, we can
+        add support for this later.
       </p>
     </div>;
   }

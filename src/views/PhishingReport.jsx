@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import reportPhishers from "./reportPhishers";
+import reportPhishers from "../reportPhishers";
 import LazyConnect from "./LazyConnect";
-import ReportInput from "./views/ReportInput";
-import createPhisherLabel from "./createPhisherLabel";
+import ReportInput from "./ReportInput";
+import createPhisherLabel from "../createPhisherLabel";
 const { ethers } = require("ethers");
-const config = require("./config.json");
+const config = require("../config.json");
 const { chainId } = config;
 
 export default function (props) {
@@ -30,11 +30,13 @@ export default function (props) {
     <div className="box">
       <h3>Report a phishing attempt</h3>
 
-      <ReportInput onSubmit={(_phisher) => {
+      <ReportInput
+        onSubmit={(_phisher) => {
           const newPhishers = [...phishers, _phisher];
           localStorage.setItem("pendingPhishers", JSON.stringify(newPhishers));
           setPhishers(newPhishers);
-      }} />
+        }}
+      />
 
       <div className="phishers">
         {phishers && phishers.length > 0 ? (
@@ -48,11 +50,15 @@ export default function (props) {
                     {phisherLabel}{" "}
                     <button
                       onClick={() => {
-                        const newPhishers = phishers.filter(p => p !== phisher);
-                        localStorage.setItem("pendingPhishers", JSON.stringify(newPhishers));
+                        const newPhishers = phishers.filter(
+                          (p) => p !== phisher
+                        );
+                        localStorage.setItem(
+                          "pendingPhishers",
+                          JSON.stringify(newPhishers)
+                        );
                         setPhishers(newPhishers);
-                      }}
-                    >
+                      }}>
                       Remove
                     </button>
                   </li>
@@ -60,8 +66,14 @@ export default function (props) {
               })}
             </ol>
 
-            <LazyConnect actionName="submit reports directly to the blockchain" chainId={chainId}>
-              <SubmitBatchButton phishers={phishers} invitation={invitation} setPhishers={setPhishers} />
+            <LazyConnect
+              actionName="submit reports directly to the blockchain"
+              chainId={chainId}>
+              <SubmitBatchButton
+                phishers={phishers}
+                invitation={invitation}
+                setPhishers={setPhishers}
+              />
             </LazyConnect>
           </div>
         ) : null}
@@ -78,14 +90,17 @@ function SubmitBatchButton(props) {
       <button
         onClick={async () => {
           try {
-            const block = await reportPhishers(phishers, ethersProvider, invitation);
+            const block = await reportPhishers(
+              phishers,
+              ethersProvider,
+              invitation
+            );
             localStorage.clear();
             setPhishers([]);
           } catch (err) {
             alert(`Error: ${err.message}`);
           }
-        }}
-      >
+        }}>
         Submit batch to blockchain
       </button>
     </div>

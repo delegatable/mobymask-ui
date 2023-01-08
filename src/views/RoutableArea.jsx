@@ -4,11 +4,10 @@ import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
 
 // Routes
-import InstallExtension from "./InstallExtension";
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
 
-const config = require("./config.json");
+const config = require("../config.json");
 const { chainId } = config;
 
 export default function RoutableArea(props) {
@@ -19,16 +18,7 @@ export default function RoutableArea(props) {
         path="/"
         element={
           <div>
-            <div className="box">
-              <LazyConnect
-                actionName="check if a user is a phisher or member"
-                chainId={chainId}
-                opts={{ needsAccountConnected: true }}>
-                <PhisherCheckButton />
-                <MemberCheckButton />
-              </LazyConnect>
-            </div>
-            <InstallExtension />
+            <div className="box"></div>
           </div>
         }
       />

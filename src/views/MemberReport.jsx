@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import reportMembers from "./reportMembers";
+import reportMembers from "../reportMembers";
 import LazyConnect from "./LazyConnect";
 import TextInput from "./TextInput";
 const { ethers } = require("ethers");
-const config = require("./config.json");
+const config = require("../config.json");
 const { chainId } = config;
 
 export default function (props) {
@@ -31,7 +31,7 @@ export default function (props) {
       <TextInput
         placeholder="@member_person"
         buttonLabel="Endorse"
-        onComplete={member => {
+        onComplete={(member) => {
           const _member = member.indexOf("@") === 0 ? member.slice(1) : member;
           if (members.includes(_member)) return;
           const newMembers = [...members, _member];
@@ -51,11 +51,13 @@ export default function (props) {
                     {member}{" "}
                     <button
                       onClick={() => {
-                        const newMembers = members.filter(p => p !== member);
-                        localStorage.setItem("pendingMembers", JSON.stringify(newMembers));
+                        const newMembers = members.filter((p) => p !== member);
+                        localStorage.setItem(
+                          "pendingMembers",
+                          JSON.stringify(newMembers)
+                        );
                         setMembers(newMembers);
-                      }}
-                    >
+                      }}>
                       Remove
                     </button>
                   </li>
@@ -63,8 +65,14 @@ export default function (props) {
               })}
             </ol>
 
-            <LazyConnect actionName="submit endorsements directly to the blockchain" chainId={chainId}>
-              <SubmitBatchButton members={members} invitation={invitation} setMembers={setMembers} />
+            <LazyConnect
+              actionName="submit endorsements directly to the blockchain"
+              chainId={chainId}>
+              <SubmitBatchButton
+                members={members}
+                invitation={invitation}
+                setMembers={setMembers}
+              />
             </LazyConnect>
           </div>
         ) : null}
@@ -81,15 +89,18 @@ function SubmitBatchButton(props) {
       <button
         onClick={async () => {
           try {
-            const block = await reportMembers(members, ethersProvider, invitation);
+            const block = await reportMembers(
+              members,
+              ethersProvider,
+              invitation
+            );
             localStorage.clear();
             setMembers([]);
           } catch (err) {
             console.error(err);
             alert(`Error: ${err.message}`);
           }
-        }}
-      >
+        }}>
         Submit batch to blockchain
       </button>
     </div>

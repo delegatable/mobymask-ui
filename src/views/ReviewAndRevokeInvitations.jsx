@@ -1,18 +1,20 @@
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
-import createRegistry from "./createRegistry";
-import linkForInvitation from "./linkForInvitation";
-import copyInvitationLink from "./copyInvitationLink";
+import createRegistry from "../createRegistry";
+import linkForInvitation from "../linkForInvitation";
+import copyInvitationLink from "../copyInvitationLink";
 
-const { generateUtil, createSignedDelegationHash } = require("eth-delegatable-utils");
-const { chainId, address, name } = require("./config.json");
+const {
+  generateUtil,
+  createSignedDelegationHash,
+} = require("eth-delegatable-utils");
+const { chainId, address, name } = require("../config.json");
 const CONTRACT_NAME = name;
 const util = generateUtil({
   chainId,
   verifyingContract: address,
   name: CONTRACT_NAME,
 });
-
 
 export default function (props) {
   const { provider, invitations, invitation, setInvitations } = props;
@@ -27,7 +29,7 @@ export default function (props) {
     }
 
     createRegistry(ethersProvider)
-      .then(_registry => {
+      .then((_registry) => {
         setRegistry(_registry);
       })
       .catch(console.error);
@@ -44,33 +46,48 @@ export default function (props) {
         return (
           <div key={index}>
             <span>{_invitation.petName}</span>
-            <input type="text" readOnly value={linkForInvitation(_invitation.invitation)}></input>
+            <input
+              type="text"
+              readOnly
+              value={linkForInvitation(_invitation.invitation)}></input>
             <button
               onClick={() => {
-                copyInvitationLink(_invitation.invitation, _invitation.petName).catch(err => alert(err.message));
-              }}
-            >
+                copyInvitationLink(
+                  _invitation.invitation,
+                  _invitation.petName
+                ).catch((err) => alert(err.message));
+              }}>
               Copy
             </button>
             <button
               onClick={async () => {
                 const { signedDelegations } = _invitation.invitation;
-                const signedDelegation = signedDelegations[signedDelegations.length - 1];
+                const signedDelegation =
+                  signedDelegations[signedDelegations.length - 1];
 
-                const delegationHash = createSignedDelegationHash(signedDelegation);
+                const delegationHash =
+                  createSignedDelegationHash(signedDelegation);
                 const intendedRevocation = {
                   delegationHash,
                 };
-                const signedIntendedRevocation = util.signRevocation(intendedRevocation, invitation.key);
+                const signedIntendedRevocation = util.signRevocation(
+                  intendedRevocation,
+                  invitation.key
+                );
 
-                await registry.revokeDelegation(signedDelegation, signedIntendedRevocation);
+                await registry.revokeDelegation(
+                  signedDelegation,
+                  signedIntendedRevocation
+                );
 
                 const newInvites = [...invitations];
                 newInvites.splice(index, 1);
-                localStorage.setItem("outstandingInvitations", JSON.stringify(newInvites));
+                localStorage.setItem(
+                  "outstandingInvitations",
+                  JSON.stringify(newInvites)
+                );
                 setInvitations(newInvites);
-              }}
-            >
+              }}>
               Revoke
             </button>
           </div>

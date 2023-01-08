@@ -1,15 +1,71 @@
-import React, { useRef, useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { reportTypes as options } from "../constants";
 import cn from "classnames";
 
+import { gql, useQuery } from "@apollo/client";
+import useLazyQuery from "../hooks/useLazyQuery";
+import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
+import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
+import createPhisherLabel from "../createPhisherLabel";
+import ReportInputInfo from "./ReportInputInfo";
+import config from "../config.json";
+const { address } = config;
+
 function ReportInput() {
   const [selectedOption, setSelectedOption] = useState("TWT");
-  const inputRef = useRef(null);
+  const [checkResult, setCheckResult] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isShow, setIsShow] = useState(false);
+  const inputRef = useRef();
 
-  function submitFrom() {
-    const info = sanitizeValue(selectedOption, inputRef.current.value);
-    console.log(info);
+  useEffect(() => {
+    inputRef.current.value = "";
+  }, [selectedOption]);
+
+  // Get latest block
+  const LATEST_BLOCK_GQL = gql(LATEST_BLOCK_GRAPHQL);
+  const latestBlock = useLazyQuery(LATEST_BLOCK_GQL, {
+    fetchPolicy: "no-cache",
+  });
+
+  // Check if isPhisher
+  const IS_PHISHER_GQL = gql(IS_PHISHER_GRAPHQL);
+  const isPhisher = useLazyQuery(IS_PHISHER_GQL, {
+    variables: {
+      contractAddress: address,
+    },
+  });
+
+  async function submitFrom() {
+    // const info = sanitizeValue(selectedOption, phisher);
+    setIsLoading(true);
+    setIsShow(true);
+    const result = await checkPhisher(inputRef.current.value);
+    if (result) {
+      setCheckResult(result?.isPhisher?.value);
+    } else {
+      console.error(result);
+    }
+    setIsLoading(false);
   }
+
+  const checkPhisher = async (codedName) => {
+    try {
+      const { data: latestBlockData } = await latestBlock();
+      const { data } = await isPhisher({
+        blockHash: latestBlockData?.latestBlock?.hash,
+        key0: codedName,
+      });
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const clearPhisher = () => {
+    setIsShow(false);
+    inputRef.current.value = "";
+  };
 
   return (
     <>
@@ -25,15 +81,15 @@ function ReportInput() {
             )}
             key={item.value}
             onClick={() => setSelectedOption(item.value)}>
-            {item.label}
+            {item?.label}
           </div>
         ))}
       </div>
-      <div className="relative w-max m-auto rounded-[100px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
+      <div className="relative w-[100%] m-auto rounded-[100px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
         <input
           ref={inputRef}
           className={cn(
-            "w-[910px] h-[80px] m-auto text-[18px] px-[35px]",
+            "w-[100%] h-[80px] m-auto text-[18px] px-[35px]",
             "border-[0.5px] border-solid border-[#D0D5DD] rounded-[100px]"
           )}
           placeholder="Enter a twitter name to check if it is a phisher..."
@@ -44,35 +100,19 @@ function ReportInput() {
           🔍
         </span>
       </div>
+      {isShow && (
+        <ReportInputInfo
+          {...{
+            checkResult,
+            selectedOption,
+            phisher: inputRef.current.value,
+            clearPhisher,
+            isLoading,
+          }}
+        />
+      )}
     </>
   );
-  // return (
-  //   // <form onSubmit={handleSubmit}>
-  //   //   <div>
-  //   //     <label htmlFor="report-type">Report Type:</label>
-  //   //     <select id="report-type" name="report-type" onChange={handleChange}>
-  //   //       {options.map((option) => (
-  //   //         <option key={option.value} value={option.value}>
-  //   //           {option.label}
-  //   //         </option>
-  //   //       ))}
-  //   //     </select>
-  //   //   </div>
-  //   //   <div>
-  //   //     <label htmlFor="value">Value:</label>
-  //   //     <input
-  //   //       type="text"
-  //   //       id="value"
-  //   //       name="value"
-  //   //       value={value}
-  //   //       onChange={(event) => setValue(event.target.value)}
-  //   //     />
-  //   //   </div>
-  //   //   <div>
-  //   //     <button type="submit">Submit</button>
-  //   //   </div>
-  //   // </form>
-  // );
 }
 
 function sanitizeValue(type, value) {

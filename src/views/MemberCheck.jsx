@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import useLazyQuery from "./hooks/useLazyQuery";
-import LATEST_BLOCK_GRAPHQL from "./queries/latestBlock";
-import IS_MEMBER_GRAPHQL from "./queries/isMember";
+import useLazyQuery from "../hooks/useLazyQuery";
+import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
+import IS_MEMBER_GRAPHQL from "../queries/isMember";
 import TextInput from "./TextInput";
-import config from "./config.json";
+import config from "../config.json";
 const { address } = config;
 
 export default function MemberCheck(props) {
@@ -15,10 +15,10 @@ export default function MemberCheck(props) {
       <TextInput
         placeholder="Enter a Twitter name"
         buttonLabel="Check"
-        onComplete={name => {
+        onComplete={(name) => {
           props
             .checkMember(name)
-            .then(result => {
+            .then((result) => {
               setOutput(result);
             })
             .catch(console.error);
@@ -46,11 +46,14 @@ export function MemberCheckButton() {
 
   return (
     <MemberCheck
-      checkMember={async name => {
+      checkMember={async (name) => {
         const codedName = `TWT:${name.toLowerCase()}`;
         try {
           const { data: latestBlockData } = await latestBlock();
-          const { data } = await isMember({ blockHash: latestBlockData?.latestBlock?.hash, key0: codedName });
+          const { data } = await isMember({
+            blockHash: latestBlockData?.latestBlock?.hash,
+            key0: codedName,
+          });
 
           if (data?.isMember?.value) {
             return `${name} is an endorsed moby.`;

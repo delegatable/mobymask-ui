@@ -1,8 +1,9 @@
 import logo from "./logo.svg";
 import "./installBuffer";
-import QueryParamsRoute from "./RoutableArea";
+import QueryParamsRoute from "./views/RoutableArea";
 import { HashRouter } from "react-router-dom";
 import ContentBox from "./views/ContentBox";
+import InstallExtension from "./views/InstallExtension";
 import "./App.css";
 
 function App() {
@@ -58,6 +59,8 @@ function App() {
       <HashRouter>
         <QueryParamsRoute />
       </HashRouter>
+
+      <InstallExtension />
 
       <div className="footer">
         <p>Reporters are added on an invite-only basis.</p>

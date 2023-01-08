@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MetaMaskOnboarding from "@metamask/onboarding";
-import chainList from "./chainList";
+import chainList from "../chainList";
 
 export default function LazyConnect(props) {
   const { actionName, chainId } = props;
@@ -174,14 +174,24 @@ function createChecklist(checklistOpts) {
           accounts,
           hasWallet,
         })}
-        {switchNetworkItem({ chainId, setError, userChainId, chainName, setAccounts, provider, setLoading, hasWallet })}
+        {switchNetworkItem({
+          chainId,
+          setError,
+          userChainId,
+          chainName,
+          setAccounts,
+          provider,
+          setLoading,
+          hasWallet,
+        })}
       </ol>
     </div>
   );
 }
 
 function switchAccountsItem(opts) {
-  const { needsToConnectAccount, setAccounts, accounts, provider, hasWallet } = opts;
+  const { needsToConnectAccount, setAccounts, accounts, provider, hasWallet } =
+    opts;
 
   if (!needsToConnectAccount) {
     return null;
@@ -200,10 +210,11 @@ function switchAccountsItem(opts) {
       ☐{" "}
       <button
         onClick={async () => {
-          const _accounts = await provider.request({ method: "eth_requestAccounts" });
+          const _accounts = await provider.request({
+            method: "eth_requestAccounts",
+          });
           setAccounts(_accounts);
-        }}
-      >
+        }}>
         Connect an account
       </button>
     </li>
@@ -211,7 +222,15 @@ function switchAccountsItem(opts) {
 }
 
 function switchNetworkItem(opts) {
-  const { chainId, userChainId, chainName, provider, setLoading, hasWallet, setError } = opts;
+  const {
+    chainId,
+    userChainId,
+    chainName,
+    provider,
+    setLoading,
+    hasWallet,
+    setError,
+  } = opts;
   const needsToSwitchChain = !!chainId && Number(userChainId) !== chainId;
 
   if (!needsToSwitchChain) {
@@ -234,13 +253,12 @@ function switchNetworkItem(opts) {
             .then(() => {
               setLoading(false);
             })
-            .catch(reason => {
+            .catch((reason) => {
               setLoading(false);
               setError(reason);
             });
           setLoading(true);
-        }}
-      >
+        }}>
         Switch to the {chainName} network
       </button>
     </li>
