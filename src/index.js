@@ -1,8 +1,8 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { PeerProvider } from "@cerc-io/react-peer";
 import ReactDOM from "react-dom";
 import App from "./App";
-import PeerProvider from "./context/PeerProvider";
 import "./index.css";
 
 const watcherUri = "https://mobymask.vdb.to/graphql"

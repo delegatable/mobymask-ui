@@ -1,15 +1,15 @@
-import { useContext, useEffect } from "react";
+import React from "react";
 import { HashRouter } from "react-router-dom";
+import { PeerContext } from "@cerc-io/react-peer";
 import logo from "./logo.svg";
 import "./installBuffer";
 import QueryParamsRoute from "./RoutableArea";
 import "./App.css";
-import { PeerContext } from "./context/PeerContext";
 
 function App() {
-  const peer = useContext(PeerContext);
+  const peer = React.useContext(PeerContext);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (peer) {
       const unsubscribe = peer.subscribeMessage((peerId, message) => {
         console.log("Message from peer:", peerId.toString())

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
+import { PeerContext } from "@cerc-io/react-peer";
 import reportMembers from "./reportMembers";
 import LazyConnect from "./LazyConnect";
 import TextInput from "./TextInput";
-import { PeerContext } from "./context/PeerContext";
 const { ethers } = require("ethers");
 const config = require("./config.json");
 const { chainId } = config;
