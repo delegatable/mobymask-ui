@@ -6,7 +6,7 @@
   "dependencies": {
     "@apollo/client": "^3.7.2",
     "@babel/core": "^7.16.0",
-    "@cerc-io/react-peer": "^0.2.21",
+    "@cerc-io/react-peer": "^0.2.22",
     "@metamask/eth-sig-util": "^5.0.2",
     "@metamask/onboarding": "^1.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",

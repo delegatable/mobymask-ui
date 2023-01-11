@@ -5,14 +5,15 @@ import logo from "./logo.svg";
 import "./installBuffer";
 import QueryParamsRoute from "./RoutableArea";
 import "./App.css";
+import { MOBYMASK_TOPIC } from "./constants";
 
 function App() {
   const peer = React.useContext(PeerContext);
 
   React.useEffect(() => {
     if (peer) {
-      const unsubscribe = peer.subscribeMessage((peerId, message) => {
-        console.log("Message from peer:", peerId.toString())
+      const unsubscribe = peer.subscribeTopic(MOBYMASK_TOPIC, (message) => {
+        console.log("Message from a peer")
         console.log("Signed invocations")
         console.log(message)
       });
