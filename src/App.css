@@ -69,9 +69,6 @@ button {
   cursor: pointer;
 }
 
-.lazyConnect {
-  border: 1px dashed black;
-}
 
 .phisherBox {
   background-color: pink;

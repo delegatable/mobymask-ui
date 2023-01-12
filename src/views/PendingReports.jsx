@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import cn from "classnames";
 
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import {
   pendingPhishersAtom,
   pendingNotPhishersAtom,
 } from "../atoms/phisherAtom";
 
+import { invitationAtom } from "../atoms/invitationAtom";
+
 import LazyConnect from "./LazyConnect";
-import { PhisherCheckButton } from "./PhisherCheck";
-import { MemberCheckButton } from "./MemberCheck";
 import Button from "../components/Button";
 import TableList from "../components/TableList";
+import SubmitBatchButton from "../components/SubmitBatchButton";
 
 const config = require("../config.json");
 const { chainId } = config;
@@ -19,6 +20,7 @@ const { chainId } = config;
 function PendingReports() {
   const [active, setActive] = useState("ReportPhisher");
   const [storedPhishers, setStoredPhishers] = useAtom(pendingPhishersAtom);
+  const invitation = useAtomValue(invitationAtom);
   const [storedNotPhishers, setStoredNotPhishers] = useAtom(
     pendingNotPhishersAtom
   );
@@ -105,11 +107,21 @@ function PendingReports() {
         )}>
         <TableList {...{ tableHeader, tabList }} />
         <LazyConnect
-          actionName="check if a user is a phisher or member"
+          actionName=" submit reports directly to the blockchain.Get a web3 compatible wallet(like metamask) to proceed."
           chainId={chainId}
           opts={{ needsAccountConnected: true }}>
-          <PhisherCheckButton />
-          <MemberCheckButton />
+          <SubmitBatchButton
+            type={active}
+            subData={
+              active === "ReportPhisher" ? storedPhishers : storedNotPhishers
+            }
+            invitation={invitation}
+            setLocalData={
+              active === "ReportPhisher"
+                ? setStoredPhishers
+                : setStoredNotPhishers
+            }
+          />
         </LazyConnect>
       </div>
     </div>

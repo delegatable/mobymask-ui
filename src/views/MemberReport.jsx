@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import reportMembers from "../reportMembers";
 import LazyConnect from "./LazyConnect";
 import TextInput from "./TextInput";
+import SubmitBatchButton from "../components/SubmitBatchButton";
 const { ethers } = require("ethers");
 const config = require("../config.json");
 const { chainId } = config;
@@ -68,41 +69,17 @@ export default function (props) {
             <LazyConnect
               actionName="submit endorsements directly to the blockchain"
               chainId={chainId}>
-              <SubmitBatchButton
-                members={members}
-                invitation={invitation}
-                setMembers={setMembers}
-              />
+              <div className="text-center">
+                <SubmitBatchButton
+                  members={members}
+                  invitation={invitation}
+                  setMembers={setMembers}
+                />
+              </div>
             </LazyConnect>
           </div>
         ) : null}
       </div>
-    </div>
-  );
-}
-
-function SubmitBatchButton(props) {
-  const { provider, members, invitation, setMembers } = props;
-  const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
-  return (
-    <div>
-      <button
-        onClick={async () => {
-          try {
-            const block = await reportMembers(
-              members,
-              ethersProvider,
-              invitation
-            );
-            localStorage.clear();
-            setMembers([]);
-          } catch (err) {
-            console.error(err);
-            alert(`Error: ${err.message}`);
-          }
-        }}>
-        Submit batch to blockchain
-      </button>
     </div>
   );
 }

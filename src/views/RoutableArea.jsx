@@ -4,6 +4,8 @@ import LazyConnect from "./LazyConnect";
 import { PhisherCheckButton } from "./PhisherCheck";
 
 // Routes
+import ContentBox from "./ContentBox";
+
 import Members from "./Members";
 import { MemberCheckButton } from "./MemberCheck";
 
@@ -13,15 +15,7 @@ const { chainId } = config;
 export default function RoutableArea(props) {
   return (
     <Routes>
-      <Route
-        exact
-        path="/"
-        element={
-          <div>
-            <div className="box"></div>
-          </div>
-        }
-      />
+      <Route exact path="/" element={<ContentBox />} />
       <Route path="/members" element={<Members />} />
     </Routes>
   );

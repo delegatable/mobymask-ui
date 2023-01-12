@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import chainList from "../chainList";
+import Button from "../components/Button";
+
+import cn from "classnames";
 
 export default function LazyConnect(props) {
   const { actionName, chainId } = props;
@@ -78,7 +81,7 @@ export default function LazyConnect(props) {
 
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
     return (
-      <div className="lazyConnect">
+      <div className="text-center">
         {createChecklist({
           hasWallet: MetaMaskOnboarding.isMetaMaskInstalled(),
           provider,
@@ -92,13 +95,14 @@ export default function LazyConnect(props) {
           actionName,
           accounts,
         })}
-        <button
-          onClick={() => {
+        <Button
+          className="mx-auto inline-block"
+          label="Get MetaMask"
+          click={() => {
             const onboarding = new MetaMaskOnboarding();
             onboarding.startOnboarding();
-          }}>
-          Get MetaMask
-        </button>
+          }}
+        />
       </div>
     );
   }
@@ -138,7 +142,7 @@ export default function LazyConnect(props) {
     return child;
   });
 
-  return <div className="lazyConnected">{childrenWithProps}</div>;
+  return <div className="text-center">{childrenWithProps}</div>;
 }
 
 function createChecklist(checklistOpts) {
@@ -158,13 +162,8 @@ function createChecklist(checklistOpts) {
   } = checklistOpts;
   return (
     <div>
-      <p>You need a few things to {actionName}.</p>
-      <ol>
-        {hasWallet ? (
-          <li>✅ Get a web3 compatible Wallet (like MetaMask)</li>
-        ) : (
-          <li>☐ Get a web3 compatible Wallet (like MetaMask)</li>
-        )}
+      <p className="w-[670px] m-auto">You need a few things to {actionName}.</p>
+      <div className="text-center">
         {switchAccountsItem({
           needsAccountConnected,
           needsToConnectAccount,
@@ -173,18 +172,18 @@ function createChecklist(checklistOpts) {
           setLoading,
           accounts,
           hasWallet,
-        })}
-        {switchNetworkItem({
-          chainId,
-          setError,
-          userChainId,
-          chainName,
-          setAccounts,
-          provider,
-          setLoading,
-          hasWallet,
-        })}
-      </ol>
+        }) ||
+          switchNetworkItem({
+            chainId,
+            setError,
+            userChainId,
+            chainName,
+            setAccounts,
+            provider,
+            setLoading,
+            hasWallet,
+          })}
+      </div>
     </div>
   );
 }
@@ -198,7 +197,7 @@ function switchAccountsItem(opts) {
   }
 
   if (!hasWallet) {
-    return <li>☐ Connect an account</li>;
+    return null;
   }
 
   if (typeof accounts !== "undefined" && accounts.length > 0) {
@@ -206,18 +205,18 @@ function switchAccountsItem(opts) {
   }
 
   return (
-    <li>
-      ☐{" "}
-      <button
-        onClick={async () => {
-          const _accounts = await provider.request({
-            method: "eth_requestAccounts",
-          });
-          setAccounts(_accounts);
-        }}>
-        Connect an account
-      </button>
-    </li>
+    <Button
+      className={cn(
+        "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
+        "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
+      )}
+      label="Connect A Wallet"
+      click={async () => {
+        const _accounts = await provider.request({
+          method: "eth_requestAccounts",
+        });
+        setAccounts(_accounts);
+      }}></Button>
   );
 }
 
@@ -238,29 +237,31 @@ function switchNetworkItem(opts) {
   }
 
   if (!hasWallet) {
-    return <li>Switch to the {chainName} network</li>;
+    return null;
   }
 
   return (
-    <li>
-      <button
-        onClick={async () => {
-          provider
-            .request({
-              method: "wallet_switchEthereumChain",
-              params: [{ chainId: "0x" + chainId.toString(16) }],
-            })
-            .then(() => {
-              setLoading(false);
-            })
-            .catch((reason) => {
-              setLoading(false);
-              setError(reason);
-            });
-          setLoading(true);
-        }}>
-        Switch to the {chainName} network
-      </button>
-    </li>
+    <Button
+      label={`Switch to the ${chainName} network`}
+      className={cn(
+        "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
+        "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
+      )}
+      click={async () => {
+        provider
+          .request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: "0x" + chainId.toString(16) }],
+          })
+          .then(() => {
+            setLoading(false);
+          })
+          .catch((reason) => {
+            setLoading(false);
+            setError(reason);
+          });
+        setLoading(true);
+      }}
+    />
   );
 }

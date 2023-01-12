@@ -2,11 +2,10 @@ import logo from "./logo.svg";
 import "./installBuffer";
 import QueryParamsRoute from "./views/RoutableArea";
 import { HashRouter } from "react-router-dom";
-import ContentBox from "./views/ContentBox";
-import InstallExtension from "./views/InstallExtension";
 import "./App.css";
+import InstallExtension from "./views/InstallExtension";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
@@ -53,9 +52,6 @@ function App() {
           </svg>
         </div>
       </header>
-
-      <ContentBox />
-
       <HashRouter>
         <QueryParamsRoute />
       </HashRouter>
