@@ -16,8 +16,8 @@ function App() {
 
   React.useEffect(() => {
     if (peer) {
-      const unsubscribe = peer.subscribeTopic(MOBYMASK_TOPIC, (message) => {
-        console.log("Received a message on mobymask P2P network")
+      const unsubscribe = peer.subscribeTopic(MOBYMASK_TOPIC, (peerId, message) => {
+        console.log("Received a message on mobymask P2P network from peer:", peerId.toString())
         console.log("Signed invocations:")
         console.log(JSON.stringify(message, null, 2))
 
