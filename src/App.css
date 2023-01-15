@@ -21,14 +21,6 @@
   color: white;
 }
 
-.logo-bar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-size: 31px;
-  padding-left: 40px;
-  padding-top: 46px;
-}
 
 .App-link {
   color: #61dafb;
@@ -65,9 +57,6 @@ button.installButton {
   padding-top:80px;
 }
 
-button {
-  cursor: pointer;
-}
 
 
 .phisherBox {
@@ -89,6 +78,7 @@ button {
 
 body {
   margin: 0;
+  font-family: 'Inter';
 }
 
 h1 {
@@ -96,12 +86,6 @@ h1 {
   font-weight: 300;
   letter-spacing: 2px;
   font-size: 48px;
-}
-p {
-  font-family: "Lato", sans-serif;
-  letter-spacing: 1px;
-  font-size: 14px;
-  color: #333333;
 }
 
 .header {

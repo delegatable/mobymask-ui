@@ -6,8 +6,11 @@
   "dependencies": {
     "@apollo/client": "^3.7.2",
     "@babel/core": "^7.16.0",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@metamask/eth-sig-util": "^5.0.2",
     "@metamask/onboarding": "^1.0.1",
+    "@mui/material": "^5.11.4",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",

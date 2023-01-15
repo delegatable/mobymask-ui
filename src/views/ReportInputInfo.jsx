@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useAtom, useAtomValue } from "jotai";
+
 import cn from "classnames";
 import Button from "../components/Button";
-import { useAtom } from "jotai";
 import { pendingPhishersAtom } from "../atoms/phisherAtom";
+import { invitationAtom } from "../atoms/invitationAtom";
 import { reportTypes } from "../constants";
 
 function ReportInputInfo(props) {
@@ -14,6 +16,7 @@ function ReportInputInfo(props) {
     clearPhisher = () => {},
   } = props;
   const [storedPhishers, setStoredPhishers] = useAtom(pendingPhishersAtom);
+  const invitation = useAtomValue(invitationAtom);
 
   const handleReport = () => {
     if (checkResult) {
@@ -77,13 +80,15 @@ function ReportInputInfo(props) {
           <p className="text-[16px] text-[#666F85] my-[24px] text-left">
             In doubt about this result, you can take the following actions
           </p>
-          <Button
-            {...{
-              label: `Repot ${checkResult ? "not" : ""} Phisher`,
-              active: false,
-              click: handleReport,
-            }}
-          />
+          {invitation && (
+            <Button
+              {...{
+                label: `Repot ${checkResult ? "not" : ""} Phisher`,
+                active: false,
+                click: handleReport,
+              }}
+            />
+          )}
         </>
       )}
     </div>

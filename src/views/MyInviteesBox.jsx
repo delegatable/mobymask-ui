@@ -28,52 +28,48 @@ function MyInvitees() {
   const invitation = useAtomValue(invitationAtom);
   const [newInvites, setNewInvites] = useAtom(outstandingInvitationsAtom);
 
-  //   if (!invitation) {
-  //     return (
-  //       <div>
-  //         <h3>Processing invitation...</h3>
-  //       </div>
-  //     );
-  //   }
-  // const tier = invitation.signedDelegations.length;
-
-  //   const membership = createMembership({
-  //     invitation,
-  //     contractInfo,
-  //   });
-
-  const addInvitation = (invitation) => {
-    if (invitation) {
-      const newInvites = [...invitations, invitation];
-      setNewInvites(newInvites);
+    if (!invitation) {
+      return (
+        <div>
+          <h3>Processing invitation...</h3>
+        </div>
+      );
     }
-  };
+    const tier = invitation.signedDelegations.length;
 
-  const createNewLink = () => {
-    const petName = prompt(
-      "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
-    );
-    const newInvitation = membership.createInvitation();
-    copyInvitationLink(newInvitation, petName)
-      .then(() => {
-        if (addInvitation) {
+    const membership = createMembership({
+      invitation,
+      contractInfo,
+    });
+
+    const addInvitation = (invitation) => {
+      if (invitation) {
+        const newInvites = [...invitations, invitation];
+        setNewInvites(newInvites);
+      }
+    };
+
+    const createNewLink = () => {
+      const petName = prompt(
+        "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
+      );
+      const newInvitation = membership.createInvitation();
+      copyInvitationLink(newInvitation, petName)
+        .then(() => {
+          if (addInvitation) {
+            addInvitation({
+              petName,
+              invitation: newInvitation,
+            });
+          }
+        })
+        .catch(() => {
           addInvitation({
             petName,
             invitation: newInvitation,
           });
-        }
-      })
-      .catch(() => {
-        addInvitation({
-          petName,
-          invitation: newInvitation,
         });
-      });
-  };
-
-  // test
-  const membership = {}; //
-  const tier = 3;
+    };
 
   if (tier < 4) {
     return (

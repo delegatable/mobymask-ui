@@ -37,7 +37,6 @@ function ReportInput() {
   });
 
   async function submitFrom() {
-    // const info = sanitizeValue(selectedOption, phisher);
     setIsLoading(true);
     setIsShow(true);
     const result = await checkPhisher(inputRef.current.value);
@@ -62,6 +61,11 @@ function ReportInput() {
     }
   };
 
+  const changeOptions = (item) => {
+    clearPhisher();
+    setSelectedOption(item.value);
+  };
+
   const clearPhisher = () => {
     setIsShow(false);
     inputRef.current.value = "";
@@ -80,7 +84,7 @@ function ReportInput() {
               `bg-[${selectedOption === item.value ? "black" : "white"}]`
             )}
             key={item.value}
-            onClick={() => setSelectedOption(item.value)}>
+            onClick={() => changeOptions(item)}>
             {item?.label}
           </div>
         ))}
