@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import cn from "classnames";
 import Button from "../components/Button";
 import TableList from "../components/TableList";
@@ -10,7 +10,7 @@ function MyInviteesReportHistory() {
     active === 3
       ? [
           {
-            key: "ReportStatus",
+            key: "status",
             title: "Report Status",
           },
           {
@@ -54,6 +54,61 @@ function MyInviteesReportHistory() {
     ...isChallengedHeader,
   ];
 
+  useEffect(() => {
+    if (active === 3) {
+      setTabList([
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          status: "bob",
+          Reporter: "Jane",
+          ParentInviter: "Jane",
+          ParentInviter: "Jane",
+        },
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          status: "bob",
+          Reporter: "Jane",
+          ParentInviter: "Jane",
+          Challenger: "Jane",
+        },
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          status: "bob",
+          Reporter: "Jane",
+          ParentInviter: "Jane",
+          Challenger: "Jane",
+        },
+      ]);
+    } else {
+      setTabList([
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          Reporter: "bob",
+          date: "2022-10-22",
+          ParentInviter: "Jane",
+        },
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          Reporter: "bob",
+          date: "2022-10-22",
+          ParentInviter: "Jane",
+        },
+        {
+          name: "GaliBrata1",
+          type: "Twitter",
+          Reporter: "bob",
+          date: "2022-10-22",
+          ParentInviter: "Jane",
+        },
+      ]);
+    }
+  }, [active]);
+
   return (
     <div className={cn("pt-[77px]")}>
       <h3 className={cn("text-[16px] mb-[24px]")}>
@@ -64,7 +119,7 @@ function MyInviteesReportHistory() {
           {...{
             label: "Reported phisher",
             active: active === 1,
-            click: () => setActive(1),
+            onClick: () => setActive(1),
           }}
         />
         <Button
@@ -72,14 +127,14 @@ function MyInviteesReportHistory() {
             label: "Reported not phisher",
             active: active === 2,
             className: "mx-[8px]",
-            click: () => setActive(2),
+            onClick: () => setActive(2),
           }}
         />
         <Button
           {...{
             label: "Challenged",
             active: active === 3,
-            click: () => setActive(3),
+            onClick: () => setActive(3),
           }}
         />
       </p>

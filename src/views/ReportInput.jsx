@@ -80,8 +80,8 @@ function ReportInput() {
               "mx-1 cursor-pointer",
               "px-[17.5px] pt-[8.5px] pb-[6.5px]",
               "rounded-t-[10px] border-[0.5px] border-[#D0D5DD] border-solid",
-              `text-[${selectedOption === item.value ? "white" : "#D0D5DD"}]`,
-              `bg-[${selectedOption === item.value ? "black" : "white"}]`
+              selectedOption === item.value ? "text-white" : "#D0D5DD",
+              selectedOption === item.value ? "bg-[#101828]" : "bg-white"
             )}
             key={item.value}
             onClick={() => changeOptions(item)}>
@@ -93,7 +93,7 @@ function ReportInput() {
         <input
           ref={inputRef}
           className={cn(
-            "w-[100%] h-[80px] m-auto text-[18px] px-[35px]",
+            "w-[100%] h-[80px] m-auto text-[18px] px-[35px] box-border",
             "border-[0.5px] border-solid border-[#D0D5DD] rounded-[100px]"
           )}
           placeholder="Enter a twitter name to check if it is a phisher..."

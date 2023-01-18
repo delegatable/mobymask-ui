@@ -51,7 +51,7 @@ function PendingReports() {
           {...{
             label: "remove",
             active: false,
-            click: () => removeClick(row),
+            onClick: () => removeClick(row),
           }}
         />
       ),
@@ -88,21 +88,21 @@ function PendingReports() {
             label: "Report Phisher",
             active: active === "ReportPhisher",
             className: "mr-[8px]",
-            click: () => setActive("ReportPhisher"),
+            onClick: () => setActive("ReportPhisher"),
           }}
         />
         <Button
           {...{
             label: "Report not Phisher",
             active: active === "ReportNotPhisher",
-            click: () => setActive("ReportNotPhisher"),
+            onClick: () => setActive("ReportNotPhisher"),
           }}
         />
       </p>
 
       <div
         className={cn(
-          "border-[0.5px] border-solid rounded-[10px]",
+          "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]",
           "px-[32px] py-[32px]"
         )}>
         <TableList {...{ tableHeader, tabList }} />

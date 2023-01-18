@@ -4,5 +4,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  important: "#root",
+  corePlugins: {
+    preflight: false,
+  },
   plugins: [],
 };

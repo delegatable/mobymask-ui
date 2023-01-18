@@ -1,17 +1,11 @@
 import cn from "classnames";
+import MuiButton from "@mui/material/Button";
 
 function Button(props = {}) {
-  const {
-    label = "button",
-    click = () => {
-      console.log("click button");
-    },
-    active = true,
-    className = "",
-  } = props;
+  const { label = "button", active = false, className = "", ...other } = props;
 
   return (
-    <div
+    <MuiButton
       className={cn(
         "w-[max-content] px-[16px] py-[12px] inline-block text-[16px] ",
         "border-[0.5px] border-solid rounded-[10px]",
@@ -21,9 +15,9 @@ function Button(props = {}) {
           : "text-[#101828] border-[#D0D5DD] ",
         className
       )}
-      onClick={click}>
+      {...other}>
       {label}
-    </div>
+    </MuiButton>
   );
 }
 

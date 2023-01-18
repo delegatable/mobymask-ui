@@ -41,8 +41,6 @@ export default async function reportPhishers(phishers, provider, invitation) {
     },
   });
 
-  console.dir({ signedInvocations });
-  console.log('reporting phishers', signedInvocations);
   return await registry.invoke([signedInvocations]);
 }
 

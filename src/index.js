@@ -1,6 +1,8 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./App";
 import "./index.css";
 
@@ -15,6 +17,8 @@ const container = document.querySelector("#root");
 const root = ReactDOM.createRoot(container);
 root.render(
   <ApolloProvider client={client}>
-    <App />
+    <StyledEngineProvider injectFirst>
+      <App />
+    </StyledEngineProvider>
   </ApolloProvider>
 );

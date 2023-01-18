@@ -8,10 +8,10 @@ import {
 } from "../atoms/invitationAtom";
 
 import Button from "../components/Button";
-import TableList from "../components/TableList";
 import copyInvitationLink from "../copyInvitationLink";
 import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
+import linkForInvitation from "../linkForInvitation";
 const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
@@ -24,60 +24,62 @@ function MyInviteesBox() {
 }
 
 function MyInvitees() {
-  const [invitations, setInvitations] = useState([]); // Outbound invitations
   const invitation = useAtomValue(invitationAtom);
-  const [newInvites, setNewInvites] = useAtom(outstandingInvitationsAtom);
+  const [outstandingInvitations, setOutstandingInvitations] = useAtom(
+    outstandingInvitationsAtom
+  );
 
-    if (!invitation) {
-      return (
-        <div>
-          <h3>Processing invitation...</h3>
-        </div>
-      );
+  if (!invitation) {
+    return (
+      <div>
+        <h3>Processing invitation...</h3>
+      </div>
+    );
+  }
+  const tier = invitation.signedDelegations.length;
+
+  const membership = createMembership({
+    invitation,
+    contractInfo,
+  });
+
+  const addInvitation = (invitation) => {
+    if (invitation) {
+      const newInvites = [...outstandingInvitations, invitation];
+      setOutstandingInvitations(newInvites);
     }
-    const tier = invitation.signedDelegations.length;
+  };
 
-    const membership = createMembership({
-      invitation,
-      contractInfo,
-    });
-
-    const addInvitation = (invitation) => {
-      if (invitation) {
-        const newInvites = [...invitations, invitation];
-        setNewInvites(newInvites);
-      }
-    };
-
-    const createNewLink = () => {
-      const petName = prompt(
-        "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
-      );
-      const newInvitation = membership.createInvitation();
-      copyInvitationLink(newInvitation, petName)
-        .then(() => {
-          if (addInvitation) {
-            addInvitation({
-              petName,
-              invitation: newInvitation,
-            });
-          }
-        })
-        .catch(() => {
-          addInvitation({
-            petName,
-            invitation: newInvitation,
-          });
+  const createNewLink = () => {
+    const petName = prompt(
+      "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
+    );
+    const newInvitation = membership.createInvitation();
+    copyInvitationLink(newInvitation, petName)
+      .then(() => {
+        addInvitation({
+          petName,
+          invitationLink: linkForInvitation(newInvitation),
+          invitation: newInvitation,
         });
-    };
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   if (tier < 4) {
     return (
       <div
         className={cn(
-          "border-[0.5px] border-solid rounded-[10px]",
+          "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]",
           "px-[32px] py-[80px]"
         )}>
+        <img
+          src={require("../assets/Invite_icon.png")}
+          className="w-[80px] h-[80px] m-auto block mb-[40px]"
+          alt=""
+        />
         <p
           className={cn(
             "w-[670px] m-auto text-[#2867BB] text-[20px] mb-[29px]"
@@ -102,7 +104,7 @@ function MyInvitees() {
           <Button
             className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
             label="Create new invite link"
-            click={createNewLink}
+            onClick={createNewLink}
           />
         </p>
         <MyInviteesReportHistory />

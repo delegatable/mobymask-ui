@@ -3,7 +3,10 @@ import { useAtom, useAtomValue } from "jotai";
 
 import cn from "classnames";
 import Button from "../components/Button";
-import { pendingPhishersAtom } from "../atoms/phisherAtom";
+import {
+  pendingPhishersAtom,
+  pendingNotPhishersAtom,
+} from "../atoms/phisherAtom";
 import { invitationAtom } from "../atoms/invitationAtom";
 import { reportTypes } from "../constants";
 
@@ -16,28 +19,40 @@ function ReportInputInfo(props) {
     clearPhisher = () => {},
   } = props;
   const [storedPhishers, setStoredPhishers] = useAtom(pendingPhishersAtom);
+  const [storedNotPhishers, setStoredNotPhishers] = useAtom(
+    pendingNotPhishersAtom
+  );
   const invitation = useAtomValue(invitationAtom);
 
   const handleReport = () => {
-    if (checkResult) {
-      reportIsNotPhisher();
-    } else {
-      reportIsPhisher();
-    }
+    reportHandle({
+      store: checkResult ? storedNotPhishers : storedPhishers,
+      setStore: checkResult ? setStoredNotPhishers : setStoredPhishers,
+    });
   };
 
-  const reportIsPhisher = () => {
-    const isPhisher = storedPhishers.find((item) => item.name === phisher);
+  const reportHandle = ({ store, setStore }) => {
+    const isPhisher = store.find((item) => item.name === phisher);
     if (!isPhisher && phisher) {
       const typeLabel = reportTypes.find(
         (reportType) => reportType.value === selectedOption
       )?.label;
       const info = { type: typeLabel, name: phisher, status: "Pending" };
-      setStoredPhishers([...storedPhishers, info]);
+      setStore([...store, info]);
     }
     clearPhisher("");
   };
-  const reportIsNotPhisher = () => {};
+
+  const getIcon = () => {
+    switch (selectedOption) {
+      case "eip155:1":
+        return require(`../assets/ICON_ETH.png`);
+      case "TWT":
+        return require(`../assets/ICON_TWT.png`);
+      case "URL":
+        return require(`../assets/ICON_URL.png`);
+    }
+  };
 
   return (
     <div
@@ -56,7 +71,7 @@ function ReportInputInfo(props) {
             )}>
             <img
               className={cn("w-[60px] h-[60px] flex-shrink-0 mr-[20px]")}
-              src={require("../assets/ethereumLogo.png")}
+              src={getIcon()}
               alt=""
             />
             <span
@@ -85,7 +100,7 @@ function ReportInputInfo(props) {
               {...{
                 label: `Repot ${checkResult ? "not" : ""} Phisher`,
                 active: false,
-                click: handleReport,
+                onClick: handleReport,
               }}
             />
           )}

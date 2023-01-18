@@ -4,12 +4,14 @@ import chainList from "../chainList";
 import Button from "../components/Button";
 
 import cn from "classnames";
+import { useAtom } from "jotai";
+import { providerAtom } from "../atoms/providerAtom";
 
 export default function LazyConnect(props) {
   const { actionName, chainId } = props;
   let { opts = {} } = props;
   const { needsAccountConnected = true } = opts;
-  const [provider, setInjectedProvider] = useState(false);
+  const [provider, setInjectedProvider] = useAtom(providerAtom);
   const [accounts, setAccounts] = useState([]);
   const [userChainId, setUserChainId] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -98,7 +100,7 @@ export default function LazyConnect(props) {
         <Button
           className="mx-auto inline-block"
           label="Get MetaMask"
-          click={() => {
+          onClick={() => {
             const onboarding = new MetaMaskOnboarding();
             onboarding.startOnboarding();
           }}
@@ -211,7 +213,7 @@ function switchAccountsItem(opts) {
         "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
       )}
       label="Connect A Wallet"
-      click={async () => {
+      onClick={async () => {
         const _accounts = await provider.request({
           method: "eth_requestAccounts",
         });
@@ -247,7 +249,7 @@ function switchNetworkItem(opts) {
         "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
         "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
       )}
-      click={async () => {
+      onClick={async () => {
         provider
           .request({
             method: "wallet_switchEthereumChain",

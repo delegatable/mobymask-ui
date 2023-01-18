@@ -12,8 +12,12 @@ export default function createInvitation(invitation) {
   const signedDelegation = signedDelegations[signedDelegations.length - 1];
 
   const delegate = ethers.Wallet.createRandom();
-  console.log("types", types);
-  const delegationHash = TypedDataUtils.hashStruct("SignedDelegation", signedDelegation, types.types, true);
+  const delegationHash = TypedDataUtils.hashStruct(
+    "SignedDelegation",
+    signedDelegation,
+    types.types,
+    true
+  );
   const hexHash = "0x" + delegationHash.toString("hex");
 
   const delegation = {
@@ -24,7 +28,8 @@ export default function createInvitation(invitation) {
     caveats: [
       {
         enforcer: address,
-        terms: "0x0000000000000000000000000000000000000000000000000000000000000000",
+        terms:
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
       },
     ],
   };
@@ -38,6 +43,5 @@ export default function createInvitation(invitation) {
     signedDelegations: [...signedDelegations, newSignedDelegation],
     key: delegate.privateKey,
   };
-  console.log({ newInvite });
   return newInvite;
 }
