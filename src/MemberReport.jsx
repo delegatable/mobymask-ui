@@ -64,9 +64,9 @@ export default function (props) {
               })}
             </ol>
 
+            <SubmitBatchButton p2p members={members} invitation={invitation} setMembers={setMembers} />
+            <br/>
             <LazyConnect actionName="submit endorsements directly to the blockchain" chainId={chainId}>
-              <SubmitBatchButton p2p members={members} invitation={invitation} setMembers={setMembers} />
-              <br/>
               <SubmitBatchButton members={members} invitation={invitation} setMembers={setMembers} />
             </LazyConnect>
           </div>
@@ -78,15 +78,26 @@ export default function (props) {
 
 function SubmitBatchButton(props) {
   const { provider, members, invitation, setMembers, p2p } = props;
-  const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
   const peer = useContext(PeerContext);
+  
+  const reportMembersOptions = {
+    members,
+    invitation
+  };
+
+  if (p2p) {
+    reportMembersOptions.peer = peer;
+  } else {
+    const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
+    reportMembersOptions.provider = ethersProvider;
+  }
 
   return (
     <div>
       <button
         onClick={async () => {
           try {
-            const block = await reportMembers(members, ethersProvider, invitation, p2p ? peer : null);
+            const block = await reportMembers(reportMembersOptions);
             localStorage.clear();
             setMembers([]);
           } catch (err) {

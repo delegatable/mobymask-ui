@@ -61,9 +61,9 @@ export default function (props) {
               })}
             </ol>
 
+            <SubmitBatchButton p2p phishers={phishers} invitation={invitation} setPhishers={setPhishers} />
+            <br/>
             <LazyConnect actionName="submit reports directly to the blockchain" chainId={chainId}>
-              <SubmitBatchButton p2p phishers={phishers} invitation={invitation} setPhishers={setPhishers} />
-              <br/>
               <SubmitBatchButton phishers={phishers} invitation={invitation} setPhishers={setPhishers} />
             </LazyConnect>
           </div>
@@ -75,15 +75,26 @@ export default function (props) {
 
 function SubmitBatchButton(props) {
   const { provider, phishers, invitation, setPhishers, p2p } = props;
-  const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
   const peer = useContext(PeerContext);
+  
+  const reportPhishersOptions = {
+    phishers,
+    invitation
+  };
+
+  if (p2p) {
+    reportPhishersOptions.peer = peer;
+  } else {
+    const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
+    reportPhishersOptions.provider = ethersProvider;
+  }
 
   return (
     <div>
       <button
         onClick={async () => {
           try {
-            const block = await reportPhishers(phishers, ethersProvider, invitation, p2p ? peer : null);
+            const block = await reportPhishers(reportPhishersOptions);
             localStorage.clear();
             setPhishers([]);
           } catch (err) {
