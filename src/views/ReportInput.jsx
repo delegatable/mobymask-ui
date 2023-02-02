@@ -7,6 +7,7 @@ import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import createPhisherLabel from "../createPhisherLabel";
+import { checkPhisherStatus } from "../checkPhisherStatus";
 import ReportInputInfo from "./ReportInputInfo";
 import config from "../config.json";
 const { address } = config;
@@ -37,9 +38,15 @@ function ReportInput() {
   });
 
   async function submitFrom() {
+    if (!inputRef.current.value) return;
     setIsLoading(true);
     setIsShow(true);
-    const result = await checkPhisher(inputRef.current.value);
+    const result = await checkPhisherStatus(
+      selectedOption,
+      inputRef.current.value,
+      latestBlock,
+      isPhisher
+    );
     if (result) {
       setCheckResult(result?.isPhisher?.value);
     } else {
@@ -47,19 +54,6 @@ function ReportInput() {
     }
     setIsLoading(false);
   }
-
-  const checkPhisher = async (codedName) => {
-    try {
-      const { data: latestBlockData } = await latestBlock();
-      const { data } = await isPhisher({
-        blockHash: latestBlockData?.latestBlock?.hash,
-        key0: codedName,
-      });
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const changeOptions = (item) => {
     clearPhisher();
@@ -117,25 +111,6 @@ function ReportInput() {
       )}
     </>
   );
-}
-
-function sanitizeValue(type, value) {
-  switch (type) {
-    case "TWT":
-      value = value.indexOf("@") === 0 ? value.slice(1) : value;
-      break;
-
-    case "URL":
-      value = value.indexOf("//") === -1 ? value : value.split("//")[1];
-      break;
-
-    case "eip155:1":
-      value = value.indexOf("0x") === 0 ? value : `0x${value}`;
-      value = value.toLowerCase();
-      break;
-  }
-
-  return `${type}:${value}`;
 }
 
 export default React.memo(ReportInput);

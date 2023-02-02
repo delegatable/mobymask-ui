@@ -57,7 +57,7 @@ function ReportInputInfo(props) {
   return (
     <div
       className={cn(
-        "w-[100%] p-[32px] mt-[10px]",
+        "w-[100%] p-[32px] mt-[10px] box-border",
         "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]"
       )}>
       {isLoading ? (

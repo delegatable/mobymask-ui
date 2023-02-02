@@ -41,7 +41,7 @@ export default async function reportPhishers(phishers, provider, invitation) {
     },
   });
 
-  return await registry.invoke([signedInvocations]);
+  return await registry.invoke([signedInvocations], { gasLimit: 50000 });
 }
 
 async function attachRegistry(signer) {

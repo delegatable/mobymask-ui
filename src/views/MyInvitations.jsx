@@ -4,7 +4,10 @@ import { useAtom, useAtomValue } from "jotai";
 import cn from "classnames";
 import createRegistry from "../createRegistry";
 import copyInvitationLink from "../copyInvitationLink";
-import { outstandingInvitationsAtom } from "../atoms/invitationAtom";
+import {
+  outstandingInvitationsAtom,
+  revokedInvitationsAtom,
+} from "../atoms/invitationAtom";
 import { invitationAtom } from "../atoms/invitationAtom";
 import { providerAtom } from "../atoms/providerAtom";
 import Button from "../components/Button";
@@ -26,6 +29,10 @@ function MyInvitations() {
   const [active, setActive] = useState(1);
   const [outstandingInvitations, setOutstandingInvitations] = useAtom(
     outstandingInvitationsAtom
+  );
+
+  const [revokedInvitations, setRevokedInvitations] = useAtom(
+    revokedInvitationsAtom
   );
 
   const provider = useAtomValue(providerAtom);
@@ -106,8 +113,9 @@ function MyInvitations() {
       );
 
       const newInvites = [...outstandingInvitations];
-      newInvites.splice(index, 1);
+      const deleteInvites = newInvites.splice(index, 1);
       setOutstandingInvitations(newInvites);
+      setRevokedInvitations([...revokedInvitations, deleteInvites]);
     } catch (err) {
       console.error(err);
     }
@@ -136,17 +144,19 @@ function MyInvitations() {
       {active === 1 ? (
         <TableList {...{ tableHeader, tabList: outstandingInvitations }} />
       ) : (
-        <div
-          className={cn(
-            "h-[84px] flex justify-start items-center",
-            "text-[16px] text-left",
-            "border-y-[0.5px] border-solid border-[#E5E5E5]"
-          )}>
-          <div className={cn("w-[160px] shrink-0")}>1234</div>
-          <div className="text-[#D0D5DD]">
-            https://mobymask.com/#/members?238%nsdfg23824...
+        revokedInvitations.map((item) => (
+          <div
+            className={cn(
+              "h-[84px] flex justify-start items-center",
+              "text-[16px] text-left",
+              "border-y-[0.5px] border-solid border-[#E5E5E5]"
+            )}>
+            <div className={cn("w-[160px] shrink-0")}>1234</div>
+            <div className="text-[#D0D5DD]">
+              https://mobymask.com/#/members?238%nsdfg23824...
+            </div>
           </div>
-        </div>
+        ))
       )}
     </div>
   );

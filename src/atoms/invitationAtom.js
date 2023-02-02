@@ -9,3 +9,10 @@ export const outstandingInvitationsAtom = atomWithStorage(
   "outstandingInvitations",
   localStorage.getItem("outstandingInvitations") || []
 );
+
+export const revokedInvitationsAtom = atomWithStorage(
+  "revokedInvitations",
+  localStorage.getItem("revokedInvitations") || []
+);
+
+

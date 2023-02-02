@@ -18,15 +18,15 @@ function SubmitBatchButton(props) {
     }
   };
 
-  const memberReport = async () => {
-    if (!invitation) return;
-    try {
-      await reportMembers(subData, ethersProvider, invitation);
-      setLocalData([]);
-    } catch (err) {
-      console.error(`Error: ${err.message}`);
-    }
-  };
+  // const memberReport = async () => {
+  //   if (!invitation) return;
+  //   try {
+  //     await reportMembers(subData, ethersProvider, invitation);
+  //     setLocalData([]);
+  //   } catch (err) {
+  //     console.error(`Error: ${err.message}`);
+  //   }
+  // };
 
   const phishingReport = async () => {
     try {
@@ -38,11 +38,15 @@ function SubmitBatchButton(props) {
   };
 
   return (
-    <Button
-      className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
-      label="Submit batch to blockchain"
-      onClick={submitClick}
-    />
+    <>
+      {subData.length !== 0 && (
+        <Button
+          className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
+          label="Submit batch to blockchain"
+          onClick={submitClick}
+        />
+      )}
+    </>
   );
 }
 

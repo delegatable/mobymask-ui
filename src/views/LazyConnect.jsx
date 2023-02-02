@@ -89,6 +89,7 @@ export default function LazyConnect(props) {
           provider,
           needsToConnectAccount,
           setLoading,
+          setUserChainId,
           chainId: chainId,
           userChainId,
           chainName,
@@ -155,6 +156,7 @@ function createChecklist(checklistOpts) {
     setAccounts,
     provider,
     setLoading,
+    setUserChainId,
     needsToConnectAccount,
     needsAccountConnected,
     actionName,
@@ -183,6 +185,7 @@ function createChecklist(checklistOpts) {
             setAccounts,
             provider,
             setLoading,
+            setUserChainId,
             hasWallet,
           })}
       </div>
@@ -229,9 +232,11 @@ function switchNetworkItem(opts) {
     chainName,
     provider,
     setLoading,
+    setUserChainId,
     hasWallet,
     setError,
   } = opts;
+  console.log(chainId, userChainId);
   const needsToSwitchChain = !!chainId && Number(userChainId) !== chainId;
 
   if (!needsToSwitchChain) {
@@ -256,6 +261,7 @@ function switchNetworkItem(opts) {
             params: [{ chainId: "0x" + chainId.toString(16) }],
           })
           .then(() => {
+            // setUserChainId(chainId);
             setLoading(false);
           })
           .catch((reason) => {

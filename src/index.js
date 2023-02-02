@@ -6,7 +6,8 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./App";
 import "./index.css";
 
-const watcherUri = "https://mobymask.vdb.to/graphql";
+// const watcherUri = "https://mobymask.vdb.to/graphql";
+const watcherUri = "http://localhost:3001/graphql";
 
 const client = new ApolloClient({
   uri: watcherUri,
