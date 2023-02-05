@@ -23,7 +23,6 @@ export default function RoutableArea(props) {
     async function checkInvitations() {
       if (!loadingFromDisk) {
         setLoadingFromDisk(true);
-        console.log("invitation", invitation);
         if (!invitation) {
           try {
             let parsedInvitation = JSON.parse(query.get("invitation"));

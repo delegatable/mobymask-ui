@@ -15,14 +15,12 @@ export default function LazyConnect(props) {
   const [accounts, setAccounts] = useState([]);
   const [userChainId, setUserChainId] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   if (!provider && MetaMaskOnboarding.isMetaMaskInstalled()) {
     setInjectedProvider(window.ethereum);
   }
 
   const chainName = chainId ? chainList[Number(chainId)] : null;
-
   // Get accounts;
   useEffect(() => {
     if (!provider) {
@@ -46,18 +44,18 @@ export default function LazyConnect(props) {
     return () => {
       provider.removeListener("accountsChanged", setAccounts);
     };
-  }, []);
+  }, [provider]);
 
   // Get current selected network:
   useEffect(() => {
-    if (!provider || userChainId) {
+    if (!provider) {
       return;
     }
     getUserChainId().then(setUserChainId).catch(console.error);
 
     async function getUserChainId() {
       const chainId = await provider.request({ method: "eth_chainId" });
-      return chainId;
+      return Number(chainId);
     }
 
     provider.on("chainChanged", setUserChainId);
@@ -65,41 +63,21 @@ export default function LazyConnect(props) {
     return () => {
       provider.removeListener("chainChanged", setUserChainId);
     };
-  }, []);
+  }, [provider]);
 
   const needsToSwitchChain = Number(userChainId) !== chainId;
   const needsToConnectAccount =
     needsAccountConnected && (!accounts || accounts.length === 0);
   const requiresAction = needsToSwitchChain || needsToConnectAccount;
 
-  if (error) {
-    return (
-      <div className="lazyConnect">
-        <h3>Something went wrong 😿:</h3>
-        <p>{error}</p>
-      </div>
-    );
-  }
-
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
     return (
       <div className="text-center">
-        {createChecklist({
-          hasWallet: MetaMaskOnboarding.isMetaMaskInstalled(),
-          provider,
-          needsToConnectAccount,
-          setLoading,
-          setUserChainId,
-          chainId: chainId,
-          userChainId,
-          chainName,
-          setAccounts,
-          needsAccountConnected,
-          actionName,
-          accounts,
-        })}
         <Button
-          className="mx-auto inline-block"
+          className={cn(
+            "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
+            "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
+          )}
           label="Get MetaMask"
           onClick={() => {
             const onboarding = new MetaMaskOnboarding();
@@ -109,12 +87,12 @@ export default function LazyConnect(props) {
       </div>
     );
   }
+
   if (requiresAction) {
     return (
       <div className="lazyConnect">
         {createChecklist({
           setLoading,
-          setError,
           provider,
           needsToConnectAccount,
           hasWallet: MetaMaskOnboarding.isMetaMaskInstalled(),
@@ -129,10 +107,6 @@ export default function LazyConnect(props) {
         })}
       </div>
     );
-  }
-
-  if (loading) {
-    return <div className="lazyConnect">Loading...</div>;
   }
 
   const { children } = props;
@@ -156,121 +130,74 @@ function createChecklist(checklistOpts) {
     chainName,
     setAccounts,
     provider,
+    loading,
     setLoading,
-    setUserChainId,
     needsToConnectAccount,
-    needsAccountConnected,
     actionName,
-    setError,
     hasWallet,
-    accounts,
   } = checklistOpts;
+
+  const needsToSwitchChain = !!chainId && Number(userChainId) !== chainId;
+
+  if (!hasWallet) {
+    return null;
+  }
+
+  const connectWalletFn = async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      if (needsToConnectAccount) {
+        await connectAccountFn();
+      }
+
+      if (needsToSwitchChain) {
+        await connectChainFn();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setLoading(false);
+  };
+
+  const connectAccountFn = async () => {
+    const _accounts = await provider.request({
+      method: "eth_requestAccounts",
+    });
+    setAccounts(_accounts);
+  };
+
+  const connectChainFn = async () => {
+    const result = await provider.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: "0x" + chainId.toString(16) }],
+    });
+    console.log("connectChainFn", result);
+  };
+
+  const btnTextFn = () => {
+    let labelText = "Connect A Wallet";
+    if (needsToConnectAccount) {
+      labelText = "Connect A Wallet";
+    }
+    if (!needsToConnectAccount && needsToSwitchChain) {
+      labelText = `Switch to the ${chainName} network`;
+    }
+    return labelText;
+  };
+
   return (
     <div>
       <p className="w-[670px] m-auto">You need a few things to {actionName}.</p>
       <div className="text-center">
-        {switchAccountsItem({
-          needsAccountConnected,
-          needsToConnectAccount,
-          setAccounts,
-          provider,
-          setLoading,
-          accounts,
-          hasWallet,
-        }) ||
-          switchNetworkItem({
-            chainId,
-            setError,
-            userChainId,
-            chainName,
-            setAccounts,
-            provider,
-            setLoading,
-            setUserChainId,
-            hasWallet,
-          })}
+        <Button
+          className={cn(
+            "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
+            "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
+          )}
+          label={loading ? "Connecting" : btnTextFn()}
+          onClick={connectWalletFn}></Button>
       </div>
     </div>
-  );
-}
-
-function switchAccountsItem(opts) {
-  const { needsToConnectAccount, setAccounts, accounts, provider, hasWallet } =
-    opts;
-
-  if (!needsToConnectAccount) {
-    return null;
-  }
-
-  if (!hasWallet) {
-    return null;
-  }
-
-  if (typeof accounts !== "undefined" && accounts.length > 0) {
-    return null;
-  }
-
-  return (
-    <Button
-      className={cn(
-        "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
-        "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
-      )}
-      label="Connect A Wallet"
-      onClick={async () => {
-        const _accounts = await provider.request({
-          method: "eth_requestAccounts",
-        });
-        setAccounts(_accounts);
-      }}></Button>
-  );
-}
-
-function switchNetworkItem(opts) {
-  const {
-    chainId,
-    userChainId,
-    chainName,
-    provider,
-    setLoading,
-    setUserChainId,
-    hasWallet,
-    setError,
-  } = opts;
-  console.log(chainId, userChainId);
-  const needsToSwitchChain = !!chainId && Number(userChainId) !== chainId;
-
-  if (!needsToSwitchChain) {
-    return null;
-  }
-
-  if (!hasWallet) {
-    return null;
-  }
-
-  return (
-    <Button
-      label={`Switch to the ${chainName} network`}
-      className={cn(
-        "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
-        "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
-      )}
-      onClick={async () => {
-        provider
-          .request({
-            method: "wallet_switchEthereumChain",
-            params: [{ chainId: "0x" + chainId.toString(16) }],
-          })
-          .then(() => {
-            setUserChainId(chainId);
-            setLoading(false);
-          })
-          .catch((reason) => {
-            setLoading(false);
-            setError(reason);
-          });
-        setLoading(true);
-      }}
-    />
   );
 }
