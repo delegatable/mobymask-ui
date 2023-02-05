@@ -25,7 +25,7 @@ import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
-import { checkPhisherStatus } from "../checkPhisherStatus";
+import { checkPhisherStatus, reportHandle } from "../checkPhisherStatus";
 
 const config = require("../config.json");
 const { chainId, address } = config;
@@ -123,7 +123,15 @@ function PendingReports() {
     );
     if (result) {
       console.log("result", result);
-      // setCheckResult(result?.isPhisher?.value);
+      reportHandle({
+        phisher: inputRef.current.value,
+        store: active === "ReportPhisher" ? storedPhishers : storedNotPhishers,
+        setStore:
+          active === "ReportPhisher" ? setStoredPhishers : setStoredNotPhishers,
+        reportTypes,
+        selectedOption,
+      });
+      inputRef.current.value = "";
     } else {
       console.error(result);
     }
@@ -156,7 +164,7 @@ function PendingReports() {
           "px-[32px] py-[32px]"
         )}>
         <TableList {...{ tableHeader, tabList }} />
-        <div className={cn("flex justify-center items-center")}>
+        <div className={cn("flex justify-center items-center  mb-5")}>
           <FormControl>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select

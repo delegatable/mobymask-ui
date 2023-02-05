@@ -9,6 +9,7 @@ import {
 } from "../atoms/phisherAtom";
 import { invitationAtom } from "../atoms/invitationAtom";
 import { reportTypes } from "../constants";
+import { reportHandle } from "../checkPhisherStatus";
 
 function ReportInputInfo(props) {
   const {
@@ -26,21 +27,14 @@ function ReportInputInfo(props) {
 
   const handleReport = () => {
     reportHandle({
+      phisher,
+      checkResult,
       store: checkResult ? storedNotPhishers : storedPhishers,
       setStore: checkResult ? setStoredNotPhishers : setStoredPhishers,
+      clearPhisher,
+      reportTypes,
+      selectedOption,
     });
-  };
-
-  const reportHandle = ({ store, setStore }) => {
-    const isPhisher = store.find((item) => item.name === phisher);
-    if (!isPhisher && phisher) {
-      const typeLabel = reportTypes.find(
-        (reportType) => reportType.value === selectedOption
-      )?.label;
-      const info = { type: typeLabel, name: phisher, status: "Pending" };
-      setStore([...store, info]);
-    }
-    clearPhisher("");
   };
 
   const getIcon = () => {
@@ -98,7 +92,7 @@ function ReportInputInfo(props) {
           {invitation && (
             <Button
               {...{
-                label: `Repot ${checkResult ? "not" : ""} Phisher`,
+                label: `Report ${checkResult ? "not" : ""} Phisher`,
                 active: false,
                 onClick: handleReport,
               }}

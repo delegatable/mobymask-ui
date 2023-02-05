@@ -31,3 +31,27 @@ export function sanitizeValue(type, value) {
 
   return `${type}:${value}`;
 }
+
+export const reportHandle = ({
+  store,
+  setStore,
+  reportTypes,
+  clearPhisher = () => {},
+  selectedOption,
+  phisher,
+  checkResult,
+}) => {
+  const isPhisher = store.find((item) => item.name === phisher);
+  if (!isPhisher && phisher) {
+    const typeLabel = reportTypes.find(
+      (reportType) => reportType.value === selectedOption
+    )?.label;
+    const info = {
+      type: typeLabel,
+      name: phisher,
+      status: `Registered ${checkResult ? "" : "Not"} Phisher`,
+    };
+    setStore([...store, info]);
+  }
+  clearPhisher("");
+};

@@ -6,7 +6,12 @@ const { abi } = require("./artifacts");
 const { chainId, address, name } = require("./config.json");
 const CONTRACT_NAME = name;
 
-export default async function reportPhishers(phishers, provider, invitation) {
+export default async function reportPhishers(
+  phishers,
+  provider,
+  invitation,
+  isPhisher
+) {
   const { key, signedDelegations } = invitation;
   const membership = createMembership({
     contractInfo,
@@ -17,8 +22,12 @@ export default async function reportPhishers(phishers, provider, invitation) {
   const registry = await attachRegistry(wallet);
 
   const invocations = await Promise.all(
-    phishers.map(async phisher => {
-      const desiredTx = await registry.populateTransaction.claimIfPhisher(phisher, true);
+    phishers.map(async (phisher) => {
+      // true  false: not
+      const desiredTx = await registry.populateTransaction.claimIfPhisher(
+        phisher,
+        isPhisher
+      );
       const invocation = {
         transaction: {
           to: address,
@@ -28,7 +37,7 @@ export default async function reportPhishers(phishers, provider, invitation) {
         authority: signedDelegations,
       };
       return invocation;
-    }),
+    })
   );
   console.dir({ invocations });
 
@@ -41,7 +50,7 @@ export default async function reportPhishers(phishers, provider, invitation) {
     },
   });
 
-  return await registry.invoke([signedInvocations], { gasLimit: 50000 });
+  return await registry.invoke([signedInvocations]);
 }
 
 async function attachRegistry(signer) {

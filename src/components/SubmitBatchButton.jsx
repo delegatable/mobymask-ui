@@ -8,14 +8,7 @@ function SubmitBatchButton(props) {
   const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
 
   const submitClick = () => {
-    switch (type) {
-      case "ReportPhisher":
-        phishingReport();
-        break;
-      case "ReportNotPhisher":
-        // phishingReport();
-        break;
-    }
+    phishingReport(type === "ReportPhisher");
   };
 
   // const memberReport = async () => {
@@ -28,9 +21,14 @@ function SubmitBatchButton(props) {
   //   }
   // };
 
-  const phishingReport = async () => {
+  const phishingReport = async (isReportPhisher) => {
     try {
-      await reportPhishers(subData, ethersProvider, invitation);
+      await reportPhishers(
+        subData,
+        ethersProvider,
+        invitation,
+        isReportPhisher
+      );
       setLocalData([]);
     } catch (err) {
       console.error(`Error: ${err.message}`);

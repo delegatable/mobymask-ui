@@ -120,6 +120,7 @@ export default function LazyConnect(props) {
           hasWallet: MetaMaskOnboarding.isMetaMaskInstalled(),
           chainId: chainId,
           userChainId,
+          setUserChainId,
           chainName,
           setAccounts,
           needsAccountConnected,
@@ -261,7 +262,7 @@ function switchNetworkItem(opts) {
             params: [{ chainId: "0x" + chainId.toString(16) }],
           })
           .then(() => {
-            // setUserChainId(chainId);
+            setUserChainId(chainId);
             setLoading(false);
           })
           .catch((reason) => {

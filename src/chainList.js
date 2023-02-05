@@ -61,6 +61,7 @@ const chainIds = {
   1666600000: "harmony",
   11297108109: "palm",
   836542336838601: "curio",
+  41337: "local",
 };
 
 export default chainIds;
