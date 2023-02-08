@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { useAtom, useAtomValue } from "jotai";
 import cn from "classnames";
+
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import createRegistry from "../createRegistry";
 import copyInvitationLink from "../copyInvitationLink";
 import {
@@ -55,11 +58,12 @@ function MyInvitations() {
       render: (val, row, index) => {
         return (
           <>
-            <Button
-              className="rounded-[100px] h-[48px] inline-flex"
-              label="copy"
-              onClick={() => copyLink(row)}
-            />{" "}
+            <CopyToClipboard text={row.invitationLink}>
+              <Button
+                className="rounded-[100px] h-[48px] inline-flex"
+                label="copy"
+              />
+            </CopyToClipboard>
             &nbsp;
             <Button
               className="rounded-[100px] h-[48px] inline-flex"

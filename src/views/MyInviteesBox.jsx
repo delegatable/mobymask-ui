@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import cn from "classnames";
 import contractInfo from "../contractInfo";
@@ -12,6 +12,7 @@ import copyInvitationLink from "../copyInvitationLink";
 import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
 import linkForInvitation from "../linkForInvitation";
+import CreateInvitationModal from "../components/CreateInvitationModal";
 const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
@@ -24,6 +25,7 @@ function MyInviteesBox() {
 }
 
 function MyInvitees() {
+  const [open, setOpen] = useState(false);
   const invitation = useAtomValue(invitationAtom);
   const [outstandingInvitations, setOutstandingInvitations] = useAtom(
     outstandingInvitationsAtom
@@ -50,10 +52,7 @@ function MyInvitees() {
     }
   };
 
-  const createNewLink = () => {
-    const petName = prompt(
-      "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
-    );
+  const createNewLink = (petName) => {
     const newInvitation = membership.createInvitation();
     copyInvitationLink(newInvitation, petName)
       .then(() => {
@@ -67,6 +66,8 @@ function MyInvitees() {
         console.error(err);
       });
   };
+
+  const handleClose = () => setOpen(false);
 
   if (tier < 4) {
     return (
@@ -104,11 +105,12 @@ function MyInvitees() {
           <Button
             className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
             label="Create new invite link"
-            onClick={createNewLink}
+            onClick={() => setOpen(true)}
           />
         </p>
         <MyInviteesReportHistory />
         <MyInvitations />
+        <CreateInvitationModal {...{ createNewLink, open, handleClose }} />
       </div>
     );
   } else if (tier === 4) {
