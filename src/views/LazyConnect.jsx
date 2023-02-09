@@ -119,7 +119,6 @@ export default function LazyConnect(props) {
     }
     return child;
   });
-  console.log(childrenWithProps);
   return <div className="text-center">{childrenWithProps}</div>;
 }
 

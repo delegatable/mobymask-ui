@@ -1,5 +1,5 @@
 export const checkPhisherStatus = async (type, id, latestBlock, isPhisher) => {
-  let codedName = sanitizeValue(type, id);
+  let codedName = sanitizeValue(type, id.toLowerCase());
 
   try {
     const { data: latestBlockData } = await latestBlock();

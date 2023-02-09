@@ -82,7 +82,9 @@ function ReportInputInfo(props) {
             </span>
             <img
               className={cn("w-[20px] h-[20px] flex-shrink-0")}
-              src={require("../assets/ethereumLogo.png")}
+              src={require(`../assets/${
+                checkResult ? "warning" : "success"
+              }_icon.png`)}
               alt=""
             />
           </div>

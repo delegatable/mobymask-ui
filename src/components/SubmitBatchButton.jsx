@@ -2,6 +2,7 @@ import cn from "classnames";
 import Button from "./Button";
 import reportMembers from "../reportMembers";
 import reportPhishers from "../reportPhishers";
+import { reportTypes } from "../constants";
 const { ethers } = require("ethers");
 function SubmitBatchButton(props) {
   const { type, provider, subData, invitation = false, setLocalData } = props;
@@ -25,8 +26,12 @@ function SubmitBatchButton(props) {
     const data = subData.map((item) => {
       const name =
         item.name.indexOf("@") === 0 ? item.name.slice(1) : item.name;
-      return `${item.type}:${name}`;
+      const type = reportTypes.find(
+        (report) => report.label === item.type
+      )?.value;
+      return `${type}:${name.toLowerCase()}`;
     });
+    console.log("data", data);
     try {
       await reportPhishers(data, ethersProvider, invitation, isReportPhisher);
       setLocalData([]);
