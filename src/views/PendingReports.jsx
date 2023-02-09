@@ -25,7 +25,11 @@ import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
-import { checkPhisherStatus, reportHandle } from "../checkPhisherStatus";
+import {
+  checkPhisherStatus,
+  reportHandle,
+  sanitizeValue,
+} from "../checkPhisherStatus";
 
 const config = require("../config.json");
 const { chainId, address } = config;
@@ -122,7 +126,6 @@ function PendingReports() {
       isPhisher
     );
     if (result) {
-      console.log("result", result);
       reportHandle({
         phisher: inputRef.current.value,
         store: active === "ReportPhisher" ? storedPhishers : storedNotPhishers,

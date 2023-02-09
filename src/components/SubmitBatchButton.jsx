@@ -22,13 +22,13 @@ function SubmitBatchButton(props) {
   // };
 
   const phishingReport = async (isReportPhisher) => {
+    const data = subData.map((item) => {
+      const name =
+        item.name.indexOf("@") === 0 ? item.name.slice(1) : item.name;
+      return `${item.type}:${name}`;
+    });
     try {
-      await reportPhishers(
-        subData,
-        ethersProvider,
-        invitation,
-        isReportPhisher
-      );
+      await reportPhishers(data, ethersProvider, invitation, isReportPhisher);
       setLocalData([]);
     } catch (err) {
       console.error(`Error: ${err.message}`);

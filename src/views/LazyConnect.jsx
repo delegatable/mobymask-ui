@@ -119,7 +119,7 @@ export default function LazyConnect(props) {
     }
     return child;
   });
-
+  console.log(childrenWithProps);
   return <div className="text-center">{childrenWithProps}</div>;
 }
 
@@ -172,7 +172,6 @@ function createChecklist(checklistOpts) {
       method: "wallet_switchEthereumChain",
       params: [{ chainId: "0x" + chainId.toString(16) }],
     });
-    console.log("connectChainFn", result);
   };
 
   const btnTextFn = () => {
