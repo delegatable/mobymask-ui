@@ -3,6 +3,7 @@ import Button from "./Button";
 import reportMembers from "../reportMembers";
 import reportPhishers from "../reportPhishers";
 import { reportTypes } from "../constants";
+import { toast } from "react-hot-toast";
 const { ethers } = require("ethers");
 function SubmitBatchButton(props) {
   const { type, provider, subData, invitation = false, setLocalData } = props;
@@ -35,8 +36,9 @@ function SubmitBatchButton(props) {
     try {
       await reportPhishers(data, ethersProvider, invitation, isReportPhisher);
       setLocalData([]);
+      toast.success("Success!");
     } catch (err) {
-      console.error(`Error: ${err.message}`);
+      toast.error(`Error: ${err?.message}`);
     }
   };
 
