@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { reportTypes as options } from "../constants";
 import cn from "classnames";
-
+import { toast } from "react-hot-toast";
 import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
@@ -41,16 +41,20 @@ function ReportInput() {
     if (!inputRef.current.value) return;
     setIsLoading(true);
     setIsShow(true);
-    const result = await checkPhisherStatus(
-      selectedOption,
-      inputRef.current.value,
-      latestBlock,
-      isPhisher
-    );
-    if (result) {
-      setCheckResult(result?.isPhisher?.value);
-    } else {
-      console.error(result);
+    try {
+      const result = await checkPhisherStatus(
+        selectedOption,
+        inputRef.current.value,
+        latestBlock,
+        isPhisher
+      );
+      if (result) {
+        setCheckResult(result?.isPhisher?.value);
+      } else {
+        console.error(result);
+      }
+    } catch (err) {
+      toast.error(`Error: ${err.message}`);
     }
     setIsLoading(false);
   }
@@ -63,6 +67,12 @@ function ReportInput() {
   const clearPhisher = () => {
     setIsShow(false);
     inputRef.current.value = "";
+  };
+
+  const keyDown = (event) => {
+    if (event.keyCode === 13) {
+      submitFrom();
+    }
   };
 
   return (
@@ -86,6 +96,7 @@ function ReportInput() {
       <div className="relative w-[100%] m-auto rounded-[100px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
         <input
           ref={inputRef}
+          onKeyDown={keyDown}
           className={cn(
             "w-[100%] h-[80px] m-auto text-[18px] px-[35px] box-border",
             "border-[0.5px] border-solid border-[#D0D5DD] rounded-[100px]"
