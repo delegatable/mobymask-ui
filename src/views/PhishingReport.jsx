@@ -58,7 +58,8 @@ export default function (props) {
                           JSON.stringify(newPhishers)
                         );
                         setPhishers(newPhishers);
-                      }}>
+                      }}
+                    >
                       Remove
                     </button>
                   </li>
@@ -68,7 +69,8 @@ export default function (props) {
 
             <LazyConnect
               actionName="submit reports directly to the blockchain"
-              chainId={chainId}>
+              chainId={chainId}
+            >
               <SubmitBatchButton
                 phishers={phishers}
                 invitation={invitation}
@@ -97,10 +99,13 @@ function SubmitBatchButton(props) {
             );
             localStorage.clear();
             setPhishers([]);
+            // clear data in extension
+            document.dispatchEvent(new Event("clear_pendingPhishers"));
           } catch (err) {
             alert(`Error: ${err.message}`);
           }
-        }}>
+        }}
+      >
         Submit batch to blockchain
       </button>
     </div>
