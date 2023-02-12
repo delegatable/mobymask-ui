@@ -185,12 +185,14 @@ function createChecklist(checklistOpts) {
   };
 
   return (
-    <div>
-      <p className="w-[670px] m-auto">You need a few things to {actionName}.</p>
+    <div className="mt-10">
+      <p className="w-[670px] m-auto break-all">
+        You need a few things to {actionName}.
+      </p>
       <div className="text-center">
         <Button
           className={cn(
-            "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
+            "mt-[10px] text-white rounded-[100px] px-[20px] py-[12px]",
             "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
           )}
           label={loading ? "Connecting" : btnTextFn()}

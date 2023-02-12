@@ -15,6 +15,7 @@ import {
 import { invitationAtom } from "../atoms/invitationAtom";
 
 import { reportTypes } from "../constants";
+import statusText from "../statusText";
 
 import LazyConnect from "./LazyConnect";
 import Button from "../components/Button";
@@ -25,11 +26,7 @@ import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
-import {
-  checkPhisherStatus,
-  reportHandle,
-  sanitizeValue,
-} from "../checkPhisherStatus";
+import { checkPhisherStatus, reportHandle } from "../checkPhisherStatus";
 
 const config = require("../config.json");
 const { chainId, address } = config;
@@ -76,6 +73,7 @@ function PendingReports() {
     {
       key: "status",
       title: "Status",
+      render: (val) => statusText[val],
     },
     {
       key: "action",
@@ -140,6 +138,12 @@ function PendingReports() {
     }
   };
 
+  const keyDown = (event) => {
+    if (event.keyCode === 13) {
+      checkInfo();
+    }
+  };
+
   return (
     <div className={cn("pt-[77px]")}>
       <h3 className={cn("text-[20px] mb-[24px]")}>Pending reports</h3>
@@ -167,7 +171,8 @@ function PendingReports() {
           "px-[32px] py-[32px]"
         )}>
         <TableList {...{ tableHeader, tabList }} />
-        <div className={cn("flex justify-center items-center  mb-5")}>
+        <div
+          className={cn("flex justify-center items-center  mb-5  mt-[40px]")}>
           <FormControl>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
@@ -195,6 +200,7 @@ function PendingReports() {
                 "w-[100%] h-[100%] block border-0 rounded-[100px] pl-[10px]",
                 "outline-none"
               )}
+              onKeyDown={keyDown}
               ref={inputRef}
               placeholder="Enter new names.."
             />

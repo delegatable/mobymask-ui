@@ -49,7 +49,7 @@ export const reportHandle = ({
     const info = {
       type: typeLabel,
       name: phisher,
-      status: `Registered ${checkResult ? "" : "Not"} Phisher`,
+      status: checkResult ? "yes" : "no",
     };
     setStore([...store, info]);
   }

@@ -24,6 +24,7 @@ function SubmitBatchButton(props) {
   // };
 
   const phishingReport = async (isReportPhisher) => {
+    const loading = toast.loading("Waiting...");
     const data = subData.map((item) => {
       const name =
         item.name.indexOf("@") === 0 ? item.name.slice(1) : item.name;
@@ -32,14 +33,21 @@ function SubmitBatchButton(props) {
       )?.value;
       return `${type}:${name.toLowerCase()}`;
     });
-    console.log("data", data);
     try {
-      await reportPhishers(data, ethersProvider, invitation, isReportPhisher);
+      const block = await reportPhishers(
+        data,
+        ethersProvider,
+        invitation,
+        isReportPhisher
+      );
+      await block.wait();
+      document.dispatchEvent(new Event("clear_pendingPhishers"));
       setLocalData([]);
-      toast.success("Success!");
+      toast.success("Batch submitted to blockchain!");
     } catch (err) {
-      toast.error(`Error: ${err?.message}`);
+      toast.error(err.reason || err.error.message);
     }
+    toast.dismiss(loading);
   };
 
   return (

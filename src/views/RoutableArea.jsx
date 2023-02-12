@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
 // Routes
 import ContentBox from "./ContentBox";
-import Members from "./Members";
+// import Members from "../views/Members";
 import contractInfo from "../contractInfo";
 import { invitationAtom } from "../atoms/invitationAtom";
 

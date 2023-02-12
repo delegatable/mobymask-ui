@@ -6,9 +6,9 @@ import { gql, useQuery } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
-import createPhisherLabel from "../createPhisherLabel";
+// import createPhisherLabel from "../createPhisherLabel";
 import { checkPhisherStatus } from "../checkPhisherStatus";
-import ReportInputInfo from "./ReportInputInfo";
+import ReportInputInfo from "../views/ReportInputInfo";
 import config from "../config.json";
 const { address } = config;
 
