@@ -99,6 +99,7 @@ function SubmitBatchButton(props) {
             const block = await reportPhishers(phishers, ethersProvider, invitation);
             localStorage.clear();
             setPhishers([]);
+            document.dispatchEvent(new Event('clear_pendingPhishers'))
           } catch (err) {
             alert(`Error: ${err.message}`);
           }
