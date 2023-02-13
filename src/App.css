@@ -76,11 +76,6 @@ button.installButton {
 
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
-body {
-  margin: 0;
-  font-family: 'Inter';
-}
-
 .header {
   position: relative;
   text-align: center;
