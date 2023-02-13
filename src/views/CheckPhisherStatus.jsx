@@ -1,13 +1,29 @@
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import ReportInput from "./ReportInput";
 function CheckPhisherStatus() {
   return (
-    <div className="pt-20 w-[961px] m-auto">
-      <h1 className="text-[62px] pb-5 font-[600]">Check Phisher Status</h1>
-      <h6 className="text-[#101828] text-xs mb-10">
+    <Box width="961px" margin="auto" textAlign="center">
+      <Typography
+        component="h1"
+        fontSize="62px"
+        paddingBottom="20px"
+        fontWeight="600"
+        marginTop="79px"
+        lineHeight="1.2">
+        Check Phisher Status
+      </Typography>
+      <Typography
+        component="p"
+        color="#101828"
+        fontWeight="400"
+        fontSize="16px"
+        lineHeight="1.2"
+        marginBottom="44px">
         An alliance of good-hearted phish, aiming to eliminate phishers.
-      </h6>
+      </Typography>
       <ReportInput />
-    </div>
+    </Box>
   );
 }
 

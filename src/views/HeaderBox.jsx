@@ -1,17 +1,55 @@
 import logo from "../assets/logo.svg";
+import twitter from "../assets/twitter.png";
+import github from "../assets/github.png";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
+import Avatar from "@mui/material/Avatar";
 
 function HeaderBox() {
   return (
     <header className="App-header">
-      <div className="flex justify-between px-[40px] pt-[46px]">
-        <div className="flex justify-start text-3xl">
+      <Box
+        width="100%"
+        boxSizing="border-box"
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        padding="46px 40px">
+        <Box display="flex" justifyContent="flex-start">
           <img src={logo} className="App-logo" alt="logo" />
-          MobyMask
-        </div>
-      </div>
+          <Typography
+            style={{ WebkitTextStroke: "1px #000" }}
+            fontWeight="600"
+            fontSize="31px">
+            MobyMask
+          </Typography>
+        </Box>
+        <Box display="flex">
+          <Link href="#" marginRight="28px">
+            <Avatar
+              width="48px"
+              height="48px"
+              cursor="pointer"
+              src={twitter}
+              alt="twitter"
+            />
+          </Link>
+          <Link href="#">
+            <Avatar
+              width="48px"
+              height="48px"
+              cursor="pointer"
+              src={github}
+              alt="github"
+            />
+          </Link>
+        </Box>
+      </Box>
 
       {/* Based on https://codepen.io/goodkatz/pen/LYPGxQz?editors=1100 */}
-      <div className="waves">
+      <Box className="waves">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -46,7 +84,7 @@ function HeaderBox() {
             <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
           </g>
         </svg>
-      </div>
+      </Box>
     </header>
   );
 }

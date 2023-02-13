@@ -54,7 +54,11 @@ function SubmitBatchButton(props) {
     <>
       {subData.length !== 0 && (
         <Button
-          className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
+          color="#fff"
+          borderRadius="100px"
+          style={{
+            background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+          }}
           label="Submit batch to blockchain"
           onClick={submitClick}
         />

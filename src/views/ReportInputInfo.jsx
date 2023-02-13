@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAtom, useAtomValue } from "jotai";
+import { Typography, Box } from "@mui/material";
 
-import cn from "classnames";
 import Button from "../components/Button";
 import {
   pendingPhishersAtom,
@@ -10,6 +10,8 @@ import {
 import { invitationAtom } from "../atoms/invitationAtom";
 import { reportTypes } from "../constants";
 import { reportHandle } from "../checkPhisherStatus";
+import error_icon from "../assets/error_icon.png";
+import success_icon from "../assets/success_icon.png";
 
 function ReportInputInfo(props) {
   const {
@@ -49,48 +51,67 @@ function ReportInputInfo(props) {
   };
 
   return (
-    <div
-      className={cn(
-        "w-[100%] p-[32px] mt-[10px] box-border",
-        "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]"
-      )}>
+    <Box
+      width="100%"
+      padding="32px"
+      marginTop="10px"
+      boxSizing="border-box"
+      border="1px solid #D0D5DD"
+      borderRadius="10px"
+      textAlign="left">
       {isLoading ? (
         <>checking...</>
       ) : (
         <>
-          <div
-            className={cn(
-              "w-[100%] flex justify-start items-center pb-[24px]",
-              "border-b-[0.5px] border-solid border-[#D0D5DD]"
-            )}>
-            <img
-              className={cn("w-[60px] h-[60px] flex-shrink-0 mr-[20px]")}
+          <Box
+            width="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            paddingBottom="24px"
+            borderBottom="1px solid #D0D5DD">
+            <Typography
+              component="img"
+              width="60px"
+              height="60px"
+              flexShrink="0"
+              marginRight="20px"
               src={getIcon()}
               alt=""
             />
-            <span
-              className={cn(
-                "w-[100%] text-[18px] font-[600] text-[#101828] text-left"
-              )}>
+            <Typography
+              component="span"
+              width="100%"
+              fontSize="18px"
+              fontWeight="700"
+              color="#101828"
+              textAlign="left">
               {phisher + " "}
-              <span
-                className={cn(
-                  checkResult ? " text-[#FF5056]" : "text-[#61BA60]"
-                )}>
+              <Typography
+                component="span"
+                fontWeight="400"
+                color={checkResult ? "#FF5056" : "#61BA60"}>
                 is {!checkResult && "not"} a registered phisher.
-              </span>
-            </span>
-            <img
-              className={cn("w-[20px] h-[20px] flex-shrink-0")}
-              src={require(`../assets/${
-                checkResult ? "warning" : "success"
-              }_icon.png`)}
+              </Typography>
+            </Typography>
+            <Typography
+              component="img"
+              width="20px"
+              height="20px"
+              flexShrink="0"
+              src={checkResult ? error_icon : success_icon}
               alt=""
             />
-          </div>
-          <p className="text-[16px] text-[#666F85] my-[24px] text-left">
+          </Box>
+          <Typography
+            component="p"
+            fontSize="16px"
+            color="#666F85"
+            margin="24px 0"
+            textAlign="left"
+            lineHeight="24px">
             In doubt about this result, you can take the following actions
-          </p>
+          </Typography>
           {invitation && (
             <Button
               {...{
@@ -102,7 +123,7 @@ function ReportInputInfo(props) {
           )}
         </>
       )}
-    </div>
+    </Box>
   );
 }
 

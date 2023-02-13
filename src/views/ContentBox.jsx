@@ -1,14 +1,15 @@
+import Box from "@mui/material/Box";
 import PendingReports from "./PendingReports";
 import ReportHistory from "./ReportHistory";
 import MyInviteesBox from "./MyInviteesBox";
 
 function ContentBox() {
   return (
-    <div className="pt-20 w-[961px] m-auto">
+    <Box width="961px" margin="auto">
       <PendingReports />
       <ReportHistory />
       <MyInviteesBox />
-    </div>
+    </Box>
   );
 }
 

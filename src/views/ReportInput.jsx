@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+import { Typography, Box } from "@mui/material";
 import { reportTypes as options } from "../constants";
-import cn from "classnames";
 import { toast } from "react-hot-toast";
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
@@ -10,6 +10,7 @@ import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import { checkPhisherStatus } from "../checkPhisherStatus";
 import ReportInputInfo from "../views/ReportInputInfo";
 import config from "../config.json";
+import search_icon from "../assets/search.png";
 const { address } = config;
 
 function ReportInput() {
@@ -77,38 +78,56 @@ function ReportInput() {
 
   return (
     <>
-      <div className="flex justify-center">
+      <Box display="flex" justifyContent="center">
         {options.map((item) => (
-          <div
-            className={cn(
-              "mx-1 cursor-pointer",
-              "px-[17.5px] pt-[8.5px] pb-[6.5px]",
-              "rounded-t-[10px] border-[0.5px] border-[#D0D5DD] border-solid",
-              selectedOption === item.value ? "text-white" : "#D0D5DD",
-              selectedOption === item.value ? "bg-[#101828]" : "bg-white"
-            )}
+          <Box
+            margin="0 4px"
+            padding="8px 18px 6px 18px"
+            border="1px solid #D0D5DD"
+            color={selectedOption === item.value ? "#fff" : "#D0D5DD"}
+            backgroundColor={selectedOption === item.value ? "#101828" : "#fff"}
+            borderRadius="10px 10px 0px 0px"
+            borderBottom="none"
+            style={{ cursor: "pointer" }}
             key={item.value}
             onClick={() => changeOptions(item)}>
             {item?.label}
-          </div>
+          </Box>
         ))}
-      </div>
-      <div className="relative w-[100%] m-auto rounded-[100px] shadow-[0_10px_30px_rgba(0,0,0,0.05)]">
-        <input
+      </Box>
+      <Box
+        position="relative"
+        width="100%"
+        height="80px"
+        margin="auto"
+        border="1px solid #D0D5DD"
+        box-shadow="0px 0px 30px rgba(0, 0, 0, 0.05)"
+        borderRadius="100px">
+        <Typography
+          width="100%"
+          height="100%"
+          fontSize="18px"
+          padding="0 35px"
+          boxSizing="border-box"
+          border="1px solid #D0D5DD"
+          borderRadius="100px"
+          component="input"
           ref={inputRef}
           onKeyDown={keyDown}
-          className={cn(
-            "w-[100%] h-[80px] m-auto text-[18px] px-[35px] box-border",
-            "border-[0.5px] border-solid border-[#D0D5DD] rounded-[100px]"
-          )}
           placeholder="Enter a twitter name to check if it is a phisher..."
         />
-        <span
-          className="absolute top-[30px] right-9 cursor-pointer"
-          onClick={submitFrom}>
-          🔍
-        </span>
-      </div>
+        <Typography
+          component="img"
+          width="24px"
+          height="24px"
+          position="absolute"
+          top="50%"
+          right="28px"
+          style={{ cursor: "pointer", transform: "translateY(-50%)" }}
+          src={search_icon}
+          onClick={submitFrom}
+        />
+      </Box>
       {isShow && (
         <ReportInputInfo
           {...{

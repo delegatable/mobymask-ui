@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import cn from "classnames";
+import { Typography, Box } from "@mui/material";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -145,9 +146,11 @@ function PendingReports() {
   };
 
   return (
-    <div className={cn("pt-[77px]")}>
-      <h3 className={cn("text-[20px] mb-[24px]")}>Pending reports</h3>
-      <p className="mb-[22px]">
+    <Box paddingTop="77px">
+      <Typography component="h3" fontSize="20px" marginBottom="24px">
+        Pending reports
+      </Typography>
+      <Typography component="p" marginBottom="22px">
         <Button
           {...{
             label: "Report Phisher",
@@ -163,21 +166,20 @@ function PendingReports() {
             onClick: () => setActive("ReportNotPhisher"),
           }}
         />
-      </p>
+      </Typography>
 
-      <div
-        className={cn(
-          "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]",
-          "px-[32px] py-[32px]"
-        )}>
+      <Box border="1px solid #D0D5DD" borderRadius="10px" padding="32px">
         <TableList {...{ tableHeader, tabList }} />
-        <div
-          className={cn("flex justify-center items-center  mb-5  mt-[40px]")}>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          marginBottom="20px"
+          marginTop="40px">
           <FormControl>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
-              className="w-[150px] h-[54px] rounded-[100px]"
-              labelId="demo-simple-select-label"
+              style={{ width: "150px", height: "54px", borderRadius: "100px" }}
               id="demo-simple-select"
               value={selectedOption}
               label="Type"
@@ -189,30 +191,45 @@ function PendingReports() {
               ))}
             </Select>
           </FormControl>
-          <div
-            className={cn(
-              "flex justify-start items-center box-border",
-              "w-[347px] h-[54px] rounded-[100px] p-[5px] ml-[16px]",
-              "border-[1px] border-solid border-[#D0D5DD]"
-            )}>
-            <input
-              className={cn(
-                "w-[100%] h-[100%] block border-0 rounded-[100px] pl-[10px]",
-                "outline-none"
-              )}
+          <Box
+            display="flex"
+            justifyContent="flex-start"
+            boxSizing="border-box"
+            width="347px"
+            height="54px"
+            borderRadius="100px"
+            padding="5px"
+            marginLeft="16px"
+            border="1px solid #D0D5DD">
+            <Typography
+              component="input"
+              width="100%"
+              height="100%"
+              display="block"
+              borderRadius="100px"
+              paddingLeft="10px"
               onKeyDown={keyDown}
+              style={{ outline: "none", border: "0" }}
               ref={inputRef}
               placeholder="Enter new names.."
             />
             <Button
-              className="w-[81px] h-[100%] flex justify-center items-center bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white text-[16px] m-auto rounded-[100px] shrink-0"
+              width="81px"
+              height="100%"
+              margin="auto"
+              color="white"
+              flexShrink="0"
+              borderRadius="100px"
               label="Enter"
+              style={{
+                background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+              }}
               onClick={checkInfo}
             />
-          </div>
-        </div>
+          </Box>
+        </Box>
         <LazyConnect
-          actionName=" submit reports directly to the blockchain.Get a web3 compatible wallet(like metamask) to proceed."
+          actionName="submit reports directly to the blockchain.Get a web3 compatible wallet(like metamask) to proceed."
           chainId={chainId}
           opts={{ needsAccountConnected: true }}>
           <SubmitBatchButton
@@ -228,8 +245,8 @@ function PendingReports() {
             }
           />
         </LazyConnect>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
