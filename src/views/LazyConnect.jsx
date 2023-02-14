@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
 import MetaMaskOnboarding from "@metamask/onboarding";
 import chainList from "../chainList";
 import Button from "../components/Button";
@@ -72,25 +73,28 @@ export default function LazyConnect(props) {
 
   if (!MetaMaskOnboarding.isMetaMaskInstalled()) {
     return (
-      <div className="text-center">
+      <Box textAlign="center">
         <Button
-          className={cn(
-            "mt-[30px] text-white rounded-[100px] px-[20px] py-[12px]",
-            "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
-          )}
+          marginTop="30px"
+          color="#fff"
+          borderRadius="100px"
+          padding="12px 20px"
+          style={{
+            background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+          }}
           label="Get MetaMask"
           onClick={() => {
             const onboarding = new MetaMaskOnboarding();
             onboarding.startOnboarding();
           }}
         />
-      </div>
+      </Box>
     );
   }
 
   if (requiresAction) {
     return (
-      <div className="lazyConnect">
+      <Box>
         {createChecklist({
           setLoading,
           provider,
@@ -105,7 +109,7 @@ export default function LazyConnect(props) {
           actionName,
           accounts,
         })}
-      </div>
+      </Box>
     );
   }
 
@@ -174,9 +178,9 @@ function createChecklist(checklistOpts) {
   };
 
   const btnTextFn = () => {
-    let labelText = "Connect A Wallet";
+    let labelText = "Connect Wallet";
     if (needsToConnectAccount) {
-      labelText = "Connect A Wallet";
+      labelText = "Connect Wallet";
     }
     if (!needsToConnectAccount && needsToSwitchChain) {
       labelText = `Switch to the ${chainName} network`;
@@ -185,19 +189,27 @@ function createChecklist(checklistOpts) {
   };
 
   return (
-    <div className="mt-10">
-      <p className="w-[670px] m-auto break-all">
+    <Box marginTop="10px">
+      <Box
+        component="p"
+        width="670px"
+        margin="auto"
+        color="#666F85"
+        style={{ wordBreak: "break-all" }}>
         You need a few things to {actionName}.
-      </p>
-      <div className="text-center">
+      </Box>
+      <Box className="text-center">
         <Button
-          className={cn(
-            "mt-[10px] text-white rounded-[100px] px-[20px] py-[12px]",
-            "bg-gradient-to-r from-[#334FB8] to-[#1D81BE]"
-          )}
+          marginTop="10px"
+          color="#fff"
+          borderRadius="100px"
+          padding="12px 20px"
+          style={{
+            background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+          }}
           label={loading ? "Connecting" : btnTextFn()}
           onClick={connectWalletFn}></Button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

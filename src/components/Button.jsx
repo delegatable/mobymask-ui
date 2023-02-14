@@ -21,10 +21,7 @@ function Button(props = {}) {
       boxShadow="0px 1px 2px rgba(16, 24, 40, 0.05)"
       borderRadius="6px"
       {...other}>
-      <Typography
-        component="span"
-        fontWeight={active ? 500 : 400}
-        style={{ cursor: "pointer" }}>
+      <Typography component="span" style={{ cursor: "pointer" }}>
         {label}
       </Typography>
     </Typography>

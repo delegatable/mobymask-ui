@@ -1,40 +1,69 @@
 import React from "react";
+import { Typography, Box } from "@mui/material";
 import cn from "classnames";
 import Button from "../components/Button";
 
 function InstallExtension() {
   return (
-    <div className={cn("pt-[77px] pb-[66px] w-[961px] m-auto")}>
-      <h3 className={cn("text-[20px] mb-[24px]")}>Get Extension Now</h3>
-      <div
-        className={cn(
-          "pt-[57px] p-x-[145px] pb-[48px]",
-          "text-[16px] text-center",
-          "border-[0.5px] border-solid border-[#E5E5E5]"
-        )}>
-        <p className="text-[#2867BB] w-[670px] text-center m-auto mb-[24px]">
+    <Box paddingTop="77px" paddingBottom="66px" width="961px" margin="auto">
+      <Typography
+        component="h3"
+        fontSize="20px"
+        marginBottom="24px"
+        fontWeight="600">
+        Get Extension Now
+      </Typography>
+      <Box
+        paddingTop="57px"
+        paddingBottom="48px"
+        borderRadius="10px"
+        fontSize="16px"
+        textAlign="center"
+        border="1px solid #E5E5E5">
+        <Box
+          color="#2867BB"
+          width="670px"
+          textAlign="center"
+          margin="auto"
+          fontSize="20px"
+          fontWeight="500"
+          marginBottom="24px">
           Get warned about phishers on the web:
-        </p>
+        </Box>
         <Button
-          label="Install the Web Extension (coming soon!)"
+          label="Install the Web Extension"
           active={false}
-          className="rounded-[100px] text-[16px] text-[#0D1320]"
+          borderRadius="100px"
+          fontSize="16px"
+          color="#0D1320"
         />
-        <p className={cn("text-center text-[16px] text-[#666F85] my-[24px]")}>
+        <Box textAlign="center" fontSize="16px" color="#666F85" marginY="24px">
           Users of{" "}
-          <a className="text-[#2867BB]" href="https://metamask.io/flask">
+          <Typography
+            component="a"
+            color="#2867BB"
+            style={{ textDecoration: "none" }}
+            href="https://metamask.io/flask">
             MetaMask Flask
-          </a>
+          </Typography>
           :
-        </p>
-        <a href="https://montoya.github.io/get-mobymask-snap/">
+        </Box>
+        <Typography
+          component="a"
+          href="https://montoya.github.io/get-mobymask-snap/">
           <Button
-            className=" rounded-[100px] bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto"
+            style={{
+              background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+            }}
+            borderRadius="100px"
+            color="#fff"
+            display="inline-block"
+            margin="auto"
             label=" Install the MetaMask Snap"
           />
-        </a>
-      </div>
-    </div>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

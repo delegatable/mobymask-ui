@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Typography, Box } from "@mui/material";
 import cn from "classnames";
 import Button from "../components/Button";
 import TableList from "../components/TableList";
@@ -110,11 +111,15 @@ function MyInviteesReportHistory() {
   }, [active]);
 
   return (
-    <div className={cn("pt-[77px]")}>
-      <h3 className={cn("text-[16px] mb-[24px]")}>
+    <Box paddingTop="77px">
+      <Typography
+        component="h3"
+        fontSize="16px"
+        marginBottom="24px"
+        fontWeight={600}>
         My invitees' report history
-      </h3>
-      <p>
+      </Typography>
+      <Box>
         <Button
           {...{
             label: "Reported phisher",
@@ -126,7 +131,7 @@ function MyInviteesReportHistory() {
           {...{
             label: "Reported not phisher",
             active: active === 2,
-            className: "mx-[8px]",
+            marginX: "8px",
             onClick: () => setActive(2),
           }}
         />
@@ -137,11 +142,11 @@ function MyInviteesReportHistory() {
             onClick: () => setActive(3),
           }}
         />
-      </p>
-      <div className={cn(" py-[32px]")}>
+      </Box>
+      <Box paddingY="8px">
         <TableList {...{ tableHeader, tabList }} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 

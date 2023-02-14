@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
+import { Typography, Box } from "@mui/material";
 import cn from "classnames";
 import contractInfo from "../contractInfo";
 import {
@@ -13,14 +14,22 @@ import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
 import linkForInvitation from "../linkForInvitation";
 import CreateInvitationModal from "../components/CreateInvitationModal";
+import { styled } from "@emotion/styled";
 const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
   return (
-    <div className={cn("pt-[80px]")}>
-      <h3 className={cn("text-[20px] mb-[24px]")}>My invitees</h3>
+    <Box marginTop="80px">
+      <Typography
+        component="h3"
+        fontSize="20px"
+        marginBottom="24px"
+        color="#101828"
+        fontWeight={600}>
+        My invitees
+      </Typography>
       {MyInvitees()}
-    </div>
+    </Box>
   );
 }
 
@@ -33,9 +42,9 @@ function MyInvitees() {
 
   if (!invitation) {
     return (
-      <div>
-        <h3>Processing invitation...</h3>
-      </div>
+      <Box>
+        <Typography component="h3">Processing invitation...</Typography>
+      </Box>
     );
   }
   const tier = invitation.signedDelegations.length;
@@ -71,65 +80,76 @@ function MyInvitees() {
 
   if (tier < 4) {
     return (
-      <div
-        className={cn(
-          "border-[0.5px] border-solid border-[#D0D5DD] rounded-[10px]",
-          "px-[32px] py-[80px]"
-        )}>
-        <img
+      <Box
+        border="1px solid #D0D5DD"
+        borderRadius="10px"
+        paddingX="32px"
+        paddingY="80px">
+        <Typography
+          component="img"
           src={require("../assets/Invite_icon.png")}
-          className="w-[80px] h-[80px] m-auto block mb-[40px]"
+          width="80px"
+          height="80px"
+          margin="auto"
+          display="block"
+          marginBottom="45px"
           alt=""
         />
-        <p
-          className={cn(
-            "w-[670px] m-auto text-[#2867BB] text-[20px] mb-[29px]"
-          )}>
+        <Box
+          component="p"
+          width="670px"
+          margin="auto"
+          color="#2867BB"
+          fontSize="20px"
+          marginBottom="29px">
           You are a tier {tier} invitee.
           <br />
           This means you can invite up to {4 - tier} additional tiers of
           members.
-        </p>
-        <p
-          className={cn(
-            "w-[670px] m-auto text-[#666F85] text-[16px] mb-[24px]"
-          )}>
+        </Box>
+        <Box
+          component="p"
+          width="670px"
+          margin="auto"
+          color="#666F85"
+          fontSize="16px"
+          marginBottom="24px">
           Invite people who you think will respect the system, and only report
           definite impostors and frauds, and only endorse people who are
           neither.
           <br />
+          <br />
           If you invite an abusive person and don't revoke their activity
           quickly, you may have your membership revoked.
-        </p>
-        <p className="text-center mb-[86px]">
+        </Box>
+        <Box component="p" textAlign="center" marginBottom="86px">
           <Button
-            className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
+            style={{
+              background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
+            }}
+            color="#fff"
+            display="inline-block"
+            margin="auto"
+            borderRadius="100px"
             label="Create new invite link"
             onClick={() => setOpen(true)}
           />
-        </p>
+        </Box>
         <MyInviteesReportHistory />
         <MyInvitations />
         <CreateInvitationModal {...{ createNewLink, open, handleClose }} />
-      </div>
+      </Box>
     );
   } else if (tier === 4) {
     return (
-      <div
-        className={cn(
-          "border-[0.5px] border-solid rounded-[10px]",
-          "px-[32px] py-[80px]"
-        )}>
-        <p
-          className={cn(
-            "w-[670px] m-auto text-[#666F85] text-[16px] mb-[24px]"
-          )}>
+      <Box border="1px solid #D0D5DD" borderRadius="10px" padding="80px 32px">
+        <Box width="670px" margin="auto" color="#666F85" marginBottom="24px">
           {" "}
           You are a tier 4 member. That means you can't currently invite new
           members through this interface, but if this site becomes popular, we
           can add support for this later.
-        </p>
-      </div>
+        </Box>
+      </Box>
     );
   }
 }

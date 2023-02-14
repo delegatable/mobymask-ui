@@ -1,5 +1,6 @@
 import { useId } from "react";
 
+import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -21,14 +22,14 @@ function TableList(props) {
   const key = useId();
 
   return (
-    <div>
+    <Box>
       <TableContainer sx={{ maxHeight: 400 }}>
         <Table stickyHeader>
           <TableHead>
             <TableRow>
               {tableHeader.map((column, index) => (
                 <TableCell key={`${key}TableCell${index}`} align="center">
-                  {column.title}
+                  <span style={{ color: "#666F85" }}>{column.title}</span>
                 </TableCell>
               ))}
             </TableRow>
@@ -64,7 +65,7 @@ function TableList(props) {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 }
 

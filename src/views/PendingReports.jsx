@@ -82,7 +82,9 @@ function PendingReports() {
       render: (val, row) => (
         <Button
           {...{
-            label: "remove",
+            height: "48px",
+            borderRadius: "100px",
+            label: "Remove",
             active: false,
             onClick: () => removeClick(row),
           }}
@@ -146,8 +148,13 @@ function PendingReports() {
   };
 
   return (
-    <Box paddingTop="77px">
-      <Typography component="h3" fontSize="20px" marginBottom="24px">
+    <Box marginTop="77px">
+      <Typography
+        component="h3"
+        fontSize="20px"
+        marginBottom="24px"
+        color="#101828"
+        fontWeight={600}>
         Pending reports
       </Typography>
       <Typography component="p" marginBottom="22px">
@@ -174,8 +181,9 @@ function PendingReports() {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          marginBottom="20px"
-          marginTop="40px">
+          borderBottom="1px solid #E5E5E5"
+          paddingY="16px"
+          marginBottom="46px">
           <FormControl>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select

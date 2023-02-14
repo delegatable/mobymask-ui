@@ -1,6 +1,6 @@
 import cn from "classnames";
 import Button from "./Button";
-import reportMembers from "../reportMembers";
+// import reportMembers from "../reportMembers";
 import reportPhishers from "../reportPhishers";
 import { reportTypes } from "../constants";
 import { toast } from "react-hot-toast";

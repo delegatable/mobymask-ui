@@ -1,9 +1,12 @@
 import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Box,
+} from "@mui/material";
 import Button from "./Button";
 import showMessage from "./showMessage";
 import { useState } from "react";
@@ -45,12 +48,29 @@ function CreateInvitationModal(props) {
         />
       </DialogContent>
       <DialogActions>
-        <Button label="cancel" onClick={handleClose} />
-        <Button
-          label="ok"
-          className="bg-gradient-to-r from-[#334FB8] to-[#1D81BE] text-white inline-block m-auto rounded-[100px]"
-          onClick={makeSure}
-        />
+        <Box textAlign="right">
+          <Button
+            width="94px"
+            height="48px"
+            label="Cancel"
+            onClick={handleClose}
+            marginRight="8px"
+          />
+          <Button
+            width="94px"
+            height="48px"
+            label="OK"
+            style={{
+              background:
+                "linear-gradient(89.57deg, #2975DF 0.27%, #3ACFE3 105.82%)",
+              boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+            }}
+            color="#fff"
+            borderRadius="6px"
+            margin="auto"
+            onClick={makeSure}
+          />
+        </Box>
       </DialogActions>
     </Dialog>
   );
