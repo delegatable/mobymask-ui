@@ -1,13 +1,17 @@
 import { useId } from "react";
 
-import { Box } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import {
+  Typography,
+  Box,
+  styled,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+
 import cn from "classnames";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -48,17 +52,21 @@ function TableList(props) {
                 ))}
               </StyledTableRow>
             ))}
-            <StyledTableRow className="border-0">
+            <StyledTableRow border="0px">
               <TableCell colSpan="24">
                 {tabList.length > 0 ? (
-                  <p
-                    className={cn(
-                      "text-[16px] text-[#D0D5DD] text-center m-0"
-                    )}>
+                  <Typography
+                    component="p"
+                    fontSize="16px"
+                    color="#D0D5DD"
+                    textAlign="center"
+                    margin="0">
                     in the end···
-                  </p>
+                  </Typography>
                 ) : (
-                  <p className="text-center">no phisher</p>
+                  <Typography component="p" textAlign="center">
+                    no phisher
+                  </Typography>
                 )}
               </TableCell>
             </StyledTableRow>

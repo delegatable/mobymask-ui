@@ -123,7 +123,7 @@ export default function LazyConnect(props) {
     }
     return child;
   });
-  return <div className="text-center">{childrenWithProps}</div>;
+  return <Box textAlign="center">{childrenWithProps}</Box>;
 }
 
 function createChecklist(checklistOpts) {
@@ -198,7 +198,7 @@ function createChecklist(checklistOpts) {
         style={{ wordBreak: "break-all" }}>
         You need a few things to {actionName}.
       </Box>
-      <Box className="text-center">
+      <Box textAlign="center">
         <Button
           marginTop="10px"
           color="#fff"

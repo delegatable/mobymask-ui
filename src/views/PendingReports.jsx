@@ -162,7 +162,7 @@ function PendingReports() {
           {...{
             label: "Report Phisher",
             active: active === "ReportPhisher",
-            className: "mr-[8px]",
+            marginRight: "8px",
             onClick: () => setActive("ReportPhisher"),
           }}
         />
