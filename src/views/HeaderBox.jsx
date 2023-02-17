@@ -16,13 +16,18 @@ function HeaderBox() {
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        padding="46px 40px">
+        padding="2.662037% 2.3148148%">
         <Box display="flex" justifyContent="flex-start">
-          <img src={logo} className="App-logo" alt="logo" />
+          <Typography
+            component="img"
+            className="App-logo"
+            src={logo}
+            alt="logo"
+          />
           <Typography
             style={{ WebkitTextStroke: "1px #000" }}
             fontWeight="600"
-            fontSize="31px">
+            fontSize="1.9375rem">
             MobyMask
           </Typography>
         </Box>
@@ -49,7 +54,7 @@ function HeaderBox() {
       </Box>
 
       {/* Based on https://codepen.io/goodkatz/pen/LYPGxQz?editors=1100 */}
-      <Box className="waves">
+      <Box className="waves" style={{ height: "13.392857vw" }}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"

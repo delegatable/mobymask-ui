@@ -98,7 +98,8 @@ function ReportInput() {
       <Box
         position="relative"
         width="100%"
-        height="80px"
+        height="4.62695199vw"
+        minHeight="50px"
         margin="auto"
         border="1px solid #D0D5DD"
         box-shadow="0px 0px 30px rgba(0, 0, 0, 0.05)"
@@ -122,7 +123,7 @@ function ReportInput() {
           height="24px"
           position="absolute"
           top="50%"
-          right="28px"
+          right="2.9136316%"
           style={{ cursor: "pointer", transform: "translateY(-50%)" }}
           src={search_icon}
           onClick={submitFrom}

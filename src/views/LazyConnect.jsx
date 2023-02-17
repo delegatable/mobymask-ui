@@ -192,7 +192,7 @@ function createChecklist(checklistOpts) {
     <Box marginTop="10px">
       <Box
         component="p"
-        width="670px"
+        width="69.71904%"
         margin="auto"
         color="#666F85"
         style={{ wordBreak: "break-all" }}>

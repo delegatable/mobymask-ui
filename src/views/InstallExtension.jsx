@@ -5,7 +5,12 @@ import Button from "../components/Button";
 
 function InstallExtension() {
   return (
-    <Box paddingTop="77px" paddingBottom="66px" width="961px" margin="auto">
+    <Box
+      paddingTop="77px"
+      paddingBottom="66px"
+      width="55.581260%"
+      minWidth="600px"
+      margin="auto">
       <Typography
         component="h3"
         fontSize="20px"

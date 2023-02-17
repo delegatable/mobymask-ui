@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import ReportInput from "./ReportInput";
 function CheckPhisherStatus() {
   return (
-    <Box width="961px" margin="auto" textAlign="center">
+    <Box width="55.581260%" minWidth="600px" margin="auto" textAlign="center">
       <Typography
         component="h1"
         fontSize="62px"
-        paddingBottom="20px"
+        paddingBottom="2.08116545%"
         fontWeight="600"
-        marginTop="79px"
+        marginTop="8.220603%"
         lineHeight="1.2">
         Check Phisher Status
       </Typography>
@@ -19,7 +19,7 @@ function CheckPhisherStatus() {
         fontWeight="400"
         fontSize="16px"
         lineHeight="1.2"
-        marginBottom="44px">
+        marginBottom="4.57856399%">
         An alliance of good-hearted phish, aiming to eliminate phishers.
       </Typography>
       <ReportInput />

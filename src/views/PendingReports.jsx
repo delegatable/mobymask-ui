@@ -148,7 +148,7 @@ function PendingReports() {
   };
 
   return (
-    <Box marginTop="77px">
+    <Box marginTop="4.296875vw">
       <Typography
         component="h3"
         fontSize="20px"
@@ -157,7 +157,7 @@ function PendingReports() {
         fontWeight={600}>
         Pending reports
       </Typography>
-      <Typography component="p" marginBottom="22px">
+      <Typography component="p" marginBottom="1.227678571vw">
         <Button
           {...{
             label: "Report Phisher",
@@ -175,7 +175,10 @@ function PendingReports() {
         />
       </Typography>
 
-      <Box border="1px solid #D0D5DD" borderRadius="10px" padding="32px">
+      <Box
+        border="1px solid #D0D5DD"
+        borderRadius="10px"
+        padding="1.785714285vw">
         <TableList {...{ tableHeader, tabList }} />
         <Box
           display="flex"
@@ -183,11 +186,17 @@ function PendingReports() {
           alignItems="center"
           borderBottom="1px solid #E5E5E5"
           paddingY="16px"
-          marginBottom="46px">
+          marginBottom="2.56696428vw">
           <FormControl>
             <InputLabel id="demo-simple-select-label">Type</InputLabel>
             <Select
-              style={{ width: "150px", height: "54px", borderRadius: "100px" }}
+              style={{
+                width: "8.37053vw",
+                minWidth: "100px",
+                height: "3.013392vw",
+                minHeight: "50px",
+                borderRadius: "100px",
+              }}
               id="demo-simple-select"
               value={selectedOption}
               label="Type"
@@ -203,8 +212,9 @@ function PendingReports() {
             display="flex"
             justifyContent="flex-start"
             boxSizing="border-box"
-            width="347px"
-            height="54px"
+            width="44.8491155%"
+            height="3.013392vw"
+            minHeight="50px"
             borderRadius="100px"
             padding="5px"
             marginLeft="16px"
