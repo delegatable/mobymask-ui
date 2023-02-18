@@ -1,5 +1,3 @@
-
-
 .App-logo {
   height: 57px;
   pointer-events: none;
@@ -11,16 +9,6 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.App-header {
-  background: linear-gradient(to right, #334fb8, #1a87bf);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  color: white;
-}
-
 
 .App-link {
   color: #61dafb;
@@ -54,10 +42,8 @@ button.installButton {
   background: #dedede;
   margin: 16px;
   padding: 8px;
-  padding-top:80px;
+  padding-top: 80px;
 }
-
-
 
 .phisherBox {
   background-color: pink;
@@ -109,12 +95,6 @@ button.installButton {
   text-align: center;
 }
 
-.waves {
-  position: relative;
-  width: 100%;
-  height: 240px;
-}
-
 .content {
   position: relative;
   height: 20vh;
@@ -151,16 +131,18 @@ button.installButton {
     transform: translate3d(85px, 0, 0);
   }
 }
-/*Shrinking for mobile*/
-@media (max-width: 768px) {
-  .waves {
-    height: 40px;
-    min-height: 40px;
+
+.whale-icon {
+  animation: swimming-forever 6s ease-in-out infinite;
+}
+@keyframes swimming-forever {
+  0% {
+    transform: translate(0, 0);
   }
-  .content {
-    height: 30vh;
+  50% {
+    transform: translate(0, 50px);
   }
-  h1 {
-    font-size: 24px;
+  100% {
+    transform: translate(0, 0);
   }
 }

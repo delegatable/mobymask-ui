@@ -9,14 +9,25 @@ import Avatar from "@mui/material/Avatar";
 
 function HeaderBox() {
   return (
-    <header className="App-header">
+    <Box
+      sx={{
+        background: "linear-gradient(to right, #334fb8, #1a87bf)",
+      }}
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-start"
+      justifyContent="center"
+      color="white"
+      overflow="hidden"
+    >
       <Box
         width="100%"
         boxSizing="border-box"
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        padding="2.662037% 2.3148148%">
+        padding="2.662037% 2.3148148%"
+      >
         <Box display="flex" justifyContent="flex-start">
           <Typography
             component="img"
@@ -27,7 +38,8 @@ function HeaderBox() {
           <Typography
             style={{ WebkitTextStroke: "1px #000" }}
             fontWeight="600"
-            fontSize="1.9375rem">
+            fontSize="1.9375rem"
+          >
             MobyMask
           </Typography>
         </Box>
@@ -54,13 +66,35 @@ function HeaderBox() {
       </Box>
 
       {/* Based on https://codepen.io/goodkatz/pen/LYPGxQz?editors=1100 */}
-      <Box className="waves" style={{ height: "13.392857vw" }}>
+      <Box width="100%">
+        <Box
+          className="whale-icon"
+          marginLeft="50%"
+          position="relative"
+          left={200}
+          bottom={-150}
+          component="img"
+          src="/whale.png"
+          width="200px"
+          zIndex={0}
+          marginTop="-50px"
+        ></Box>
         <svg
+          style={{
+            marginBottom: "-7px",
+            width: "100%",
+            minHeight: 100,
+            maxHeight: 150,
+            height: "15vh",
+            position: "relative",
+            zIndex: 1,
+          }}
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 20 190 28"
+          viewBox="0 24 150 28"
           preserveAspectRatio="none"
-          shapeRendering="auto">
+          shapeRendering="auto"
+        >
           <defs>
             <path
               id="gentle-wave"
@@ -72,25 +106,25 @@ function HeaderBox() {
               xlinkHref="#gentle-wave"
               x="48"
               y="0"
-              fill="rgba(255,255,255,0.7)"
+              fill="rgba(255,255,255,0.9)"
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="3"
-              fill="rgba(255,255,255,0.5)"
+              fill="rgba(255,255,255,0.8)"
             />
             <use
               xlinkHref="#gentle-wave"
               x="48"
               y="5"
-              fill="rgba(255,255,255,0.3)"
+              fill="rgba(255,255,255,0.7)"
             />
             <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
           </g>
         </svg>
       </Box>
-    </header>
+    </Box>
   );
 }
 

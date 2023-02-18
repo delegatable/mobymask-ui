@@ -30,5 +30,5 @@ root.render(
         <App />
       </ThemeProvider>
     </StyledEngineProvider>
-  </ApolloProvider>
+  </ApolloProvider>,
 );
