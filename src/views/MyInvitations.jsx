@@ -33,11 +33,11 @@ const util = generateUtil({
 function MyInvitations() {
   const [active, setActive] = useState(1);
   const [outstandingInvitations, setOutstandingInvitations] = useAtom(
-    outstandingInvitationsAtom
+    outstandingInvitationsAtom,
   );
 
   const [revokedInvitations, setRevokedInvitations] = useAtom(
-    revokedInvitationsAtom
+    revokedInvitationsAtom,
   );
 
   const provider = useAtomValue(providerAtom);
@@ -109,12 +109,12 @@ function MyInvitations() {
       };
       const signedIntendedRevocation = util.signRevocation(
         intendedRevocation,
-        invitation.key
+        invitation.key,
       );
 
       const result = await registry.revokeDelegation(
         signedDelegation,
-        signedIntendedRevocation
+        signedIntendedRevocation,
       );
       await result.wait();
       const newInvites = [...outstandingInvitations];
@@ -135,7 +135,8 @@ function MyInvitations() {
         component="h3"
         fontSize="16px"
         marginBottom="24px"
-        fontWeight={600}>
+        fontWeight={600}
+      >
         My Invitations
       </Typography>
       <Box component="p" marginBottom="24px">
@@ -157,6 +158,10 @@ function MyInvitations() {
       </Box>
       {active === 1 ? (
         <TableList {...{ tableHeader, tabList: outstandingInvitations }} />
+      ) : revokedInvitations.length === 0 ? (
+        <Typography textAlign="center" margin="60px">
+          No Records
+        </Typography>
       ) : (
         revokedInvitations.map((item) => (
           <Box
@@ -167,7 +172,8 @@ function MyInvitations() {
             fontSize="16px"
             textAlign="left"
             borderBottom="1px solid #E5E5E5"
-            key={`revokedInvitations${item.petName}${item.invitationLink}`}>
+            key={`revokedInvitations${item.petName}${item.invitationLink}`}
+          >
             <Box width="160px" flexShrink="0">
               {item.petName}
             </Box>
@@ -175,7 +181,7 @@ function MyInvitations() {
               {item.invitationLink &&
                 `${item.invitationLink.slice(
                   0,
-                  50
+                  50,
                 )}...${item.invitationLink.slice(-4)}`}
             </Box>
           </Box>

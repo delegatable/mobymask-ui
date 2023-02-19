@@ -30,7 +30,7 @@ function CreateInvitationModal(props) {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>who is this invitation for?</DialogTitle>
+      <DialogTitle>Who is this invitation for?</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Get a nickname for this invitation so you can view their reports and

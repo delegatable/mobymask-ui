@@ -37,7 +37,7 @@ function PendingReports() {
   const [storedPhishers, setStoredPhishers] = useAtom(pendingPhishersAtom);
   const invitation = useAtomValue(invitationAtom);
   const [storedNotPhishers, setStoredNotPhishers] = useAtom(
-    pendingNotPhishersAtom
+    pendingNotPhishersAtom,
   );
   const [tabList, setTabList] = useState([]);
   const [selectedOption, setSelectedOption] = useState("TWT");
@@ -103,13 +103,13 @@ function PendingReports() {
 
   const removeStoredPhishers = (phisher) => {
     const newStoredPhishers = storedPhishers.filter(
-      (item) => item.name !== phisher.name
+      (item) => item.name !== phisher.name,
     );
     setStoredPhishers(newStoredPhishers);
   };
   const removeStoredNotPhishers = (phisher) => {
     const newStoredNotPhishers = storedNotPhishers.filter(
-      (item) => item.name !== phisher.name
+      (item) => item.name !== phisher.name,
     );
     setStoredNotPhishers(newStoredNotPhishers);
   };
@@ -124,7 +124,7 @@ function PendingReports() {
       selectedOption,
       inputRef.current.value,
       latestBlock,
-      isPhisher
+      isPhisher,
     );
     if (result) {
       reportHandle({
@@ -154,7 +154,8 @@ function PendingReports() {
         fontSize="20px"
         marginBottom="24px"
         color="#101828"
-        fontWeight={600}>
+        fontWeight={600}
+      >
         Pending reports
       </Typography>
       <Typography component="p" marginBottom="1.227678571vw">
@@ -178,7 +179,8 @@ function PendingReports() {
       <Box
         border="1px solid #D0D5DD"
         borderRadius="10px"
-        padding="1.785714285vw">
+        padding="32px 32px 38px 32px"
+      >
         <TableList {...{ tableHeader, tabList }} />
         <Box
           display="flex"
@@ -186,9 +188,10 @@ function PendingReports() {
           alignItems="center"
           borderBottom="1px solid #E5E5E5"
           paddingY="16px"
-          marginBottom="2.56696428vw">
+          marginBottom="2.56696428vw"
+        >
           <FormControl>
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
+            <InputLabel>Type</InputLabel>
             <Select
               style={{
                 width: "8.37053vw",
@@ -197,10 +200,10 @@ function PendingReports() {
                 minHeight: "50px",
                 borderRadius: "100px",
               }}
-              id="demo-simple-select"
               value={selectedOption}
               label="Type"
-              onChange={handleChange}>
+              onChange={handleChange}
+            >
               {reportTypes.map((item) => (
                 <MenuItem key={item.value} value={item.value}>
                   {item.label}
@@ -218,7 +221,8 @@ function PendingReports() {
             borderRadius="100px"
             padding="5px"
             marginLeft="16px"
-            border="1px solid #D0D5DD">
+            border="1px solid #D0D5DD"
+          >
             <Typography
               component="input"
               width="100%"
@@ -229,7 +233,7 @@ function PendingReports() {
               onKeyDown={keyDown}
               style={{ outline: "none", border: "0" }}
               ref={inputRef}
-              placeholder="Enter new names.."
+              placeholder="Enter new record..."
             />
             <Button
               width="81px"
@@ -247,9 +251,10 @@ function PendingReports() {
           </Box>
         </Box>
         <LazyConnect
-          actionName="submit reports directly to the blockchain.Get a web3 compatible wallet(like metamask) to proceed."
+          actionName="submit reports directly to the blockchain. Get a web3 compatible wallet(like metamask) to proceed"
           chainId={chainId}
-          opts={{ needsAccountConnected: true }}>
+          opts={{ needsAccountConnected: true }}
+        >
           <SubmitBatchButton
             type={active}
             subData={

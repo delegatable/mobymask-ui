@@ -192,15 +192,17 @@ function createChecklist(checklistOpts) {
     <Box marginTop="10px">
       <Box
         component="p"
-        width="69.71904%"
+        width="96%"
+        maxWidth="670px"
         margin="auto"
         color="#666F85"
-        style={{ wordBreak: "break-all" }}>
+        style={{ fontFamily: "Inter", lineHeight: 1.5 }}
+      >
         You need a few things to {actionName}.
       </Box>
       <Box textAlign="center">
         <Button
-          marginTop="10px"
+          marginTop="20px"
           color="#fff"
           borderRadius="100px"
           padding="12px 20px"
@@ -208,7 +210,8 @@ function createChecklist(checklistOpts) {
             background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
           }}
           label={loading ? "Connecting" : btnTextFn()}
-          onClick={connectWalletFn}></Button>
+          onClick={connectWalletFn}
+        ></Button>
       </Box>
     </Box>
   );

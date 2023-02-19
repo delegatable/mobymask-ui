@@ -111,12 +111,13 @@ function MyInviteesReportHistory() {
   }, [active]);
 
   return (
-    <Box paddingTop="77px">
+    <Box>
       <Typography
         component="h3"
         fontSize="16px"
         marginBottom="24px"
-        fontWeight={600}>
+        fontWeight={600}
+      >
         My invitees' report history
       </Typography>
       <Box>
@@ -143,8 +144,15 @@ function MyInviteesReportHistory() {
           }}
         />
       </Box>
-      <Box paddingY="8px">
-        <TableList {...{ tableHeader, tabList }} />
+      <Box paddingY="40px">
+        {/* <TableList {...{ tableHeader, tabList }} /> */}
+        <Box
+          component="img"
+          src="/coming.png"
+          width="115px"
+          margin="30px auto"
+          display="block"
+        ></Box>
       </Box>
     </Box>
   );

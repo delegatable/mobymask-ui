@@ -91,7 +91,8 @@ function ReportHistory() {
         fontSize="20px"
         marginBottom="24px"
         color="#101828"
-        fontWeight={600}>
+        fontWeight={600}
+      >
         My report history
       </Typography>
       <Box marginBottom="22px">
@@ -119,7 +120,14 @@ function ReportHistory() {
         />
       </Box>
       <Box border="1px solid #D0D5DD" borderRadius="10px" padding="32px">
-        <TableList {...{ tableHeader, tabList }} />
+        {/* <TableList {...{ tableHeader, tabList }} /> */}
+        <Box
+          component="img"
+          src="/coming.png"
+          width="115px"
+          margin="30px auto"
+          display="block"
+        ></Box>
       </Box>
     </Box>
   );

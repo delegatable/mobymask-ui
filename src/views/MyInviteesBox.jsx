@@ -25,7 +25,8 @@ function MyInviteesBox() {
         fontSize="20px"
         marginBottom="24px"
         color="#101828"
-        fontWeight={600}>
+        fontWeight={600}
+      >
         My invitees
       </Typography>
       {MyInvitees()}
@@ -37,7 +38,7 @@ function MyInvitees() {
   const [open, setOpen] = useState(false);
   const invitation = useAtomValue(invitationAtom);
   const [outstandingInvitations, setOutstandingInvitations] = useAtom(
-    outstandingInvitationsAtom
+    outstandingInvitationsAtom,
   );
 
   if (!invitation) {
@@ -84,7 +85,8 @@ function MyInvitees() {
         border="1px solid #D0D5DD"
         borderRadius="10px"
         paddingX="32px"
-        paddingY="80px">
+        paddingY="80px"
+      >
         <Typography
           component="img"
           src={require("../assets/Invite_icon.png")}
@@ -95,25 +97,27 @@ function MyInvitees() {
           marginBottom="45px"
           alt=""
         />
-        <Box
+        <Typography
           component="p"
           width="670px"
           margin="auto"
           color="#2867BB"
           fontSize="20px"
-          marginBottom="29px">
+          marginBottom="29px"
+        >
           You are a tier {tier} invitee.
           <br />
           This means you can invite up to {4 - tier} additional tiers of
           members.
-        </Box>
-        <Box
+        </Typography>
+        <Typography
           component="p"
           width="670px"
           margin="auto"
           color="#666F85"
           fontSize="16px"
-          marginBottom="24px">
+          marginBottom="24px"
+        >
           Invite people who you think will respect the system, and only report
           definite impostors and frauds, and only endorse people who are
           neither.
@@ -121,8 +125,8 @@ function MyInvitees() {
           <br />
           If you invite an abusive person and don't revoke their activity
           quickly, you may have your membership revoked.
-        </Box>
-        <Box component="p" textAlign="center" marginBottom="86px">
+        </Typography>
+        <Typography component="p" textAlign="center" marginBottom="86px">
           <Button
             style={{
               background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
@@ -134,7 +138,7 @@ function MyInvitees() {
             label="Create new invite link"
             onClick={() => setOpen(true)}
           />
-        </Box>
+        </Typography>
         <MyInviteesReportHistory />
         <MyInvitations />
         <CreateInvitationModal {...{ createNewLink, open, handleClose }} />
