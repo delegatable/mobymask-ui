@@ -4,29 +4,17 @@ import ReportInput from "./ReportInput";
 function CheckPhisherStatus() {
   return (
     <Box
-      width="55.581260%"
+      width="96%"
+      maxWidth="960px"
       minWidth="600px"
       margin="auto"
       textAlign="center"
-      padding="8.220603%"
+      paddingTop="80px"
     >
-      <Typography
-        component="h1"
-        fontSize="62px"
-        paddingBottom="2.08116545%"
-        fontWeight="600"
-        lineHeight="1.2"
-      >
+      <Typography component="h1" fontSize="62px" fontWeight="600">
         Check Phisher Status
       </Typography>
-      <Typography
-        component="p"
-        color="#101828"
-        fontWeight="400"
-        fontSize="16px"
-        lineHeight="1.2"
-        marginBottom="4.57856399%"
-      >
+      <Typography fontSize="16px" marginTop="20px" marginBottom="44px">
         An alliance of good-hearted phish, aiming to eliminate phishers.
       </Typography>
       <ReportInput />

@@ -47,7 +47,7 @@ function ReportInput() {
         selectedOption,
         inputRef.current.value,
         latestBlock,
-        isPhisher
+        isPhisher,
       );
       if (result) {
         setCheckResult(result?.isPhisher?.value);
@@ -84,13 +84,15 @@ function ReportInput() {
             margin="0 4px"
             padding="8px 18px 6px 18px"
             border="1px solid #D0D5DD"
+            borderColor={selectedOption === item.value ? "#101828" : "#D0D5DD"}
             color={selectedOption === item.value ? "#fff" : "#D0D5DD"}
             backgroundColor={selectedOption === item.value ? "#101828" : "#fff"}
             borderRadius="10px 10px 0px 0px"
             borderBottom="none"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", fontFamily: "Inter" }}
             key={item.value}
-            onClick={() => changeOptions(item)}>
+            onClick={() => changeOptions(item)}
+          >
             {item?.label}
           </Box>
         ))}
@@ -98,36 +100,54 @@ function ReportInput() {
       <Box
         position="relative"
         width="100%"
-        height="4.62695199vw"
+        height="80px"
         minHeight="50px"
         margin="auto"
-        border="1px solid #D0D5DD"
-        box-shadow="0px 0px 30px rgba(0, 0, 0, 0.05)"
-        borderRadius="100px">
+        boxShadow="0px 0px 30px rgba(0, 0, 0, 0.05)"
+        borderRadius="100px"
+      >
         <Typography
           width="100%"
           height="100%"
           fontSize="18px"
           padding="0 35px"
           boxSizing="border-box"
-          border="1px solid #D0D5DD"
-          borderRadius="100px"
           component="input"
+          borderRadius="100px"
+          border="1px solid #D0D5DD"
+          sx={{
+            backgroundColor: "#fff",
+            ":focus": {
+              outline: "#2867BB",
+              borderColor: "#2867BB",
+            },
+          }}
           ref={inputRef}
           onKeyDown={keyDown}
-          placeholder="Enter a twitter name to check if it is a phisher..."
+          placeholder={`Enter a ${
+            options.find((item) => item.value === selectedOption).label
+          } to check if it is a phisher...`}
         />
-        <Typography
-          component="img"
-          width="24px"
-          height="24px"
-          position="absolute"
-          top="50%"
-          right="2.9136316%"
-          style={{ cursor: "pointer", transform: "translateY(-50%)" }}
-          src={search_icon}
+        <Box
+          width="80px"
+          height="80px"
           onClick={submitFrom}
-        />
+          sx={{ cursor: "pointer" }}
+          position="absolute"
+          top="0"
+          right="0"
+          bottom="0"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography
+            component="img"
+            width="24px"
+            height="24px"
+            src={search_icon}
+          />
+        </Box>
       </Box>
       {isShow && (
         <ReportInputInfo
