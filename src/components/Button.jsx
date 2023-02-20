@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 
 function Button(props = {}) {
   const { label = "button", active = false, ...other } = props;
@@ -21,7 +21,7 @@ function Button(props = {}) {
       sx={{
         cursor: "pointer",
         ":hover": {
-          borderColor: "#2867BB",
+          opacity: 0.8,
         },
       }}
       {...other}

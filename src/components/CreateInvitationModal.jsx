@@ -1,15 +1,20 @@
-import TextField from "@mui/material/TextField";
+import { useState, useEffect } from "react";
+
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
+  TextField,
+  Typography,
   DialogTitle,
   Box,
 } from "@mui/material";
+import { toast } from "react-hot-toast";
 import Button from "./Button";
 import showMessage from "./showMessage";
-import { useState } from "react";
+import copyInvitationLink from "../copyInvitationLink";
+import linkForInvitation from "../linkForInvitation";
 
 function CreateInvitationModal(props) {
   const { open, handleClose, createNewLink } = props;
@@ -22,10 +27,41 @@ function CreateInvitationModal(props) {
     if (!name) {
       return;
     }
-    createNewLink(name);
+    const linkObj = createNewLink(name);
+    const link = linkForInvitation(linkObj);
+
     handleClose();
     setName("");
-    showMessage({ title: "create success", type: "success", body: "" });
+    showMessage({
+      title: "Invitation link created successfully!",
+      type: "success",
+      body: (
+        <Box>
+          <Typography>
+            The invitation link has been copied! You can share it with the
+            person you want to invite, or copy it again.
+          </Typography>
+          <Box marginTop={2}>
+            <TextField fullWidth multiline maxRows={4} value={link} />
+          </Box>
+          <Box marginTop={2}>
+            <Button
+              label="Copy"
+              style={{
+                color: "#fff",
+                background:
+                  "linear-gradient(89.57deg, #2975DF 0.27%, #3ACFE3 105.82%)",
+                boxShadow: "0px 1px 2px rgba(16, 24, 40, 0.05)",
+              }}
+              onClick={async () => {
+                await copyInvitationLink(linkObj);
+                toast.success("Copied to clipboard!");
+              }}
+            />
+          </Box>
+        </Box>
+      ),
+    });
   };
 
   return (
@@ -37,18 +73,20 @@ function CreateInvitationModal(props) {
           revoke the invitation. Remember that this would be public to all your
           upstream users.
         </DialogContentText>
-        <TextField
-          autoFocus
-          margin="dense"
-          value={name}
-          label="Name"
-          fullWidth
-          variant="standard"
-          onChange={handleChange}
-        />
+        <Box marginTop={2}>
+          <TextField
+            autoFocus
+            margin="dense"
+            value={name}
+            label="Name"
+            fullWidth
+            variant="outlined"
+            onChange={handleChange}
+          />
+        </Box>
       </DialogContent>
       <DialogActions>
-        <Box textAlign="right">
+        <Box textAlign="right" padding={2}>
           <Button
             width="94px"
             height="48px"

@@ -3,7 +3,6 @@ import { Typography, Box } from "@mui/material";
 import { toast } from "react-hot-toast";
 import { ethers } from "ethers";
 import { useAtom, useAtomValue } from "jotai";
-import cn from "classnames";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 

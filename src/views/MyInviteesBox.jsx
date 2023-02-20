@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { Typography, Box } from "@mui/material";
-import cn from "classnames";
 import contractInfo from "../contractInfo";
 import {
   invitationAtom,
@@ -14,7 +13,6 @@ import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
 import linkForInvitation from "../linkForInvitation";
 import CreateInvitationModal from "../components/CreateInvitationModal";
-import { styled } from "@emotion/styled";
 const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
@@ -75,6 +73,7 @@ function MyInvitees() {
       .catch((err) => {
         console.error(err);
       });
+    return newInvitation;
   };
 
   const handleClose = () => setOpen(false);
