@@ -61,13 +61,13 @@ function MyInvitations() {
         return (
           <>
             <CopyToClipboard text={row.invitationLink}>
-              <Button borderRadius="100px" height="48px" label="copy" />
+              <Button borderRadius="100px" height="48px" label="Copy" />
             </CopyToClipboard>
             &nbsp;
             <Button
               borderRadius="100px"
               height="48px"
-              label="revoke"
+              label="Revoke"
               onClick={() => revokeLink(row, index)}
             />
           </>

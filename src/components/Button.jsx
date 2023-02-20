@@ -1,5 +1,3 @@
-import cn from "classnames";
-import MuiButton from "@mui/material/Button";
 import { Typography, Box } from "@mui/material";
 
 function Button(props = {}) {
@@ -20,10 +18,15 @@ function Button(props = {}) {
       backgroundColor={active ? "rgba(40, 103, 187, 0.1)" : "#fff"}
       boxShadow="0px 1px 2px rgba(16, 24, 40, 0.05)"
       borderRadius="6px"
-      {...other}>
-      <Typography component="span" style={{ cursor: "pointer" }}>
-        {label}
-      </Typography>
+      sx={{
+        cursor: "pointer",
+        ":hover": {
+          borderColor: "#2867BB",
+        },
+      }}
+      {...other}
+    >
+      <Typography component="span">{label}</Typography>
     </Typography>
   );
 }
