@@ -4,14 +4,12 @@ import { useAtom } from "jotai";
 // Routes
 import ContentBox from "./ContentBox";
 // import Members from "../views/Members";
-import contractInfo from "../contractInfo";
+import contractInfo from "../utils/contractInfo";
 import { invitationAtom } from "../atoms/invitationAtom";
 
 const { validateInvitation } = require("eth-delegatable-utils");
-const config = require("../config.json");
-const { chainId } = config;
 
-export default function RoutableArea(props) {
+export default function RoutableArea() {
   const { search } = useLocation();
   const query = useMemo(() => new URLSearchParams(search), [search]);
 

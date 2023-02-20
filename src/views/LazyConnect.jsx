@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import MetaMaskOnboarding from "@metamask/onboarding";
-import chainList from "../chainList";
+import chainList from "../utils/chainList";
 import Button from "../components/Button";
 
-import cn from "classnames";
 import { useAtom } from "jotai";
 import { providerAtom } from "../atoms/providerAtom";
 
@@ -15,7 +14,7 @@ export default function LazyConnect(props) {
   const [provider, setInjectedProvider] = useAtom(providerAtom);
   const [accounts, setAccounts] = useState([]);
   const [userChainId, setUserChainId] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
 
   if (!provider && MetaMaskOnboarding.isMetaMaskInstalled()) {
     setInjectedProvider(window.ethereum);
@@ -171,7 +170,7 @@ function createChecklist(checklistOpts) {
   };
 
   const connectChainFn = async () => {
-    const result = await provider.request({
+    await provider.request({
       method: "wallet_switchEthereumChain",
       params: [{ chainId: "0x" + chainId.toString(16) }],
     });

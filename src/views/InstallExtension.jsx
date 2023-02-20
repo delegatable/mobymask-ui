@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
-import cn from "classnames";
 import Button from "../components/Button";
 
 function InstallExtension() {

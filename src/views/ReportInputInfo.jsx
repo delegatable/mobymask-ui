@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { Typography, Box } from "@mui/material";
 
@@ -8,8 +7,8 @@ import {
   pendingNotPhishersAtom,
 } from "../atoms/phisherAtom";
 import { invitationAtom } from "../atoms/invitationAtom";
-import { reportTypes } from "../constants";
-import { reportHandle } from "../checkPhisherStatus";
+import { reportTypes } from "../utils/constants";
+import { reportHandle } from "../utils/checkPhisherStatus";
 import error_icon from "../assets/error_icon.png";
 import success_icon from "../assets/success_icon.png";
 
@@ -23,7 +22,7 @@ function ReportInputInfo(props) {
   } = props;
   const [storedPhishers, setStoredPhishers] = useAtom(pendingPhishersAtom);
   const [storedNotPhishers, setStoredNotPhishers] = useAtom(
-    pendingNotPhishersAtom
+    pendingNotPhishersAtom,
   );
   const invitation = useAtomValue(invitationAtom);
 
@@ -58,7 +57,8 @@ function ReportInputInfo(props) {
       boxSizing="border-box"
       border="1px solid #D0D5DD"
       borderRadius="10px"
-      textAlign="left">
+      textAlign="left"
+    >
       {isLoading ? (
         <>checking...</>
       ) : (
@@ -69,7 +69,8 @@ function ReportInputInfo(props) {
             justifyContent="center"
             alignItems="center"
             paddingBottom="24px"
-            borderBottom="1px solid #D0D5DD">
+            borderBottom="1px solid #D0D5DD"
+          >
             <Typography
               component="img"
               width="60px"
@@ -85,12 +86,14 @@ function ReportInputInfo(props) {
               fontSize="18px"
               fontWeight="700"
               color="#101828"
-              textAlign="left">
+              textAlign="left"
+            >
               {phisher + " "}
               <Typography
                 component="span"
                 fontWeight="400"
-                color={checkResult ? "#FF5056" : "#61BA60"}>
+                color={checkResult ? "#FF5056" : "#61BA60"}
+              >
                 is {!checkResult && "not"} a registered phisher.
               </Typography>
             </Typography>
@@ -109,7 +112,8 @@ function ReportInputInfo(props) {
             color="#666F85"
             margin="24px 0"
             textAlign="left"
-            lineHeight="24px">
+            lineHeight="24px"
+          >
             In doubt about this result, you can take the following actions
           </Typography>
           {invitation && (

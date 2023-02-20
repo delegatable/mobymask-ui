@@ -1,4 +1,4 @@
-import "./installBuffer";
+import "./utils/installBuffer";
 import QueryParamsRoute from "./views/RoutableArea";
 import { HashRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
@@ -8,7 +8,7 @@ import HeaderBox from "./views/HeaderBox";
 import InstallExtension from "./views/InstallExtension";
 import FooterBox from "./views/FooterBox";
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <Toaster />

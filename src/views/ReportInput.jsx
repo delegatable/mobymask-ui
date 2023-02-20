@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
-import { reportTypes as options } from "../constants";
+import { reportTypes as options } from "../utils/constants";
 import { toast } from "react-hot-toast";
 import { gql } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 // import createPhisherLabel from "../createPhisherLabel";
-import { checkPhisherStatus } from "../checkPhisherStatus";
+import { checkPhisherStatus } from "../utils/checkPhisherStatus";
 import ReportInputInfo from "../views/ReportInputInfo";
-import config from "../config.json";
+import config from "../utils/config.json";
 import search_icon from "../assets/search.png";
 const { address } = config;
 

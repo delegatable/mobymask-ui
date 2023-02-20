@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import {
   Dialog,
@@ -13,8 +13,8 @@ import {
 import { toast } from "react-hot-toast";
 import Button from "./Button";
 import showMessage from "./showMessage";
-import copyInvitationLink from "../copyInvitationLink";
-import linkForInvitation from "../linkForInvitation";
+import copyInvitationLink from "../utils/copyInvitationLink";
+import linkForInvitation from "../utils/linkForInvitation";
 
 function CreateInvitationModal(props) {
   const { open, handleClose, createNewLink } = props;

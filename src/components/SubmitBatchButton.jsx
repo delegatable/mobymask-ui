@@ -1,8 +1,7 @@
-import cn from "classnames";
 import Button from "./Button";
-// import reportMembers from "../reportMembers";
-import reportPhishers from "../reportPhishers";
-import { reportTypes } from "../constants";
+// import reportMembers from "../utils/reportMembers";
+import reportPhishers from "../utils/reportPhishers";
+import { reportTypes } from "../utils/constants";
 import { toast } from "react-hot-toast";
 const { ethers } = require("ethers");
 function SubmitBatchButton(props) {
@@ -29,7 +28,7 @@ function SubmitBatchButton(props) {
       const name =
         item.name.indexOf("@") === 0 ? item.name.slice(1) : item.name;
       const type = reportTypes.find(
-        (report) => report.label === item.type
+        (report) => report.label === item.type,
       )?.value;
       return `${type}:${name.toLowerCase()}`;
     });
@@ -38,7 +37,7 @@ function SubmitBatchButton(props) {
         data,
         ethersProvider,
         invitation,
-        isReportPhisher
+        isReportPhisher,
       );
       await block.wait();
       document.dispatchEvent(new Event("clear_pendingPhishers"));

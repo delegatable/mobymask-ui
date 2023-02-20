@@ -6,8 +6,7 @@ import { useAtom, useAtomValue } from "jotai";
 
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
-import createRegistry from "../createRegistry";
-import copyInvitationLink from "../copyInvitationLink";
+import createRegistry from "../utils/createRegistry";
 import {
   outstandingInvitationsAtom,
   revokedInvitationsAtom,
@@ -22,7 +21,7 @@ const {
   createSignedDelegationHash,
 } = require("eth-delegatable-utils");
 
-const { chainId, address, name } = require("../config.json");
+const { chainId, address, name } = require("../utils/config.json");
 const CONTRACT_NAME = name;
 const util = generateUtil({
   chainId,
@@ -89,12 +88,6 @@ function MyInvitations() {
       })
       .catch(console.error);
   });
-
-  const copyLink = (row) => {
-    copyInvitationLink(row.invitation, row.inviteeName)
-      .then(() => {})
-      .catch(console.error);
-  };
 
   const revokeLink = async (row, index) => {
     const loading = toast.loading("Waiting...");

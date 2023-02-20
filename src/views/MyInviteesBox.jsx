@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { Typography, Box } from "@mui/material";
-import contractInfo from "../contractInfo";
+import contractInfo from "../utils/contractInfo";
 import {
   invitationAtom,
   outstandingInvitationsAtom,
 } from "../atoms/invitationAtom";
 
 import Button from "../components/Button";
-import copyInvitationLink from "../copyInvitationLink";
+import copyInvitationLink from "../utils/copyInvitationLink";
 import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
-import linkForInvitation from "../linkForInvitation";
+import linkForInvitation from "../utils/linkForInvitation";
 import CreateInvitationModal from "../components/CreateInvitationModal";
 const { createMembership } = require("eth-delegatable-utils");
 

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
-import cn from "classnames";
 import Button from "../components/Button";
-import TableList from "../components/TableList";
+// import TableList from "../components/TableList";
 function MyInviteesReportHistory() {
   const [active, setActive] = useState(1);
   const [tabList, setTabList] = useState([]);
@@ -63,7 +62,6 @@ function MyInviteesReportHistory() {
           type: "Twitter",
           status: "bob",
           Reporter: "Jane",
-          ParentInviter: "Jane",
           ParentInviter: "Jane",
         },
         {

@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import cn from "classnames";
 import { Typography, Box } from "@mui/material";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -15,8 +14,8 @@ import {
 
 import { invitationAtom } from "../atoms/invitationAtom";
 
-import { reportTypes } from "../constants";
-import statusText from "../statusText";
+import { reportTypes } from "../utils/constants";
+import statusText from "../utils/statusText";
 
 import LazyConnect from "./LazyConnect";
 import Button from "../components/Button";
@@ -25,11 +24,11 @@ import SubmitBatchButton from "../components/SubmitBatchButton";
 
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
-import { checkPhisherStatus, reportHandle } from "../checkPhisherStatus";
+import { checkPhisherStatus, reportHandle } from "../utils/checkPhisherStatus";
 
-const config = require("../config.json");
+const config = require("../utils/config.json");
 const { chainId, address } = config;
 
 function PendingReports() {
