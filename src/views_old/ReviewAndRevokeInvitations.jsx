@@ -45,18 +45,20 @@ export default function (props) {
       {invitations.map((_invitation, index) => {
         return (
           <div key={index}>
-            <span>{_invitation.petName}</span>
+            <span>{_invitation.inviteeName}</span>
             <input
               type="text"
               readOnly
-              value={linkForInvitation(_invitation.invitation)}></input>
+              value={linkForInvitation(_invitation.invitation)}
+            ></input>
             <button
               onClick={() => {
                 copyInvitationLink(
                   _invitation.invitation,
-                  _invitation.petName
+                  _invitation.inviteeName,
                 ).catch((err) => alert(err.message));
-              }}>
+              }}
+            >
               Copy
             </button>
             <button
@@ -72,22 +74,23 @@ export default function (props) {
                 };
                 const signedIntendedRevocation = util.signRevocation(
                   intendedRevocation,
-                  invitation.key
+                  invitation.key,
                 );
 
                 await registry.revokeDelegation(
                   signedDelegation,
-                  signedIntendedRevocation
+                  signedIntendedRevocation,
                 );
 
                 const newInvites = [...invitations];
                 newInvites.splice(index, 1);
                 localStorage.setItem(
                   "outstandingInvitations",
-                  JSON.stringify(newInvites)
+                  JSON.stringify(newInvites),
                 );
                 setInvitations(newInvites);
-              }}>
+              }}
+            >
               Revoke
             </button>
           </div>

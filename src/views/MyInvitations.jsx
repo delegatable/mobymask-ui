@@ -45,8 +45,8 @@ function MyInvitations() {
 
   const tableHeader = [
     {
-      key: "petName",
-      title: "Invite Name",
+      key: "inviteeName",
+      title: "Invitee Name",
     },
     {
       key: "invitationLink",
@@ -91,7 +91,7 @@ function MyInvitations() {
   });
 
   const copyLink = (row) => {
-    copyInvitationLink(row.invitation, row.petName)
+    copyInvitationLink(row.invitation, row.inviteeName)
       .then(() => {})
       .catch(console.error);
   };
@@ -156,35 +156,12 @@ function MyInvitations() {
         />
       </Box>
       {active === 1 ? (
-        <TableList {...{ tableHeader, tabList: outstandingInvitations }} />
-      ) : revokedInvitations.length === 0 ? (
-        <Typography textAlign="center" margin="60px">
-          No Records
-        </Typography>
+        <TableList tableHeader={tableHeader} tabList={outstandingInvitations} />
       ) : (
-        revokedInvitations.map((item) => (
-          <Box
-            height="84px"
-            display="flex"
-            justifyContent="flex-start"
-            alignItems="center"
-            fontSize="16px"
-            textAlign="left"
-            borderBottom="1px solid #E5E5E5"
-            key={`revokedInvitations${item.petName}${item.invitationLink}`}
-          >
-            <Box width="160px" flexShrink="0">
-              {item.petName}
-            </Box>
-            <Box color="#D0D5DD">
-              {item.invitationLink &&
-                `${item.invitationLink.slice(
-                  0,
-                  50,
-                )}...${item.invitationLink.slice(-4)}`}
-            </Box>
-          </Box>
-        ))
+        <TableList
+          tableHeader={[tableHeader[0], tableHeader[1]]}
+          tabList={revokedInvitations}
+        />
       )}
     </Box>
   );

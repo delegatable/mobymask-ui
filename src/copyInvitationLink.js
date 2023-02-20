@@ -1,7 +1,7 @@
 import linkForInvitation from "./linkForInvitation";
 
-export default function copyInvitationLink(invitation, petName) {
-  return new Promise(resolve => {
+export default function copyInvitationLink(invitation, inviteeName) {
+  return new Promise((resolve) => {
     const inviteLink = linkForInvitation(invitation);
     navigator.clipboard
       .writeText(inviteLink)

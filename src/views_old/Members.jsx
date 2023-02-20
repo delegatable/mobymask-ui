@@ -109,7 +109,7 @@ export default function Members() {
       const newInvites = [...invitations, invitation];
       localStorage.setItem(
         "outstandingInvitations",
-        JSON.stringify(newInvites)
+        JSON.stringify(newInvites),
       );
       setInvitations(newInvites);
     }
@@ -123,7 +123,8 @@ export default function Members() {
             <LazyConnect
               actionName="check if a user is a phisher"
               chainId={chainId}
-              opts={{ needsAccountConnected: false }}>
+              opts={{ needsAccountConnected: false }}
+            >
               <PhisherCheckButton />
             </LazyConnect>
           </div>
@@ -138,7 +139,8 @@ export default function Members() {
             <LazyConnect
               actionName="check if a user is endorsed"
               chainId={chainId}
-              opts={{ needsAccountConnected: false }}>
+              opts={{ needsAccountConnected: false }}
+            >
               <MemberCheckButton />
             </LazyConnect>
           </div>
@@ -153,7 +155,8 @@ export default function Members() {
 
           <LazyConnect
             actionName="revoke outstanding invitations"
-            chainId={chainId}>
+            chainId={chainId}
+          >
             <ReviewAndRevokeInvitations
               invitations={invitations}
               invitation={invitation}
@@ -194,26 +197,27 @@ function generateInviteView(invitation, addInvitation) {
         </p>
         <button
           onClick={() => {
-            const petName = prompt(
-              "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?"
+            const inviteeName = prompt(
+              "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?",
             );
             const newInvitation = membership.createInvitation();
-            copyInvitationLink(newInvitation, petName)
+            copyInvitationLink(newInvitation, inviteeName)
               .then(() => {
                 if (addInvitation) {
                   addInvitation({
-                    petName,
+                    inviteeName,
                     invitation: newInvitation,
                   });
                 }
               })
               .catch(() => {
                 addInvitation({
-                  petName,
+                  inviteeName,
                   invitation: newInvitation,
                 });
               });
-          }}>
+          }}
+        >
           Create new invite link
         </button>
       </div>

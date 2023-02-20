@@ -41,11 +41,11 @@ export default function (props) {
       {invitations.map((_invitation, index) => {
         return (
           <div key={index}>
-            <span>{_invitation.petName}</span>
+            <span>{_invitation.inviteeName}</span>
             <input type="text" readOnly value={linkForInvitation(_invitation.invitation)}></input>
             <button
               onClick={() => {
-                copyInvitationLink(_invitation.invitation, _invitation.petName).catch(err => alert(err.message));
+                copyInvitationLink(_invitation.invitation, _invitation.inviteeName).catch(err => alert(err.message));
               }}
             >
               Copy

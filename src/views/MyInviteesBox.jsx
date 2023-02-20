@@ -60,12 +60,12 @@ function MyInvitees() {
     }
   };
 
-  const createNewLink = (petName) => {
+  const createNewLink = (inviteeName) => {
     const newInvitation = membership.createInvitation();
-    copyInvitationLink(newInvitation, petName)
+    copyInvitationLink(newInvitation, inviteeName)
       .then(() => {
         addInvitation({
-          petName,
+          inviteeName,
           invitationLink: linkForInvitation(newInvitation),
           invitation: newInvitation,
         });

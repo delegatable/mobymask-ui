@@ -1,6 +1,6 @@
 import linkForInvitation from "./linkForInvitation";
 
-export default function copyInvitationLink(invitation, petName) {
+export default function copyInvitationLink(invitation, inviteeName) {
   return new Promise(resolve => {
     const inviteLink = linkForInvitation(invitation);
     navigator.clipboard
@@ -8,7 +8,7 @@ export default function copyInvitationLink(invitation, petName) {
       .then(function () {
         alert(
           "Your invite link for " +
-            petName +
+            inviteeName +
             " has been copied to your clipboard. Paste it somewhere only the intended recipients can see or you can lose your membership: \n\n" +
             inviteLink,
         );

@@ -185,22 +185,22 @@ function generateInviteView(invitation, addInvitation) {
         </p>
         <button
           onClick={() => {
-            const petName = prompt(
+            const inviteeName = prompt(
               "Who is this invitation for (for your personal use only, so you can view their reports and revoke the invitation)?",
             );
             const newInvitation = membership.createInvitation();
-            copyInvitationLink(newInvitation, petName)
+            copyInvitationLink(newInvitation, inviteeName)
               .then(() => {
                 if (addInvitation) {
                   addInvitation({
-                    petName,
+                    inviteeName,
                     invitation: newInvitation,
                   });
                 }
               })
               .catch(() => {
                 addInvitation({
-                  petName,
+                  inviteeName,
                   invitation: newInvitation,
                 });
               });
