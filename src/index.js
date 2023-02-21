@@ -7,8 +7,11 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import App from "./App";
 import "./index.css";
 
-// const watcherUri = "https://mobymask.vdb.to/graphql";
-const watcherUri = "http://localhost:3001/graphql";
+const hostname = window.location.hostname;
+
+const watcherUri = ["localhost", "127.0.0.1"].includes(hostname)
+  ? "http://localhost:3001/graphql"
+  : "https://mobymask.vdb.to/graphql";
 
 const client = new ApolloClient({
   uri: watcherUri,

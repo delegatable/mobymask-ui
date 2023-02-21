@@ -58,7 +58,10 @@ function MyInvitations() {
       render: (val, row, index) => {
         return (
           <>
-            <CopyToClipboard text={row.invitationLink}>
+            <CopyToClipboard
+              text={row.invitationLink}
+              onCopy={() => toast.success("Copy successfully!")}
+            >
               <Button borderRadius="100px" height="48px" label="Copy" />
             </CopyToClipboard>
             &nbsp;

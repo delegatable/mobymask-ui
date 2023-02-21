@@ -114,7 +114,10 @@ function ReportInputInfo(props) {
             textAlign="left"
             lineHeight="24px"
           >
-            In doubt about this result, you can take the following actions
+            {invitation
+              ? `In case there are multiple reports, you will only see the latest
+            one. In doubt about this result, you can take the following actions.`
+              : `Currently, Mobymask is an invitation-based network and only the invited can make reports. We plan to onboard more people in the future to be phisher fighters. In case there are multiple reports, you will only see the latest one.`}
           </Typography>
           {invitation && (
             <Button
