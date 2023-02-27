@@ -1,87 +1,88 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Typography, Box } from "@mui/material";
 import Button from "../components/Button";
-import TableList from "../components/TableList";
+// import TableList from "../components/TableList";
+
 function ReportHistory() {
   const [active, setActive] = useState(1);
-  const [tabList, setTabList] = useState([]);
+  // const [tabList, setTabList] = useState([]);
 
-  const isChallengedHeader =
-    active === 3
-      ? [
-          {
-            key: "myReport",
-            title: "My report",
-            render: (val, row) => {
-              return (
-                <>
-                  {val}{" "}
-                  <Button
-                    {...{
-                      className:
-                        "inline-flex w-[80px] h-[34px] b-[100px] ml-[16px] rounded-[100px] px-[11.5px]",
-                      label: "Revoke",
-                      onClick: () => {},
-                    }}
-                  />
-                </>
-              );
-            },
-          },
-          {
-            key: "challengersReport",
-            title: "Challenger's Report",
-          },
-        ]
-      : [
-          {
-            key: "date",
-            title: "Apply Date",
-          },
-        ];
+  // const isChallengedHeader =
+  //   active === 3
+  //     ? [
+  //       {
+  //         key: "myReport",
+  //         title: "My report",
+  //         render: (val, row) => {
+  //           return (
+  //             <>
+  //               {val}{" "}
+  //               <Button
+  //                 {...{
+  //                   className:
+  //                     "inline-flex w-[80px] h-[34px] b-[100px] ml-[16px] rounded-[100px] px-[11.5px]",
+  //                   label: "Revoke",
+  //                   onClick: () => { },
+  //                 }}
+  //               />
+  //             </>
+  //           );
+  //         },
+  //       },
+  //       {
+  //         key: "challengersReport",
+  //         title: "Challenger's Report",
+  //       },
+  //     ]
+  //     : [
+  //       {
+  //         key: "date",
+  //         title: "Apply Date",
+  //       },
+  //     ];
 
-  const tableHeader = [
-    {
-      key: "name",
-      title: "Name",
-    },
-    {
-      key: "type",
-      title: "Type",
-    },
-    ...isChallengedHeader,
-  ];
+  // const tableHeader = [
+  //   {
+  //     key: "name",
+  //     title: "Name",
+  //   },
+  //   {
+  //     key: "type",
+  //     title: "Type",
+  //   },
+  //   ...isChallengedHeader,
+  // ];
 
-  useEffect(() => {
-    if (active === 3) {
-      setTabList([
-        {
-          name: "GaliBrata1",
-          type: "Twitter",
-          myReport: "bob",
-          challengersReport: "Jane",
-        },
-        {
-          name: "GaliBrata1",
-          type: "Twitter",
-          myReport: "bob",
-          challengersReport: "Jane",
-        },
-        {
-          name: "GaliBrata1",
-          type: "Twitter",
-          myReport: "bob",
-          challengersReport: "Jane",
-        },
-      ]);
-    } else {
-      setTabList([
-        { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
-        { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
-        { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
-      ]);
-    }
-  }, [active]);
+  // useEffect(() => {
+  //   if (active === 3) {
+  //     setTabList([
+  //       {
+  //         name: "GaliBrata1",
+  //         type: "Twitter",
+  //         myReport: "bob",
+  //         challengersReport: "Jane",
+  //       },
+  //       {
+  //         name: "GaliBrata1",
+  //         type: "Twitter",
+  //         myReport: "bob",
+  //         challengersReport: "Jane",
+  //       },
+  //       {
+  //         name: "GaliBrata1",
+  //         type: "Twitter",
+  //         myReport: "bob",
+  //         challengersReport: "Jane",
+  //       },
+  //     ]);
+  //   } else {
+  //     setTabList([
+  //       { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
+  //       { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
+  //       { name: "GaliBrata1", type: "Twitter", date: "2022-10-11" },
+  //     ]);
+  //   }
+  // }, [active]);
 
   return (
     <Box
