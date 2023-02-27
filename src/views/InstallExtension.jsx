@@ -20,23 +20,29 @@ function InstallExtension() {
         Get Extension Now
       </Typography>
       <Box
-        paddingTop="57px"
-        paddingBottom="48px"
+        paddingTop={7}
+        paddingBottom={6}
         borderRadius="10px"
-        fontSize="16px"
         textAlign="center"
         border="1px solid #E5E5E5"
       >
+        <Box
+          component="img"
+          src="/mobymask-extension.png"
+          margin="auto"
+          width="100%"
+          maxWidth="620px"
+        />
         <Typography
           color="#2867BB"
-          width="670px"
           textAlign="center"
           margin="auto"
           fontSize="20px"
           fontWeight="500"
           marginBottom="24px"
+          paddingX={2}
         >
-          Get warned about phishers on the web:
+          Get warned about phishers on the web and report them:
         </Typography>
 
         <Typography
@@ -49,16 +55,10 @@ function InstallExtension() {
             label="Install the Web Extension"
             active={false}
             borderRadius="100px"
-            fontSize="16px"
             color="#0D1320"
           />
         </Typography>
-        <Typography
-          textAlign="center"
-          fontSize="16px"
-          color="#666F85"
-          marginY="24px"
-        >
+        <Typography textAlign="center" color="#666F85" marginY="24px">
           Users of{" "}
           <Typography
             component="a"

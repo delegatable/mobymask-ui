@@ -20,8 +20,15 @@ function FooterBox() {
           </Typography>
         </Box>
 
-        <Box marginTop="60px" display="flex">
-          <Box flex="1">
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          flexDirection={{
+            xs: "column",
+            md: "row",
+          }}
+        >
+          <Box marginTop={{ xs: 3.5, md: 7.5 }} flex="1">
             <Box>
               <Typography
                 component="a"
@@ -46,11 +53,11 @@ function FooterBox() {
                 Fork on GitHub
               </Typography>
             </Box>
-            <Typography marginTop={5.5} color="#666F85">
+            <Typography marginTop={{ xs: 2, md: 5.5 }} color="#666F85">
               @2022 MobyMask • MetaMask Ecosystem
             </Typography>
           </Box>
-          <Box flex="1">
+          <Box marginTop={{ xs: 3.5, md: 7.5 }} flex="1">
             <Typography fontWeight="bold">
               MobyMask is technically supported by Laconic and LXDAO
             </Typography>
