@@ -5,7 +5,13 @@ import lxdaoLogo from "../assets/lxdaoLogo.png";
 
 function FooterBox() {
   return (
-    <Box backgroundColor="#F1F1F1" padding="90px 0">
+    <Box
+      backgroundColor="#F1F1F1"
+      paddingY={{
+        xs: "40px",
+        md: "80px",
+      }}
+    >
       <Box width="96%" maxWidth="960px" margin="auto">
         <Box display="flex" justifyContent="flex-start" alignItems="center">
           <Typography
