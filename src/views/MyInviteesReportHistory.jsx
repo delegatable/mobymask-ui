@@ -110,17 +110,14 @@ function MyInviteesReportHistory() {
 
   return (
     <Box>
-      <Typography
-        component="h3"
-        fontSize="16px"
-        marginBottom="24px"
-        fontWeight={600}
-      >
+      <Typography component="h3" fontSize="16px" fontWeight={600}>
         My invitees' report history
       </Typography>
-      <Box>
+      <Box marginBottom={2.5}>
         <Button
           {...{
+            marginTop: 3,
+            marginRight: 1,
             label: "Reported phisher",
             active: active === 1,
             onClick: () => setActive(1),
@@ -128,21 +125,23 @@ function MyInviteesReportHistory() {
         />
         <Button
           {...{
+            marginTop: 3,
+            marginRight: 1,
             label: "Reported not phisher",
             active: active === 2,
-            marginX: "8px",
             onClick: () => setActive(2),
           }}
         />
         <Button
           {...{
+            marginTop: 1,
             label: "Challenged",
             active: active === 3,
             onClick: () => setActive(3),
           }}
         />
       </Box>
-      <Box paddingY="40px">
+      <Box>
         {/* <TableList {...{ tableHeader, tabList }} /> */}
         <Box
           component="img"

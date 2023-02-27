@@ -147,17 +147,16 @@ function PendingReports() {
   };
 
   return (
-    <Box marginTop="4.296875vw">
+    <Box marginTop={8}>
       <Typography
-        component="h3"
-        fontSize="20px"
-        marginBottom="24px"
+        variant="h5"
+        marginBottom={3}
         color="#101828"
         fontWeight={600}
       >
         Pending reports
       </Typography>
-      <Typography component="p" marginBottom="1.227678571vw">
+      <Box marginBottom={2.5}>
         <Button
           {...{
             label: "Report Phisher",
@@ -173,12 +172,13 @@ function PendingReports() {
             onClick: () => setActive("ReportNotPhisher"),
           }}
         />
-      </Typography>
+      </Box>
 
       <Box
         border="1px solid #D0D5DD"
         borderRadius="10px"
-        padding="32px 32px 38px 32px"
+        padding={4}
+        overflowX="scroll"
       >
         <TableList {...{ tableHeader, tabList }} />
         <Box
@@ -187,16 +187,13 @@ function PendingReports() {
           alignItems="center"
           borderBottom="1px solid #E5E5E5"
           paddingY="16px"
-          marginBottom="2.56696428vw"
         >
           <FormControl>
             <InputLabel>Type</InputLabel>
             <Select
               style={{
-                width: "8.37053vw",
-                minWidth: "100px",
-                height: "3.013392vw",
-                minHeight: "50px",
+                width: "100px",
+                height: "50px",
                 borderRadius: "100px",
               }}
               value={selectedOption}
@@ -214,9 +211,7 @@ function PendingReports() {
             display="flex"
             justifyContent="flex-start"
             boxSizing="border-box"
-            width="44.8491155%"
-            height="3.013392vw"
-            minHeight="50px"
+            height="50px"
             borderRadius="100px"
             padding="5px"
             marginLeft="16px"

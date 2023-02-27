@@ -17,14 +17,13 @@ const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
   return (
-    <Box marginTop="80px">
-      <Typography
-        component="h3"
-        fontSize="20px"
-        marginBottom="24px"
-        color="#101828"
-        fontWeight={600}
-      >
+    <Box
+      marginTop={{
+        xs: "40px",
+        md: "80px",
+      }}
+    >
+      <Typography variant="h5" marginBottom={3} fontWeight={600}>
         My invitees
       </Typography>
       {MyInvitees()}
@@ -98,7 +97,7 @@ function MyInvitees() {
         />
         <Typography
           component="p"
-          width="670px"
+          maxWidth="670px"
           margin="auto"
           color="#2867BB"
           fontSize="20px"
@@ -111,7 +110,7 @@ function MyInvitees() {
         </Typography>
         <Typography
           component="p"
-          width="670px"
+          maxWidth="670px"
           margin="auto"
           color="#666F85"
           fontSize="16px"

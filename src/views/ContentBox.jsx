@@ -5,7 +5,7 @@ import MyInviteesBox from "./MyInviteesBox";
 
 function ContentBox() {
   return (
-    <Box width="96%" maxWidth="960px" minWidth="600px" margin="auto">
+    <Box width="96%" maxWidth="960px" margin="auto">
       <PendingReports />
       <ReportHistory />
       <MyInviteesBox />

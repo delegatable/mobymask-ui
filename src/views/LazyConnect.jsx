@@ -6,6 +6,7 @@ import Button from "../components/Button";
 
 import { useAtom } from "jotai";
 import { providerAtom } from "../atoms/providerAtom";
+import { Typography } from "@mui/material";
 
 export default function LazyConnect(props) {
   const { actionName, chainId } = props;
@@ -188,17 +189,16 @@ function createChecklist(checklistOpts) {
   };
 
   return (
-    <Box marginTop="10px">
-      <Box
-        component="p"
+    <Box marginTop="30px">
+      <Typography
+        variant="body2"
         width="96%"
         maxWidth="670px"
         margin="auto"
         color="#666F85"
-        style={{ fontFamily: "Inter", lineHeight: 1.5 }}
       >
         You need a few things to {actionName}.
-      </Box>
+      </Typography>
       <Box textAlign="center">
         <Button
           marginTop="20px"

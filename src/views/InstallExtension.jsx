@@ -9,7 +9,6 @@ function InstallExtension() {
       paddingBottom="66px"
       width="96%"
       maxWidth="960px"
-      minWidth="600px"
       margin="auto"
     >
       <Typography

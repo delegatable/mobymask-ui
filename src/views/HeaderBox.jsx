@@ -71,11 +71,11 @@ function HeaderBox() {
           className="whale-icon"
           marginLeft="50%"
           position="relative"
-          left={200}
+          left={{ xs: 0, sm: 200 }}
           bottom={-150}
           component="img"
           src="/whale.png"
-          width="200px"
+          width={{ xs: 150, sm: 200 }}
           zIndex={0}
           marginTop="-50px"
         ></Box>

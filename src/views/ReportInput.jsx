@@ -100,7 +100,7 @@ function ReportInput() {
       <Box
         position="relative"
         width="100%"
-        height="80px"
+        height={80}
         minHeight="50px"
         margin="auto"
         boxShadow="0px 0px 30px rgba(0, 0, 0, 0.05)"

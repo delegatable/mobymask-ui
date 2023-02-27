@@ -84,19 +84,20 @@ function ReportHistory() {
   }, [active]);
 
   return (
-    <Box marginTop="77px">
-      <Typography
-        component="h3"
-        fontSize="20px"
-        marginBottom="24px"
-        color="#101828"
-        fontWeight={600}
-      >
+    <Box
+      marginTop={{
+        xs: "40px",
+        md: "80px",
+      }}
+    >
+      <Typography variant="h5" fontWeight={600}>
         My report history
       </Typography>
       <Box marginBottom="22px">
         <Button
           {...{
+            marginTop: 3,
+            marginRight: 1,
             label: "Reported phisher",
             active: active === 1,
             onClick: () => setActive(1),
@@ -104,14 +105,16 @@ function ReportHistory() {
         />
         <Button
           {...{
+            marginTop: 3,
+            marginRight: 1,
             label: "Reported not phisher",
             active: active === 2,
-            marginX: "8px",
             onClick: () => setActive(2),
           }}
         />
         <Button
           {...{
+            marginTop: 1,
             label: "Challenged",
             active: active === 3,
             onClick: () => setActive(3),

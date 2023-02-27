@@ -6,15 +6,12 @@ function CheckPhisherStatus() {
     <Box
       width="96%"
       maxWidth="960px"
-      minWidth="600px"
       margin="auto"
       textAlign="center"
-      paddingTop="80px"
+      paddingTop={{ xs: 5, sm: 10 }}
     >
-      <Typography component="h1" fontSize="62px" fontWeight="600">
-        Check Phisher Status
-      </Typography>
-      <Typography fontSize="16px" marginTop="20px" marginBottom="44px">
+      <Typography variant="h1">Check Phisher Status</Typography>
+      <Typography variant="body1" marginTop={2.5} marginBottom={5}>
         An alliance of good-hearted phish, aiming to eliminate phishers.
       </Typography>
       <ReportInput />
