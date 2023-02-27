@@ -21,7 +21,19 @@ const client = new ApolloClient({
 const theme = responsiveFontSizes(
   createTheme({
     typography: {
-      fontFamily: "Inter",
+      fontFamily: [
+        "Inter",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
       fontStyle: "normal",
       h1: {
         fontSize: "62px",
