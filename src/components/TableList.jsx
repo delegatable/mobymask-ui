@@ -27,7 +27,7 @@ function TableList(props) {
   const normalColumn = { color: "#666F85" };
 
   return (
-    <Box>
+    <Box borderBottom="1px solid #E5E5E5">
       <TableContainer sx={{ maxHeight: 400 }}>
         <Table stickyHeader>
           <TableHead>

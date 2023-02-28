@@ -59,6 +59,7 @@ function SubmitBatchButton(props) {
             background: "linear-gradient(90deg, #334FB8 0%, #1D81BE 100%)",
           }}
           label="Submit batch to blockchain"
+          marginTop="30px"
           onClick={submitClick}
         />
       )}
