@@ -1,6 +1,5 @@
 {
   "name": "mobymask-ui",
-  "version": "0.1.0",
   "homepage": "https://mobymask.com",
   "private": true,
   "dependencies": {
