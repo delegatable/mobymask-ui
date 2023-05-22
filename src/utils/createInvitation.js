@@ -16,7 +16,7 @@ export default function createInvitation(invitation) {
     "SignedDelegation",
     signedDelegation,
     types.types,
-    true
+    true,
   );
   const hexHash = "0x" + delegationHash.toString("hex");
 

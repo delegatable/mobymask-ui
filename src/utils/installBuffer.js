@@ -1,3 +1,3 @@
-const { Buffer } = require('buffer/');
+const { Buffer } = require("buffer/");
 
 window.Buffer = Buffer;

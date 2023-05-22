@@ -39,13 +39,15 @@ export function SimpleModal(props) {
                 sx={{
                   fontSize: "40px",
                 }}
-                color="success"></CheckCircleIcon>
+                color="success"
+              ></CheckCircleIcon>
             ) : (
               <ErrorIcon
                 sx={{
                   fontSize: "40px",
                 }}
-                color="error"></ErrorIcon>
+                color="error"
+              ></ErrorIcon>
             )}
           </IconWrapper>
         )}
@@ -77,7 +79,7 @@ function showMessage(options) {
           onClose={close}
         />
       </ThemeProvider>,
-      container
+      container,
     );
   }
 

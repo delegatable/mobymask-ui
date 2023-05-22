@@ -1,6 +1,12 @@
 const { types } = require("./types");
 
-module.exports = function createTypedMessage(yourContract, message, primaryType, CONTRACT_NAME, _chainId) {
+module.exports = function createTypedMessage(
+  yourContract,
+  message,
+  primaryType,
+  CONTRACT_NAME,
+  _chainId,
+) {
   const chainId = yourContract?.deployTransaction?.chainId || _chainId;
   return {
     data: {
