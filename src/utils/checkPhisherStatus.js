@@ -1,3 +1,4 @@
+/* eslint default-case: 0 */
 export const checkPhisherStatus = async (type, id, latestBlock, isPhisher) => {
   let codedName = sanitizeValue(type, id.toLowerCase());
 
@@ -44,7 +45,7 @@ export const reportHandle = ({
   const isPhisher = store.find((item) => item.name === phisher);
   if (!isPhisher && phisher) {
     const typeLabel = reportTypes.find(
-      (reportType) => reportType.value === selectedOption
+      (reportType) => reportType.value === selectedOption,
     )?.label;
     const info = {
       type: typeLabel,

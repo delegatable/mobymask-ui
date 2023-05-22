@@ -1,3 +1,4 @@
+/* eslint default-case: 0 */
 import { useAtom, useAtomValue } from "jotai";
 import { Typography, Box } from "@mui/material";
 
