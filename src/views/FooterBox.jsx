@@ -1,7 +1,7 @@
 import { Typography, Box } from "@mui/material";
-import mobymaskLogo from "../assets/mobymaskLogo.png";
-import LaconicNetworklogo from "../assets/LaconicNetworklogo.png";
-import lxdaoLogo from "../assets/lxdaoLogo.png";
+import MobymaskLogo from "../assets/mobymask_logo.png";
+import LaconicLogo from "../assets/laconic_logo.png";
+import LxdaoLogo from "../assets/lxdao_logo.png";
 
 function FooterBox() {
   return (
@@ -16,7 +16,7 @@ function FooterBox() {
         <Box display="flex" justifyContent="flex-start" alignItems="center">
           <Typography
             component="img"
-            src={mobymaskLogo}
+            src={MobymaskLogo}
             width="71px"
             marginRight="15px"
             alt="logo"
@@ -78,7 +78,7 @@ function FooterBox() {
                 >
                   <Box
                     component="img"
-                    src={lxdaoLogo}
+                    src={LxdaoLogo}
                     height="40px"
                     alt="lxdao"
                   />
@@ -93,7 +93,7 @@ function FooterBox() {
                 >
                   <Box
                     component="img"
-                    src={LaconicNetworklogo}
+                    src={LaconicLogo}
                     height="40px"
                     alt="laconic"
                   />

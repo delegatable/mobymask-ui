@@ -41,11 +41,11 @@ function ReportInputInfo(props) {
   const getIcon = () => {
     switch (selectedOption) {
       case "eip155:1":
-        return require(`../assets/ICON_ETH.png`);
+        return require(`../assets/eth_icon.png`);
       case "TWT":
-        return require(`../assets/ICON_TWT.png`);
+        return require(`../assets/twt_icon.png`);
       case "URL":
-        return require(`../assets/ICON_URL.png`);
+        return require(`../assets/url_icon.png`);
     }
   };
 
