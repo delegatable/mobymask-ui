@@ -36,7 +36,8 @@ export default function LazyConnect(props) {
           setAccounts(_accounts);
         }
       } catch (err) {
-        console.log("Getting accounts failed!", err);
+        alert("Failed to get accounts!");
+        console.error("Failed to get accounts!", err);
       }
     }
 
@@ -158,7 +159,8 @@ function createChecklist(checklistOpts) {
         await connectChainFn();
       }
     } catch (err) {
-      console.log(err);
+      alert("Failed to get accounts!");
+      console.error(err);
     }
     setLoading(false);
   };

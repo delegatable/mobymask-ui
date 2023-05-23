@@ -43,7 +43,6 @@ const theme = responsiveFontSizes(
     },
   }),
 );
-console.log("theme", theme);
 
 const container = document.querySelector("#root");
 const root = ReactDOM.createRoot(container);
