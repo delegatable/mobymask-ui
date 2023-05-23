@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-const { abi } = require("./artifacts");
+const { abi } = require("../contracts/abi.json");
 const { address } = require("./config.json");
 
 export default async function createRegistry(provider, readOnly = false) {
