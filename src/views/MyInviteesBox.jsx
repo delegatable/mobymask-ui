@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import { Typography, Box } from "@mui/material";
-import contractInfo from "../utils/contractInfo";
+import { createMembership } from "eth-delegatable-utils";
+
 import {
   invitationAtom,
   outstandingInvitationsAtom,
 } from "../atoms/invitationAtom";
-
 import Button from "../components/Button";
+import contractInfo from "../utils/contractInfo";
 import copyInvitationLink from "../utils/copyInvitationLink";
 import MyInviteesReportHistory from "./MyInviteesReportHistory";
 import MyInvitations from "./MyInvitations";
 import linkForInvitation from "../utils/linkForInvitation";
 import CreateInvitationModal from "../components/CreateInvitationModal";
-const { createMembership } = require("eth-delegatable-utils");
 
 function MyInviteesBox() {
   return (

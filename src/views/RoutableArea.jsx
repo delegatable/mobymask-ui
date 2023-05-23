@@ -1,13 +1,12 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
+import { validateInvitation } from "eth-delegatable-utils";
+
 // Routes
 import ContentBox from "./ContentBox";
-// import Members from "../views/Members";
 import contractInfo from "../utils/contractInfo";
 import { invitationAtom } from "../atoms/invitationAtom";
-
-const { validateInvitation } = require("eth-delegatable-utils");
 
 export default function RoutableArea() {
   const { search } = useLocation();

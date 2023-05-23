@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Typography, Box } from "@mui/material";
-import { reportTypes as options } from "../utils/constants";
 import { toast } from "react-hot-toast";
 import { gql } from "@apollo/client";
+
+import { reportTypes as options } from "../utils/constants";
 import useLazyQuery from "../hooks/useLazyQuery";
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";

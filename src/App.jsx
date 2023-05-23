@@ -1,8 +1,8 @@
 import "./utils/installBuffer";
-import QueryParamsRoute from "./views/RoutableArea";
 import { HashRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import "./App.css";
+
+import QueryParamsRoute from "./views/RoutableArea";
 import CheckPhisherStatus from "./views/CheckPhisherStatus";
 import HeaderBox from "./views/HeaderBox";
 import InstallExtension from "./views/InstallExtension";

@@ -1,30 +1,26 @@
 import { useState, useEffect, useRef } from "react";
 import { Typography, Box } from "@mui/material";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
 import { useAtom, useAtomValue } from "jotai";
+import { gql } from "@apollo/client";
+
 import {
   pendingPhishersAtom,
   pendingNotPhishersAtom,
 } from "../atoms/phisherAtom";
-
 import { invitationAtom } from "../atoms/invitationAtom";
 
 import { reportTypes } from "../utils/constants";
 import statusText from "../utils/statusText";
-
 import LazyConnect from "./LazyConnect";
 import Button from "../components/Button";
 import TableList from "../components/TableList";
 import SubmitBatchButton from "../components/SubmitBatchButton";
-
 import LATEST_BLOCK_GRAPHQL from "../queries/latestBlock";
 import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
-import { gql } from "@apollo/client";
 import useLazyQuery from "../hooks/useLazyQuery";
 import { checkPhisherStatus, reportHandle } from "../utils/checkPhisherStatus";
 
