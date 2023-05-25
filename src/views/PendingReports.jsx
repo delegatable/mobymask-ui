@@ -170,12 +170,7 @@ function PendingReports() {
         />
       </Box>
 
-      <Box
-        border="1px solid #D0D5DD"
-        borderRadius="10px"
-        padding={4}
-        overflowX="scroll"
-      >
+      <Box border="1px solid #D0D5DD" borderRadius="10px" padding={4}>
         <TableList {...{ tableHeader, tabList }} />
         <Box
           display="flex"
