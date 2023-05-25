@@ -6,6 +6,8 @@ It is based on the [Delegatable Eth](https://github.com/danfinlay/delegatable-et
 
 This repository is dedicated to the user interface. For the extension repository, please visit: <https://github.com/lxdao-official/mobymask-extension>.
 
+For more details, please visit: [MobyMask: An Initiative to Eliminate Phishers](https://mirror.xyz/0x55e2780588aa5000F464f700D2676fD0a22Ee160/8whNch3m5KMzeo6g5eblcXMMplPf8UpW228cSh3nmzg).
+
 ## How to run the app locally?
 
 1. Begin the local backend services by following the instructions in this document: <https://github.com/cerc-io/mobymask-watcher/blob/main/mainnet/README.md>.
@@ -49,6 +51,19 @@ config.json:
 ```
 http://127.0.0.1:3000/#/members?invitation=%7B%22v%22%3A1%2C%22signedDelegations%22%3A%5B%7B%22signature%22%3A%220x1202b99fec963ddcf0aaea739f755bd6367ff2aada6bfa7a4efb476b64f1a3f729bd6ae19294ceda5bb7da10e7df9f52d717c0c77a6ef14074e9dfeab270a96f1c%22%2C%22delegation%22%3A%7B%22delegate%22%3A%220x403CA2Dac603edA1f7698230326Aa16f0b462B61%22%2C%22authority%22%3A%220x0000000000000000000000000000000000000000000000000000000000000000%22%2C%22caveats%22%3A%5B%7B%22enforcer%22%3A%220xBB9dB86eA37760019901CF2aDd0a15421a143CeA%22%2C%22terms%22%3A%220x0000000000000000000000000000000000000000000000000000000000000000%22%7D%5D%7D%7D%5D%2C%22key%22%3A%220xe7906ae273b283761a0fa8273d8db8f14711ba60fe97480726f66b883f823c84%22%7D
 ```
+
+## How to test locally?
+
+After starting the backend service, please add the following network to your MetaMask:
+
+- Network Name: Localhost 8545
+- New RPC URL: http://localhost:8545
+- Chian ID: 41337
+- Currency symbol: ETH
+
+Then, import the testing wallet. The private key is `a377edc6a0b7689cb3ff6cbb95151ae96f428bc8eb037643f669dc63d1c5fc87` (be careful this is a testing wallet, please do not transfer tokens to it).
+
+After that, you will be able to submit phishers.
 
 ## License
 
