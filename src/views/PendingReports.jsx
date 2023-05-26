@@ -127,7 +127,7 @@ function PendingReports() {
         store: active === "ReportPhisher" ? storedPhishers : storedNotPhishers,
         setStore:
           active === "ReportPhisher" ? setStoredPhishers : setStoredNotPhishers,
-        reportTypes,
+        isPhisher: result.isPhisher.value,
         selectedOption,
       });
       inputRef.current.value = "";

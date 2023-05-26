@@ -1,4 +1,6 @@
 /* eslint default-case: 0 */
+import { reportTypes } from "../utils/constants";
+
 export const checkPhisherStatus = async (type, id, latestBlock, isPhisher) => {
   let codedName = sanitizeValue(type, id.toLowerCase());
 
@@ -36,23 +38,22 @@ export function sanitizeValue(type, value) {
 export const reportHandle = ({
   store,
   setStore,
-  reportTypes,
   clearPhisher = () => {},
   selectedOption,
   phisher,
-  checkResult,
+  isPhisher,
 }) => {
-  const isPhisher = store.find((item) => item.name === phisher);
-  if (!isPhisher && phisher) {
+  if (phisher) {
     const typeLabel = reportTypes.find(
       (reportType) => reportType.value === selectedOption,
     )?.label;
     const info = {
       type: typeLabel,
       name: phisher,
-      status: checkResult ? "yes" : "no",
+      status: isPhisher ? "yes" : "no",
     };
     setStore([...store, info]);
+  } else {
+    clearPhisher("");
   }
-  clearPhisher("");
 };

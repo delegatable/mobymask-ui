@@ -1,5 +1,6 @@
 const phisherStatus = {
   yes: "Registered Phisher",
-  no: "Registered Not Phisher",
+  no: "Unregistered",
 };
+
 export default phisherStatus;
