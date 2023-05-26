@@ -13,8 +13,9 @@ For more details, please visit: [MobyMask: An Initiative to Eliminate Phishers](
 1. Begin the local backend services by following the instructions in this document: <https://github.com/cerc-io/mobymask-watcher/blob/main/mainnet/README.md>.
 2. `git clone` this repo.
 3. Open Docker and remove the MobyMask app container associated with port 3000 (since we'll be running the latest version of the app locally).
-4. Run `yarn install && npm run start`.
-5. Open your browser and navigate to <http://localhost:3000/>
+4. Substitute the content of `src/utils/config.json` with the content from `src/utils/config.local.json` (Revert before pushing to production).
+5. Run `yarn install && npm run start`.
+6. Open your browser and navigate to <http://localhost:3000/>
 
 You will be able to see the website and test on your local machine.
 
