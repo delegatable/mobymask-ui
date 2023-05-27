@@ -21,7 +21,7 @@ const {
   createSignedDelegationHash,
 } = require("eth-delegatable-utils");
 
-const { chainId, address, name } = require("../utils/config.json");
+const { chainId, address, name } = require("../utils/config");
 const CONTRACT_NAME = name;
 const util = generateUtil({
   chainId,

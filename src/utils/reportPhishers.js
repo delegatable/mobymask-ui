@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import contractInfo from "./contractInfo";
 const { createMembership } = require("eth-delegatable-utils");
 const { abi } = require("../contracts/abi.json");
-const { address } = require("./config.json");
+const { address } = require("./config");
 
 export default async function reportPhishers(
   phishers,
