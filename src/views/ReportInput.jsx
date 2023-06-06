@@ -10,7 +10,7 @@ import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 // import createPhisherLabel from "../createPhisherLabel";
 import { checkPhisherStatus } from "../utils/checkPhisherStatus";
 import ReportInputInfo from "../views/ReportInputInfo";
-import config from "../utils/config.json";
+import config from "../utils/config";
 import search_icon from "../assets/search.png";
 const { address } = config;
 

@@ -24,7 +24,7 @@ import IS_PHISHER_GRAPHQL from "../queries/isPhisher";
 import useLazyQuery from "../hooks/useLazyQuery";
 import { checkPhisherStatus, reportHandle } from "../utils/checkPhisherStatus";
 
-const config = require("../utils/config.json");
+const config = require("../utils/config");
 const { chainId, address } = config;
 
 function PendingReports() {

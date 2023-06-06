@@ -1,4 +1,4 @@
-const { chainId, address, name } = require("./config.json");
+const { chainId, address, name } = require("./config");
 
 const contractInfo = {
   chainId,

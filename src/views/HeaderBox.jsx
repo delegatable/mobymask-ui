@@ -44,7 +44,7 @@ function HeaderBox() {
           </Typography>
         </Box>
         <Box display="flex">
-          <Link href="#" marginRight="28px">
+          <Link href="https://twitter.com/MobyMask" marginRight="28px">
             <Avatar
               width="48px"
               height="48px"
@@ -53,7 +53,7 @@ function HeaderBox() {
               alt="twitter"
             />
           </Link>
-          <Link href="#">
+          <Link href="https://github.com/delegatable/mobymask-ui">
             <Avatar
               width="48px"
               height="48px"

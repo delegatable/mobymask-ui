@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 
 const { signDelegation } = require("eth-delegatable-utils");
-const { chainId, address, name } = require("./config.json");
+const { chainId, address, name } = require("./config");
 const CONTRACT_NAME = name;
 const sigUtil = require("eth-sig-util");
 const { TypedDataUtils } = sigUtil;
