@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# MobyMask UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MobyMask is a lightweight, viral invite-based phishing report system with built-in accountability and revocation features. It's available at <https://mobymask.com>.
 
-## Available Scripts
+It is based on the [Delegatable Eth](https://github.com/danfinlay/delegatable-eth) framework, designed for making counterfactually mintable soulbound tokens (or off chain delegations).
 
-In the project directory, you can run:
+This repository is dedicated to the user interface. For the extension repository, please visit: <https://github.com/lxdao-official/mobymask-extension>.
 
-### `npm start`
+For more details, please visit: [MobyMask: An Initiative to Eliminate Phishers](https://mirror.xyz/0x55e2780588aa5000F464f700D2676fD0a22Ee160/8whNch3m5KMzeo6g5eblcXMMplPf8UpW228cSh3nmzg).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How to run the app locally?
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Begin the local backend services by following the instructions in this document: <https://github.com/cerc-io/mobymask-watcher/blob/main/mainnet/README.md>.
+2. `git clone` this repo.
+3. Open Docker and remove the MobyMask app container associated with port 3000 (since we'll be running the latest version of the app locally).
+4. Substitute the content of `src/utils/config.json` with the content from `src/utils/config.local.json` (Revert before pushing to production).
+5. Run `yarn install && npm run start`.
+6. Open your browser and navigate to <http://localhost:3000/>
 
-### `npm test`
+You will be able to see the website and test on your local machine.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to create an invitation link?
 
-### `npm run build`
+MobyMask is invite-based phishing report system. If you want to test the invitation feature on your local environment, you need to create an invitation link first.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For creating an invitation link, please:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. `git clone` https://github.com/delegatable/MobyMask
+2. `yarn install && cd ./packages/server`
+3. Create the following two files:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+secrets.json:
 
-### `npm run eject`
+{
+  "rpcUrl": "http://localhost:8545",
+  "privateKey": "a377edc6a0b7689cb3ff6cbb95151ae96f428bc8eb037643f669dc63d1c5fc87",
+  "baseURI": "http://127.0.0.1:3000/#"
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+config.json:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+{
+  "address": "0x1ca7c995f8eF0A2989BbcE08D5B7Efe50A584aa1",
+  "name": "MobyMask",
+  "chainId": 31337
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. Run the command `ENV='PROD' npm run start`, you will be able to get the invitation link like:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```
+http://127.0.0.1:3000/#/members?invitation=%7B%22v%22%3A1%2C%22signedDelegations%22%3A%5B%7B%22signature%22%3A%220x1202b99fec963ddcf0aaea739f755bd6367ff2aada6bfa7a4efb476b64f1a3f729bd6ae19294ceda5bb7da10e7df9f52d717c0c77a6ef14074e9dfeab270a96f1c%22%2C%22delegation%22%3A%7B%22delegate%22%3A%220x403CA2Dac603edA1f7698230326Aa16f0b462B61%22%2C%22authority%22%3A%220x0000000000000000000000000000000000000000000000000000000000000000%22%2C%22caveats%22%3A%5B%7B%22enforcer%22%3A%220xBB9dB86eA37760019901CF2aDd0a15421a143CeA%22%2C%22terms%22%3A%220x0000000000000000000000000000000000000000000000000000000000000000%22%7D%5D%7D%7D%5D%2C%22key%22%3A%220xe7906ae273b283761a0fa8273d8db8f14711ba60fe97480726f66b883f823c84%22%7D
+```
 
-## Learn More
+## How to test locally?
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+After starting the backend service, please add the following network to your MetaMask:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Network Name: Localhost 8545
+- New RPC URL: http://localhost:8545
+- Chian ID: 41337
+- Currency symbol: ETH
 
-### Code Splitting
+Then, import the testing wallet. The private key is `a377edc6a0b7689cb3ff6cbb95151ae96f428bc8eb037643f669dc63d1c5fc87` (be careful this is a testing wallet, please do not transfer tokens to it).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+After that, you will be able to submit phishers.
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+MIT
 
-### Making a Progressive Web App
+## Community
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MobyMask Discord: <https://discord.gg/UBzChkFSUp>

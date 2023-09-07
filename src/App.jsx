@@ -1,32 +1,25 @@
-import logo from "./logo.svg";
-import { HashRouter as Router } from "react-router-dom";
-import "./App.css";
+import "./utils/installBuffer";
+import { HashRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+import QueryParamsRoute from "./views/RoutableArea";
+import CheckPhisherStatus from "./views/CheckPhisherStatus";
+import HeaderBox from "./views/HeaderBox";
+import InstallExtension from "./views/InstallExtension";
+import FooterBox from "./views/FooterBox";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>
-          <img src={logo} className="App-logo" alt="logo" />
-          MobyMask
-        </h1>
-        <p>An alliance of good-hearted phish, aiming to eliminate phishers.</p>
-      </header>
+      <Toaster />
+      <HeaderBox />
+      <CheckPhisherStatus />
+      <HashRouter>
+        <QueryParamsRoute />
+      </HashRouter>
 
-      <Router>
-      </Router>
-
-      <div className="footer">
-        <p>Reporters are added on an invite-only basis.</p>
-        <p>
-          <a href="https://mirror.xyz/0x55e2780588aa5000F464f700D2676fD0a22Ee160/8whNch3m5KMzeo6g5eblcXMMplPf8UpW228cSh3nmzg">
-            Learn more
-          </a>
-        </p>
-        <p>
-          <a href="https://github.com/danfinlay/MobyMask/">Fork on GitHub</a>
-        </p>
-      </div>
+      <InstallExtension />
+      <FooterBox />
     </div>
   );
 }

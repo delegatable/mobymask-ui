@@ -1,4 +1,4 @@
-export default `
+const queryLatestBlock = `
   query {
     latestBlock {
       hash
@@ -6,3 +6,4 @@ export default `
     }
   }
 `;
+export default queryLatestBlock;

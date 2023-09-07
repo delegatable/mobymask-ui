@@ -10,7 +10,7 @@ import { useApolloClient } from "@apollo/client";
 export default function useLazyQuery(query, options) {
   const client = useApolloClient();
   return React.useCallback(
-    variables =>
+    (variables) =>
       client.query({
         ...options,
         query: query,
@@ -19,6 +19,6 @@ export default function useLazyQuery(query, options) {
           ...variables,
         },
       }),
-    [client],
+    [client, options, query],
   );
 }
