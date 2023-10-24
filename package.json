@@ -1,6 +1,6 @@
 {
   "name": "mobymask-ui",
-  "homepage": "https://mobymask.com",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.7.2",
